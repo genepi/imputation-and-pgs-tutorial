@@ -1,0 +1,6 @@
+_book
+output
+.DS_Store
+.quarto
+/.quarto/
+data/*.vcf.gz

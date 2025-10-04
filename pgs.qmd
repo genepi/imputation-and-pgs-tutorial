@@ -1,0 +1,190 @@
+---
+engine: knitr
+---
+
+# Polygenic Risk Scores
+
+Polygenic risk scores (PRS) are widely used in genetics to estimate an individual's genetic predisposition to a trait or disease.  
+In this tutorial, we will:
+
+- Load PRS and phenotype data
+- Merge and explore them
+- Visualize the relationship between scores and phenotypes
+- Interpret how well different scores distinguish or predict traits
+
+We will explore four phenotypes:
+
+| Phenotype | Type |
+|------------|------|
+| **pheno_1** | Binary (e.g., case/control) |
+| **pheno_2** | Continuous (e.g., height) |
+| **pheno_3** | Binary or categorical |
+| **pheno_4** | Continuous |
+
+
+## Setup
+
+```{r setup, message=FALSE, warning=FALSE}
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Set a clean theme for all plots
+theme_set(theme_minimal(base_size = 14))
+```
+
+## Load Data
+
+```{r load-data}
+# Read PRS scores and phenotypes
+scores <- read_csv("data/scores.txt")
+phenos <- read_table("data/phenotypes.txt")
+
+# Check data structure
+head(scores)
+head(phenos)
+
+# Merge datasets by sample ID
+merged <- inner_join(scores, phenos, by = c("sample" = "IID"))
+
+# Check merged dataset
+glimpse(merged)
+```
+
+## Exploring the Distribution of PRS Scores
+
+It’s good practice to inspect the distribution of scores before comparing them with phenotypes.
+
+```{r distribution}
+ggplot(merged, aes(x = score_1)) +
+  geom_density(alpha = 0.5, fill = "steelblue") +
+  labs(
+    title = "Distribution of PRS (score_1)",
+    x = "score_1",
+    y = "Density"
+  )
+```
+
+
+## PRS Performance for a Binary Trait (pheno_1)
+
+**pheno_1** is a binary phenotype — for example, disease status (case vs. control).
+We can check whether `score_1` separates the two groups.
+
+```{r pheno1-density}
+ggplot(merged, aes(x = score_1, fill = as.factor(pheno_1))) +
+  geom_density(alpha = 0.5) +
+  labs(
+    title = "Distribution of PRS (score_1) by Binary Phenotype (pheno_1)",
+    x = "score_1",
+    fill = "pheno_1"
+  )
+```
+
+```{r pheno1-boxplot}
+ggplot(merged, aes(y = score_1, x = as.factor(pheno_1), fill = as.factor(pheno_1))) +
+  geom_boxplot(alpha = 0.7) +
+  labs(
+    title = "PRS (score_1) by pheno_1 Status",
+    x = "pheno_1",
+    y = "score_1",
+    fill = "pheno_1"
+  )
+```
+
+💡 **Interpretation:**
+If the distributions are well separated, `score_1` effectively distinguishes between cases and controls — meaning the PRS captures meaningful genetic signal for `pheno_1`.
+
+
+## PRS and Continuous Trait (pheno_2)
+
+**pheno_2** is continuous (e.g., height, BMI).
+We expect a *strong linear relationship* between `score_2` and `pheno_2`.
+
+```{r pheno2-scatter}
+ggplot(merged, aes(x = pheno_2, y = score_2)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  labs(
+    title = "PRS (score_2) vs Continuous Phenotype (pheno_2)",
+    x = "pheno_2",
+    y = "score_2"
+  )
+```
+
+💡 **Interpretation:**
+A clear upward trend and strong correlation (tight linear fit) indicate that the PRS predicts the quantitative trait effectively.
+
+
+## PRS with Weak or No Association (pheno_3 and pheno_4)
+
+**pheno_3** and **pheno_4** do *not* show strong relationships with their PRS.
+We'll confirm this visually.
+
+### pheno_3 (Categorical)
+
+```{r pheno3-density}
+ggplot(merged, aes(x = score_3, fill = as.factor(pheno_3))) +
+  geom_density(alpha = 0.5) +
+  labs(
+    title = "Distribution of PRS (score_3) by pheno_3",
+    x = "score_3",
+    fill = "pheno_3"
+  )
+```
+
+```{r pheno3-boxplot}
+ggplot(merged, aes(y = score_3, x = as.factor(pheno_3), fill = as.factor(pheno_3))) +
+  geom_boxplot(alpha = 0.7) +
+  labs(
+    title = "PRS (score_3) by pheno_3",
+    x = "pheno_3",
+    y = "score_3",
+    fill = "pheno_3"
+  )
+```
+
+💡 **Interpretation:**
+If the boxplots overlap heavily, `score_3` provides little discrimination for `pheno_3`.
+
+### pheno_4 (Continuous)
+
+```{r pheno4-scatter}
+ggplot(merged, aes(x = pheno_4, y = score_4)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  labs(
+    title = "PRS (score_4) vs pheno_4",
+    x = "pheno_4",
+    y = "score_4"
+  )
+```
+
+💡 **Interpretation:**
+If the regression line is flat and the scatter is random, there’s no clear correlation — suggesting the PRS does not capture the underlying genetic variance for this trait.
+
+## Summary
+
+| Phenotype | Type               | Expected Pattern                   | PRS Performance      |
+| --------- | ------------------ | ---------------------------------- | -------------------- |
+| pheno_1   | Binary             | Distinguishable groups             | ✅ Strong separation  |
+| pheno_2   | Continuous         | Strong positive linear correlation | ✅ Strong correlation |
+| pheno_3   | Binary/Categorical | Overlapping distributions          | ❌ Weak               |
+| pheno_4   | Continuous         | Flat relationship                  | ❌ Weak               |
+
+## Conclusion
+
+This tutorial demonstrates how to:
+
+* Load and merge PRS and phenotype data
+* Visualize relationships between PRS and traits
+* Interpret how well PRS predicts different phenotype types
+
+Such visual checks are an essential first step before applying formal statistical tests (e.g., logistic or linear regression) to quantify the predictive power of PRS.
+
+**Next Steps:**
+
+* Perform logistic regression for binary traits (`pheno_1`, `pheno_3`)
+* Perform linear regression for continuous traits (`pheno_2`, `pheno_4`)
+* Compute metrics such as AUC or ( R^2 ) to assess predictive strength

@@ -1,0 +1,53 @@
+name: Build and Publish Quarto Book
+
+on:
+  # Trigger when changes are pushed to the main branch
+  push:
+    branches: [main]
+
+  # Allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up micromamba and create the environment
+      - name: Set up micromamba environment
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          environment-name: imputation-and-pgs-tutorial
+          cache-downloads: true
+          cache-environment: true
+
+      # Step 3: Check that Quarto is available and functional
+      - name: Check Quarto installation
+        run: |
+          quarto check install
+          which quarto
+          micromamba info
+
+      # Step 4: Build the Quarto book
+      - name: Build Quarto book
+        shell: bash -l {0}
+        run: |
+          micromamba activate imputation-and-pgs-tutorial
+          quarto render
+
+      # Step 5: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: quarto-dev/quarto-actions@v2
+        with:
+          path: _book
+          target: gh-pages

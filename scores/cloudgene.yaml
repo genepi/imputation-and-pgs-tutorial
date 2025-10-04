@@ -1,0 +1,11 @@
+id: scores_tutorial
+name: Tutorial (Simulated Scores!)
+version: 1.0
+category: PGSPanel
+properties:
+  build: hg19
+  scores: ${CLOUDGENE_APP_LOCATION}/scores.txt.gz
+  meta: ${CLOUDGENE_APP_LOCATION}/scores.json
+  categories:
+    - id: all
+      name: All traits

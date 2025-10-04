@@ -2,12 +2,16 @@
 engine: knitr
 ---
 
-# Introduction {.unnumbered}
+This tutorial provides a practical introduction to key steps in modern genetic data analysis, including **genotype imputation**, **genome-wide association studies (GWAS)**, and **polygenic risk score (PGS)** calculation.
 
-This is a Quarto book.
+Using the **Michigan Imputation Server (MIS)** as the imputation platform, the chapter demonstrates how to process and analyze genetic data in a reproducible workflow — from imputed genotypes to interpretable genetic associations.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+You will learn how to:
 
-```{bash}
-ls
-```
+* Perform and evaluate genotype imputation using the **Michigan Imputation Server**
+* Conduct a **GWAS** to identify variants associated with phenotypes
+* Calculate and visualize **polygenic risk scores (PRS)** for different trait types
+
+The tutorial concludes with examples of four phenotypes, illustrating how PRS performance varies between binary and continuous traits — ranging from clear genetic signals to weak or absent associations.
+
+This chapter aims to build a solid understanding of the concepts, tools, and interpretation steps that underpin large-scale human genetic studies.

@@ -7,7 +7,7 @@ engine: knitr
 ## Setup
 
 ```{bash}
-[ -f data/gwas.imputed.chr20.dose.vcf.gz ] || wget -P data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz
+[ -f data/gwas.imputed.chr20.dose.vcf.gz ] || wget -q -P data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz
 mkdir -p output
 ```
 

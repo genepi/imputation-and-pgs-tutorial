@@ -44,10 +44,4 @@ jobs:
         run: |
           micromamba activate imputation-and-pgs-tutorial
           quarto render
-
-      # Step 5: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: quarto-dev/quarto-actions@v2
-        with:
-          path: _book
-          target: gh-pages
+          quarto publish gh-pages --no-browser --no-prompt --no-render

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; GWAS – Imputation and PGS Tutorial</title>
+<title>4&nbsp; GWAS – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gwas.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">GWAS</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gwas.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -145,31 +145,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./imputation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Imputation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Imputation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gwas.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">GWAS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pgs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -188,13 +188,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">3.1</span> Setup</a></li>
-  <li><a href="#nf-gwas" id="toc-nf-gwas" class="nav-link" data-scroll-target="#nf-gwas"><span class="header-section-number">3.2</span> nf-gwas</a></li>
-  <li><a href="#plink2" id="toc-plink2" class="nav-link" data-scroll-target="#plink2"><span class="header-section-number">3.3</span> PLINK2</a>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">4.1</span> Setup</a></li>
+  <li><a href="#nf-gwas" id="toc-nf-gwas" class="nav-link" data-scroll-target="#nf-gwas"><span class="header-section-number">4.2</span> nf-gwas</a></li>
+  <li><a href="#plink2" id="toc-plink2" class="nav-link" data-scroll-target="#plink2"><span class="header-section-number">4.3</span> PLINK2</a>
   <ul class="collapse">
-  <li><a href="#without-pca" id="toc-without-pca" class="nav-link" data-scroll-target="#without-pca"><span class="header-section-number">3.3.1</span> Without PCA</a></li>
-  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">3.3.2</span> PCA</a></li>
-  <li><a href="#with-pca" id="toc-with-pca" class="nav-link" data-scroll-target="#with-pca"><span class="header-section-number">3.3.3</span> With PCA</a></li>
+  <li><a href="#without-pca" id="toc-without-pca" class="nav-link" data-scroll-target="#without-pca"><span class="header-section-number">4.3.1</span> Without PCA</a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">4.3.2</span> PCA</a></li>
+  <li><a href="#with-pca" id="toc-with-pca" class="nav-link" data-scroll-target="#with-pca"><span class="header-section-number">4.3.3</span> With PCA</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">GWAS</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></h1>
 </div>
 
 
@@ -221,8 +221,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="setup" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">3.1</span> Setup</h2>
+<section id="setup" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">4.1</span> Setup</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="bu">]</span> <span class="kw">||</span> <span class="fu">wget</span> <span class="at">-q</span> <span class="at">-P</span> data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -231,13 +231,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Install PLINK2</li>
 </ul>
 </section>
-<section id="nf-gwas" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="nf-gwas"><span class="header-section-number">3.2</span> nf-gwas</h2>
+<section id="nf-gwas" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="nf-gwas"><span class="header-section-number">4.2</span> nf-gwas</h2>
 </section>
-<section id="plink2" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="plink2"><span class="header-section-number">3.3</span> PLINK2</h2>
-<section id="without-pca" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="without-pca"><span class="header-section-number">3.3.1</span> Without PCA</h3>
+<section id="plink2" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="plink2"><span class="header-section-number">4.3</span> PLINK2</h2>
+<section id="without-pca" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="without-pca"><span class="header-section-number">4.3.1</span> Without PCA</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
@@ -255,7 +255,7 @@ Options in effect:
   --pheno-name pheno_1
   --vcf data/gwas.imputed.chr20.dose.vcf.gz
 
-Start time: Sat Oct  4 11:02:32 2025
+Start time: Sat Oct  4 11:11:19 2025
 15995 MiB RAM detected, ~14911 available; reserving 7997 MiB for main
 workspace.
 Using up to 4 compute threads.
@@ -335,7 +335,7 @@ output/gwas-temporary.psam.
 Calculating allele frequencies... 0%done.
 --glm logistic-Firth hybrid regression on phenotype 'pheno_1': 0%done.
 Results written to output/gwas.pheno_1.glm.logistic.hybrid .
-End time: Sat Oct  4 11:02:43 2025</code></pre>
+End time: Sat Oct  4 11:11:30 2025</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -379,8 +379,8 @@ End time: Sat Oct  4 11:02:43 2025</code></pre>
 </div>
 </div>
 </section>
-<section id="pca" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="pca"><span class="header-section-number">3.3.2</span> PCA</h3>
+<section id="pca" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="pca"><span class="header-section-number">4.3.2</span> PCA</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -401,8 +401,8 @@ End time: Sat Oct  4 11:02:43 2025</code></pre>
 </div>
 </div>
 </section>
-<section id="with-pca" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="with-pca"><span class="header-section-number">3.3.3</span> With PCA</h3>
+<section id="with-pca" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="with-pca"><span class="header-section-number">4.3.3</span> With PCA</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
@@ -422,8 +422,8 @@ Options in effect:
   --pheno-name pheno_1
   --vcf data/gwas.imputed.chr20.dose.vcf.gz
 
-Start time: Sat Oct  4 11:02:48 2025
-15995 MiB RAM detected, ~14826 available; reserving 7997 MiB for main
+Start time: Sat Oct  4 11:11:37 2025
+15995 MiB RAM detected, ~14797 available; reserving 7997 MiB for main
 workspace.
 Using up to 4 compute threads.
 
@@ -503,7 +503,7 @@ output/gwas.covar-temporary.psam.
 Calculating allele frequencies... 0%done.
 --glm logistic-Firth hybrid regression on phenotype 'pheno_1': 0%done.
 Results written to output/gwas.covar.pheno_1.glm.logistic.hybrid .
-End time: Sat Oct  4 11:03:08 2025</code></pre>
+End time: Sat Oct  4 11:11:57 2025</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -934,12 +934,12 @@ End time: Sat Oct  4 11:03:08 2025</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./imputation.html" class="pagination-link" aria-label="Imputation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Imputation</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Imputation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./pgs.html" class="pagination-link" aria-label="Polygenic Risk Scores">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

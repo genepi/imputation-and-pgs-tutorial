@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Polygenic Risk Scores – Imputation and PGS Tutorial</title>
+<title>5&nbsp; Polygenic Risk Scores – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pgs.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pgs.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -145,31 +145,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./imputation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Imputation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Imputation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gwas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">GWAS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pgs.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -188,18 +188,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">4.1</span> Setup</a></li>
-  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">4.2</span> Load Data</a></li>
-  <li><a href="#exploring-the-distribution-of-prs-scores" id="toc-exploring-the-distribution-of-prs-scores" class="nav-link" data-scroll-target="#exploring-the-distribution-of-prs-scores"><span class="header-section-number">4.3</span> Exploring the Distribution of PRS Scores</a></li>
-  <li><a href="#prs-performance-for-a-binary-trait-pheno_1" id="toc-prs-performance-for-a-binary-trait-pheno_1" class="nav-link" data-scroll-target="#prs-performance-for-a-binary-trait-pheno_1"><span class="header-section-number">4.4</span> PRS Performance for a Binary Trait (pheno_1)</a></li>
-  <li><a href="#prs-and-continuous-trait-pheno_2" id="toc-prs-and-continuous-trait-pheno_2" class="nav-link" data-scroll-target="#prs-and-continuous-trait-pheno_2"><span class="header-section-number">4.5</span> PRS and Continuous Trait (pheno_2)</a></li>
-  <li><a href="#prs-with-weak-or-no-association-pheno_3-and-pheno_4" id="toc-prs-with-weak-or-no-association-pheno_3-and-pheno_4" class="nav-link" data-scroll-target="#prs-with-weak-or-no-association-pheno_3-and-pheno_4"><span class="header-section-number">4.6</span> PRS with Weak or No Association (pheno_3 and pheno_4)</a>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">5.1</span> Setup</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">5.2</span> Load Data</a></li>
+  <li><a href="#exploring-the-distribution-of-prs-scores" id="toc-exploring-the-distribution-of-prs-scores" class="nav-link" data-scroll-target="#exploring-the-distribution-of-prs-scores"><span class="header-section-number">5.3</span> Exploring the Distribution of PRS Scores</a></li>
+  <li><a href="#prs-performance-for-a-binary-trait-pheno_1" id="toc-prs-performance-for-a-binary-trait-pheno_1" class="nav-link" data-scroll-target="#prs-performance-for-a-binary-trait-pheno_1"><span class="header-section-number">5.4</span> PRS Performance for a Binary Trait (pheno_1)</a></li>
+  <li><a href="#prs-and-continuous-trait-pheno_2" id="toc-prs-and-continuous-trait-pheno_2" class="nav-link" data-scroll-target="#prs-and-continuous-trait-pheno_2"><span class="header-section-number">5.5</span> PRS and Continuous Trait (pheno_2)</a></li>
+  <li><a href="#prs-with-weak-or-no-association-pheno_3-and-pheno_4" id="toc-prs-with-weak-or-no-association-pheno_3-and-pheno_4" class="nav-link" data-scroll-target="#prs-with-weak-or-no-association-pheno_3-and-pheno_4"><span class="header-section-number">5.6</span> PRS with Weak or No Association (pheno_3 and pheno_4)</a>
   <ul class="collapse">
-  <li><a href="#pheno_3-categorical" id="toc-pheno_3-categorical" class="nav-link" data-scroll-target="#pheno_3-categorical"><span class="header-section-number">4.6.1</span> pheno_3 (Categorical)</a></li>
-  <li><a href="#pheno_4-continuous" id="toc-pheno_4-continuous" class="nav-link" data-scroll-target="#pheno_4-continuous"><span class="header-section-number">4.6.2</span> pheno_4 (Continuous)</a></li>
+  <li><a href="#pheno_3-categorical" id="toc-pheno_3-categorical" class="nav-link" data-scroll-target="#pheno_3-categorical"><span class="header-section-number">5.6.1</span> pheno_3 (Categorical)</a></li>
+  <li><a href="#pheno_4-continuous" id="toc-pheno_4-continuous" class="nav-link" data-scroll-target="#pheno_4-continuous"><span class="header-section-number">5.6.2</span> pheno_4 (Continuous)</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">4.7</span> Summary</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">4.8</span> Conclusion</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.7</span> Summary</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5.8</span> Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></h1>
 </div>
 
 
@@ -260,8 +260,8 @@ In this tutorial, we will:</p>
 </tr>
 </tbody>
 </table>
-<section id="setup" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">4.1</span> Setup</h2>
+<section id="setup" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">5.1</span> Setup</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -272,8 +272,8 @@ In this tutorial, we will:</p>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="load-data" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="load-data"><span class="header-section-number">4.2</span> Load Data</h2>
+<section id="load-data" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="load-data"><span class="header-section-number">5.2</span> Load Data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read PRS scores and phenotypes</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/scores.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -344,8 +344,8 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 </div>
 </section>
-<section id="exploring-the-distribution-of-prs-scores" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="exploring-the-distribution-of-prs-scores"><span class="header-section-number">4.3</span> Exploring the Distribution of PRS Scores</h2>
+<section id="exploring-the-distribution-of-prs-scores" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="exploring-the-distribution-of-prs-scores"><span class="header-section-number">5.3</span> Exploring the Distribution of PRS Scores</h2>
 <p>It’s good practice to inspect the distribution of scores before comparing them with phenotypes.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_1)) <span class="sc">+</span></span>
@@ -364,8 +364,8 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 </div>
 </section>
-<section id="prs-performance-for-a-binary-trait-pheno_1" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="prs-performance-for-a-binary-trait-pheno_1"><span class="header-section-number">4.4</span> PRS Performance for a Binary Trait (pheno_1)</h2>
+<section id="prs-performance-for-a-binary-trait-pheno_1" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="prs-performance-for-a-binary-trait-pheno_1"><span class="header-section-number">5.4</span> PRS Performance for a Binary Trait (pheno_1)</h2>
 <p><strong>pheno_1</strong> is a binary phenotype — for example, disease status (case vs.&nbsp;control). We can check whether <code>score_1</code> separates the two groups.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_1, <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_1))) <span class="sc">+</span></span>
@@ -402,8 +402,8 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 <p>💡 <strong>Interpretation:</strong> If the distributions are well separated, <code>score_1</code> effectively distinguishes between cases and controls — meaning the PRS captures meaningful genetic signal for <code>pheno_1</code>.</p>
 </section>
-<section id="prs-and-continuous-trait-pheno_2" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="prs-and-continuous-trait-pheno_2"><span class="header-section-number">4.5</span> PRS and Continuous Trait (pheno_2)</h2>
+<section id="prs-and-continuous-trait-pheno_2" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="prs-and-continuous-trait-pheno_2"><span class="header-section-number">5.5</span> PRS and Continuous Trait (pheno_2)</h2>
 <p><strong>pheno_2</strong> is continuous (e.g., height, BMI). We expect a <em>strong linear relationship</em> between <code>score_2</code> and <code>pheno_2</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> pheno_2, <span class="at">y =</span> score_2)) <span class="sc">+</span></span>
@@ -427,11 +427,11 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 <p>💡 <strong>Interpretation:</strong> A clear upward trend and strong correlation (tight linear fit) indicate that the PRS predicts the quantitative trait effectively.</p>
 </section>
-<section id="prs-with-weak-or-no-association-pheno_3-and-pheno_4" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="prs-with-weak-or-no-association-pheno_3-and-pheno_4"><span class="header-section-number">4.6</span> PRS with Weak or No Association (pheno_3 and pheno_4)</h2>
+<section id="prs-with-weak-or-no-association-pheno_3-and-pheno_4" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="prs-with-weak-or-no-association-pheno_3-and-pheno_4"><span class="header-section-number">5.6</span> PRS with Weak or No Association (pheno_3 and pheno_4)</h2>
 <p><strong>pheno_3</strong> and <strong>pheno_4</strong> do <em>not</em> show strong relationships with their PRS. We’ll confirm this visually.</p>
-<section id="pheno_3-categorical" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="pheno_3-categorical"><span class="header-section-number">4.6.1</span> pheno_3 (Categorical)</h3>
+<section id="pheno_3-categorical" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="pheno_3-categorical"><span class="header-section-number">5.6.1</span> pheno_3 (Categorical)</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_3, <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_3))) <span class="sc">+</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
@@ -467,8 +467,8 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 <p>💡 <strong>Interpretation:</strong> If the boxplots overlap heavily, <code>score_3</code> provides little discrimination for <code>pheno_3</code>.</p>
 </section>
-<section id="pheno_4-continuous" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="pheno_4-continuous"><span class="header-section-number">4.6.2</span> pheno_4 (Continuous)</h3>
+<section id="pheno_4-continuous" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="pheno_4-continuous"><span class="header-section-number">5.6.2</span> pheno_4 (Continuous)</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> pheno_4, <span class="at">y =</span> score_4)) <span class="sc">+</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
@@ -492,8 +492,8 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 <p>💡 <strong>Interpretation:</strong> If the regression line is flat and the scatter is random, there’s no clear correlation — suggesting the PRS does not capture the underlying genetic variance for this trait.</p>
 </section>
 </section>
-<section id="summary" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.7</span> Summary</h2>
+<section id="summary" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.7</span> Summary</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 11%">
@@ -537,8 +537,8 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </tbody>
 </table>
 </section>
-<section id="conclusion" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">4.8</span> Conclusion</h2>
+<section id="conclusion" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">5.8</span> Conclusion</h2>
 <p>This tutorial demonstrates how to:</p>
 <ul>
 <li>Load and merge PRS and phenotype data</li>
@@ -959,7 +959,7 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./gwas.html" class="pagination-link" aria-label="GWAS">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">GWAS</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

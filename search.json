@@ -4,149 +4,149 @@
     "href": "index.html",
     "title": "Imputation and PGS Tutorial",
     "section": "",
-    "text": "Introduction\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\nls\n\nREADME.md\n_book\n_quarto.yml\ncover.png\ndata\nenvironment.yml\ngetting-started.qmd\ngwas.qmd\nimputation.qmd\nindex.qmd\nindex.rmarkdown\npgs.qmd\nreferences.bib\nreferences.qmd",
+    "text": "This tutorial provides a practical introduction to key steps in modern genetic data analysis, including genotype imputation, genome-wide association studies (GWAS), and polygenic risk score (PGS) calculation.\nUsing the Michigan Imputation Server (MIS) as the imputation platform, the chapter demonstrates how to process and analyze genetic data in a reproducible workflow — from imputed genotypes to interpretable genetic associations.\nYou will learn how to:\n\nPerform and evaluate genotype imputation using the Michigan Imputation Server\nConduct a GWAS to identify variants associated with phenotypes\nCalculate and visualize polygenic risk scores (PRS) for different trait types\n\nThe tutorial concludes with examples of four phenotypes, illustrating how PRS performance varies between binary and continuous traits — ranging from clear genetic signals to weak or absent associations.\nThis chapter aims to build a solid understanding of the concepts, tools, and interpretation steps that underpin large-scale human genetic studies.",
     "crumbs": [
-      "Introduction"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>index.html</span>"
     ]
   },
   {
     "objectID": "getting-started.html",
     "href": "getting-started.html",
-    "title": "1  Getting Started",
+    "title": "2  Getting Started",
     "section": "",
     "text": "Description of testdata\nLinks, …",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Getting Started</span>"
     ]
   },
   {
     "objectID": "imputation.html",
     "href": "imputation.html",
-    "title": "2  Imputation",
+    "title": "3  Imputation",
     "section": "",
     "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Imputation</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Imputation</span>"
     ]
   },
   {
     "objectID": "gwas.html",
     "href": "gwas.html",
-    "title": "3  GWAS",
+    "title": "4  GWAS",
     "section": "",
-    "text": "3.1 Setup\n[ -f data/gwas.imputed.chr20.dose.vcf.gz ] || wget -q -P data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz\nmkdir -p output",
+    "text": "4.1 Setup\n[ -f data/gwas.imputed.chr20.dose.vcf.gz ] || wget -q -P data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz\nmkdir -p output",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>GWAS</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>GWAS</span>"
     ]
   },
   {
     "objectID": "gwas.html#setup",
     "href": "gwas.html#setup",
-    "title": "3  GWAS",
+    "title": "4  GWAS",
     "section": "",
     "text": "Install PLINK2",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>GWAS</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>GWAS</span>"
     ]
   },
   {
     "objectID": "gwas.html#nf-gwas",
     "href": "gwas.html#nf-gwas",
-    "title": "3  GWAS",
-    "section": "3.2 nf-gwas",
-    "text": "3.2 nf-gwas",
+    "title": "4  GWAS",
+    "section": "4.2 nf-gwas",
+    "text": "4.2 nf-gwas",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>GWAS</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>GWAS</span>"
     ]
   },
   {
     "objectID": "gwas.html#plink2",
     "href": "gwas.html#plink2",
-    "title": "3  GWAS",
-    "section": "3.3 PLINK2",
-    "text": "3.3 PLINK2\n\n3.3.1 Without PCA\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --logistic allow-no-covars \\\n  --out output/gwas\n\nPLINK v2.0.0-a.6.9LM 64-bit Intel (29 Jan 2025)    cog-genomics.org/plink/2.0/\n(C) 2005-2025 Shaun Purcell, Christopher Chang   GNU General Public License v3\nLogging to output/gwas.log.\nOptions in effect:\n  --glm allow-no-covars\n  --out output/gwas\n  --pheno data/phenotypes.txt\n  --pheno-name pheno_1\n  --vcf data/gwas.imputed.chr20.dose.vcf.gz\n\nStart time: Sat Oct  4 11:02:32 2025\n15995 MiB RAM detected, ~14911 available; reserving 7997 MiB for main\nworkspace.\nUsing up to 4 compute threads.\n\n--vcf: 1k variants scanned.\n--vcf: 2k variants scanned.\n--vcf: 3k variants scanned.\n--vcf: 4k variants scanned.\n--vcf: 5k variants scanned.\n--vcf: 6k variants scanned.\n--vcf: 7k variants scanned.\n--vcf: 8k variants scanned.\n--vcf: 9k variants scanned.\n--vcf: 10k variants scanned.\n--vcf: 11k variants scanned.\n--vcf: 12k variants scanned.\n--vcf: 13k variants scanned.\n--vcf: 14k variants scanned.\n--vcf: 15k variants scanned.\n--vcf: 16k variants scanned.\n--vcf: 17k variants scanned.\n--vcf: 18k variants scanned.\n--vcf: 19k variants scanned.\n--vcf: 20k variants scanned.\n--vcf: 21k variants scanned.\n--vcf: 22k variants scanned.\n--vcf: 23k variants scanned.\n--vcf: 24k variants scanned.\n--vcf: 25k variants scanned.\n--vcf: 26k variants scanned.\n--vcf: 27k variants scanned.\n--vcf: 28k variants scanned.\n--vcf: 29k variants scanned.\n--vcf: 30k variants scanned.\n--vcf: 31k variants scanned.\n--vcf: 32k variants scanned.\n--vcf: 33k variants scanned.\n--vcf: 34k variants scanned.\n--vcf: 35k variants scanned.\n--vcf: 36k variants scanned.\n--vcf: 37k variants scanned.\n--vcf: 38k variants scanned.\n--vcf: 39k variants scanned.\n--vcf: 40k variants scanned.\n--vcf: 41k variants scanned.\n--vcf: 42k variants scanned.\n--vcf: 43k variants scanned.\n--vcf: 44k variants scanned.\n--vcf: 45k variants scanned.\n--vcf: 46k variants scanned.\n--vcf: 47k variants scanned.\n--vcf: 48k variants scanned.\n--vcf: 49k variants scanned.\n--vcf: 50k variants scanned.\n--vcf: 51k variants scanned.\n--vcf: 52k variants scanned.\n--vcf: 53k variants scanned.\n--vcf: 54k variants scanned.\n--vcf: 55k variants scanned.\n--vcf: 56k variants scanned.\n--vcf: 57k variants scanned.\n--vcf: 58k variants scanned.\n--vcf: 59k variants scanned.\n--vcf: 60k variants scanned.\n--vcf: 61k variants scanned.\n--vcf: 62k variants scanned.\n--vcf: 63k variants scanned.\n--vcf: 63402 variants scanned.\n\n--vcf: 31k variants converted.    \b\b\b\b\n--vcf: output/gwas-temporary.pgen + output/gwas-temporary.pvar.zst +\noutput/gwas-temporary.psam written.\n2504 samples (0 females, 0 males, 2504 ambiguous; 2504 founders) loaded from\noutput/gwas-temporary.psam.\n63402 variants loaded from output/gwas-temporary.pvar.zst.\n1 binary phenotype loaded (126 cases, 2378 controls).\nCalculating allele frequencies... 0%\b\bdone.\n--glm logistic-Firth hybrid regression on phenotype 'pheno_1': 0%\b\bdone.\nResults written to output/gwas.pheno_1.glm.logistic.hybrid .\nEnd time: Sat Oct  4 11:02:43 2025\n\n\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.pheno_1.glm.logistic.hybrid\", header=TRUE, comment.char=\"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp=\"ID\")\n\n\n\n\n\n\n\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\n\n\n3.3.2 PCA\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header=TRUE, comment.char=\"\")\n#phenotypes &lt;- read.table(\"data/phenotypes.txt\", header=TRUE, comment.char=\"\")\n\n# merge pca data with phenotypes by column IID\n#phenotypes &lt;- merge(pca_data, phenotypes, by = \"IID\")\n\n#ggplot(phenotypes, aes(x = PC1, y = PC2, color = super_pop)) + geom_point()\nggplot(pca_data, aes(x = PC1, y = PC2)) + geom_point() + theme_minimal()\n\n\n\n\n\n\n\n\n\n\n3.3.3 With PCA\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --covar data/covariates.txt \\\n  --logistic hide-covar \\\n  --out output/gwas.covar\n\nPLINK v2.0.0-a.6.9LM 64-bit Intel (29 Jan 2025)    cog-genomics.org/plink/2.0/\n(C) 2005-2025 Shaun Purcell, Christopher Chang   GNU General Public License v3\nLogging to output/gwas.covar.log.\nOptions in effect:\n  --covar data/covariates.txt\n  --glm hide-covar\n  --out output/gwas.covar\n  --pheno data/phenotypes.txt\n  --pheno-name pheno_1\n  --vcf data/gwas.imputed.chr20.dose.vcf.gz\n\nStart time: Sat Oct  4 11:02:48 2025\n15995 MiB RAM detected, ~14826 available; reserving 7997 MiB for main\nworkspace.\nUsing up to 4 compute threads.\n\n--vcf: 1k variants scanned.\n--vcf: 2k variants scanned.\n--vcf: 3k variants scanned.\n--vcf: 4k variants scanned.\n--vcf: 5k variants scanned.\n--vcf: 6k variants scanned.\n--vcf: 7k variants scanned.\n--vcf: 8k variants scanned.\n--vcf: 9k variants scanned.\n--vcf: 10k variants scanned.\n--vcf: 11k variants scanned.\n--vcf: 12k variants scanned.\n--vcf: 13k variants scanned.\n--vcf: 14k variants scanned.\n--vcf: 15k variants scanned.\n--vcf: 16k variants scanned.\n--vcf: 17k variants scanned.\n--vcf: 18k variants scanned.\n--vcf: 19k variants scanned.\n--vcf: 20k variants scanned.\n--vcf: 21k variants scanned.\n--vcf: 22k variants scanned.\n--vcf: 23k variants scanned.\n--vcf: 24k variants scanned.\n--vcf: 25k variants scanned.\n--vcf: 26k variants scanned.\n--vcf: 27k variants scanned.\n--vcf: 28k variants scanned.\n--vcf: 29k variants scanned.\n--vcf: 30k variants scanned.\n--vcf: 31k variants scanned.\n--vcf: 32k variants scanned.\n--vcf: 33k variants scanned.\n--vcf: 34k variants scanned.\n--vcf: 35k variants scanned.\n--vcf: 36k variants scanned.\n--vcf: 37k variants scanned.\n--vcf: 38k variants scanned.\n--vcf: 39k variants scanned.\n--vcf: 40k variants scanned.\n--vcf: 41k variants scanned.\n--vcf: 42k variants scanned.\n--vcf: 43k variants scanned.\n--vcf: 44k variants scanned.\n--vcf: 45k variants scanned.\n--vcf: 46k variants scanned.\n--vcf: 47k variants scanned.\n--vcf: 48k variants scanned.\n--vcf: 49k variants scanned.\n--vcf: 50k variants scanned.\n--vcf: 51k variants scanned.\n--vcf: 52k variants scanned.\n--vcf: 53k variants scanned.\n--vcf: 54k variants scanned.\n--vcf: 55k variants scanned.\n--vcf: 56k variants scanned.\n--vcf: 57k variants scanned.\n--vcf: 58k variants scanned.\n--vcf: 59k variants scanned.\n--vcf: 60k variants scanned.\n--vcf: 61k variants scanned.\n--vcf: 62k variants scanned.\n--vcf: 63k variants scanned.\n--vcf: 63402 variants scanned.\n\n--vcf: 31k variants converted.    \b\b\b\b\n--vcf: output/gwas.covar-temporary.pgen + output/gwas.covar-temporary.pvar.zst\n+ output/gwas.covar-temporary.psam written.\n2504 samples (0 females, 0 males, 2504 ambiguous; 2504 founders) loaded from\noutput/gwas.covar-temporary.psam.\n63402 variants loaded from output/gwas.covar-temporary.pvar.zst.\n1 binary phenotype loaded (126 cases, 2378 controls).\n10 covariates loaded from data/covariates.txt.\nCalculating allele frequencies... 0%\b\bdone.\n--glm logistic-Firth hybrid regression on phenotype 'pheno_1': 0%\b\bdone.\nResults written to output/gwas.covar.pheno_1.glm.logistic.hybrid .\nEnd time: Sat Oct  4 11:03:08 2025\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.covar.pheno_1.glm.logistic.hybrid\", header=TRUE, comment.char=\"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp=\"ID\")\n\n\n\n\n\n\n\nqq(pheno_1$P)",
+    "title": "4  GWAS",
+    "section": "4.3 PLINK2",
+    "text": "4.3 PLINK2\n\n4.3.1 Without PCA\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --logistic allow-no-covars \\\n  --out output/gwas\n\nPLINK v2.0.0-a.6.9LM 64-bit Intel (29 Jan 2025)    cog-genomics.org/plink/2.0/\n(C) 2005-2025 Shaun Purcell, Christopher Chang   GNU General Public License v3\nLogging to output/gwas.log.\nOptions in effect:\n  --glm allow-no-covars\n  --out output/gwas\n  --pheno data/phenotypes.txt\n  --pheno-name pheno_1\n  --vcf data/gwas.imputed.chr20.dose.vcf.gz\n\nStart time: Sat Oct  4 11:11:19 2025\n15995 MiB RAM detected, ~14911 available; reserving 7997 MiB for main\nworkspace.\nUsing up to 4 compute threads.\n\n--vcf: 1k variants scanned.\n--vcf: 2k variants scanned.\n--vcf: 3k variants scanned.\n--vcf: 4k variants scanned.\n--vcf: 5k variants scanned.\n--vcf: 6k variants scanned.\n--vcf: 7k variants scanned.\n--vcf: 8k variants scanned.\n--vcf: 9k variants scanned.\n--vcf: 10k variants scanned.\n--vcf: 11k variants scanned.\n--vcf: 12k variants scanned.\n--vcf: 13k variants scanned.\n--vcf: 14k variants scanned.\n--vcf: 15k variants scanned.\n--vcf: 16k variants scanned.\n--vcf: 17k variants scanned.\n--vcf: 18k variants scanned.\n--vcf: 19k variants scanned.\n--vcf: 20k variants scanned.\n--vcf: 21k variants scanned.\n--vcf: 22k variants scanned.\n--vcf: 23k variants scanned.\n--vcf: 24k variants scanned.\n--vcf: 25k variants scanned.\n--vcf: 26k variants scanned.\n--vcf: 27k variants scanned.\n--vcf: 28k variants scanned.\n--vcf: 29k variants scanned.\n--vcf: 30k variants scanned.\n--vcf: 31k variants scanned.\n--vcf: 32k variants scanned.\n--vcf: 33k variants scanned.\n--vcf: 34k variants scanned.\n--vcf: 35k variants scanned.\n--vcf: 36k variants scanned.\n--vcf: 37k variants scanned.\n--vcf: 38k variants scanned.\n--vcf: 39k variants scanned.\n--vcf: 40k variants scanned.\n--vcf: 41k variants scanned.\n--vcf: 42k variants scanned.\n--vcf: 43k variants scanned.\n--vcf: 44k variants scanned.\n--vcf: 45k variants scanned.\n--vcf: 46k variants scanned.\n--vcf: 47k variants scanned.\n--vcf: 48k variants scanned.\n--vcf: 49k variants scanned.\n--vcf: 50k variants scanned.\n--vcf: 51k variants scanned.\n--vcf: 52k variants scanned.\n--vcf: 53k variants scanned.\n--vcf: 54k variants scanned.\n--vcf: 55k variants scanned.\n--vcf: 56k variants scanned.\n--vcf: 57k variants scanned.\n--vcf: 58k variants scanned.\n--vcf: 59k variants scanned.\n--vcf: 60k variants scanned.\n--vcf: 61k variants scanned.\n--vcf: 62k variants scanned.\n--vcf: 63k variants scanned.\n--vcf: 63402 variants scanned.\n\n--vcf: 31k variants converted.    \b\b\b\b\n--vcf: output/gwas-temporary.pgen + output/gwas-temporary.pvar.zst +\noutput/gwas-temporary.psam written.\n2504 samples (0 females, 0 males, 2504 ambiguous; 2504 founders) loaded from\noutput/gwas-temporary.psam.\n63402 variants loaded from output/gwas-temporary.pvar.zst.\n1 binary phenotype loaded (126 cases, 2378 controls).\nCalculating allele frequencies... 0%\b\bdone.\n--glm logistic-Firth hybrid regression on phenotype 'pheno_1': 0%\b\bdone.\nResults written to output/gwas.pheno_1.glm.logistic.hybrid .\nEnd time: Sat Oct  4 11:11:30 2025\n\n\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.pheno_1.glm.logistic.hybrid\", header=TRUE, comment.char=\"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp=\"ID\")\n\n\n\n\n\n\n\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\n\n\n4.3.2 PCA\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header=TRUE, comment.char=\"\")\n#phenotypes &lt;- read.table(\"data/phenotypes.txt\", header=TRUE, comment.char=\"\")\n\n# merge pca data with phenotypes by column IID\n#phenotypes &lt;- merge(pca_data, phenotypes, by = \"IID\")\n\n#ggplot(phenotypes, aes(x = PC1, y = PC2, color = super_pop)) + geom_point()\nggplot(pca_data, aes(x = PC1, y = PC2)) + geom_point() + theme_minimal()\n\n\n\n\n\n\n\n\n\n\n4.3.3 With PCA\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --covar data/covariates.txt \\\n  --logistic hide-covar \\\n  --out output/gwas.covar\n\nPLINK v2.0.0-a.6.9LM 64-bit Intel (29 Jan 2025)    cog-genomics.org/plink/2.0/\n(C) 2005-2025 Shaun Purcell, Christopher Chang   GNU General Public License v3\nLogging to output/gwas.covar.log.\nOptions in effect:\n  --covar data/covariates.txt\n  --glm hide-covar\n  --out output/gwas.covar\n  --pheno data/phenotypes.txt\n  --pheno-name pheno_1\n  --vcf data/gwas.imputed.chr20.dose.vcf.gz\n\nStart time: Sat Oct  4 11:11:37 2025\n15995 MiB RAM detected, ~14797 available; reserving 7997 MiB for main\nworkspace.\nUsing up to 4 compute threads.\n\n--vcf: 1k variants scanned.\n--vcf: 2k variants scanned.\n--vcf: 3k variants scanned.\n--vcf: 4k variants scanned.\n--vcf: 5k variants scanned.\n--vcf: 6k variants scanned.\n--vcf: 7k variants scanned.\n--vcf: 8k variants scanned.\n--vcf: 9k variants scanned.\n--vcf: 10k variants scanned.\n--vcf: 11k variants scanned.\n--vcf: 12k variants scanned.\n--vcf: 13k variants scanned.\n--vcf: 14k variants scanned.\n--vcf: 15k variants scanned.\n--vcf: 16k variants scanned.\n--vcf: 17k variants scanned.\n--vcf: 18k variants scanned.\n--vcf: 19k variants scanned.\n--vcf: 20k variants scanned.\n--vcf: 21k variants scanned.\n--vcf: 22k variants scanned.\n--vcf: 23k variants scanned.\n--vcf: 24k variants scanned.\n--vcf: 25k variants scanned.\n--vcf: 26k variants scanned.\n--vcf: 27k variants scanned.\n--vcf: 28k variants scanned.\n--vcf: 29k variants scanned.\n--vcf: 30k variants scanned.\n--vcf: 31k variants scanned.\n--vcf: 32k variants scanned.\n--vcf: 33k variants scanned.\n--vcf: 34k variants scanned.\n--vcf: 35k variants scanned.\n--vcf: 36k variants scanned.\n--vcf: 37k variants scanned.\n--vcf: 38k variants scanned.\n--vcf: 39k variants scanned.\n--vcf: 40k variants scanned.\n--vcf: 41k variants scanned.\n--vcf: 42k variants scanned.\n--vcf: 43k variants scanned.\n--vcf: 44k variants scanned.\n--vcf: 45k variants scanned.\n--vcf: 46k variants scanned.\n--vcf: 47k variants scanned.\n--vcf: 48k variants scanned.\n--vcf: 49k variants scanned.\n--vcf: 50k variants scanned.\n--vcf: 51k variants scanned.\n--vcf: 52k variants scanned.\n--vcf: 53k variants scanned.\n--vcf: 54k variants scanned.\n--vcf: 55k variants scanned.\n--vcf: 56k variants scanned.\n--vcf: 57k variants scanned.\n--vcf: 58k variants scanned.\n--vcf: 59k variants scanned.\n--vcf: 60k variants scanned.\n--vcf: 61k variants scanned.\n--vcf: 62k variants scanned.\n--vcf: 63k variants scanned.\n--vcf: 63402 variants scanned.\n\n--vcf: 31k variants converted.    \b\b\b\b\n--vcf: output/gwas.covar-temporary.pgen + output/gwas.covar-temporary.pvar.zst\n+ output/gwas.covar-temporary.psam written.\n2504 samples (0 females, 0 males, 2504 ambiguous; 2504 founders) loaded from\noutput/gwas.covar-temporary.psam.\n63402 variants loaded from output/gwas.covar-temporary.pvar.zst.\n1 binary phenotype loaded (126 cases, 2378 controls).\n10 covariates loaded from data/covariates.txt.\nCalculating allele frequencies... 0%\b\bdone.\n--glm logistic-Firth hybrid regression on phenotype 'pheno_1': 0%\b\bdone.\nResults written to output/gwas.covar.pheno_1.glm.logistic.hybrid .\nEnd time: Sat Oct  4 11:11:57 2025\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.covar.pheno_1.glm.logistic.hybrid\", header=TRUE, comment.char=\"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp=\"ID\")\n\n\n\n\n\n\n\nqq(pheno_1$P)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>GWAS</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>GWAS</span>"
     ]
   },
   {
     "objectID": "pgs.html",
     "href": "pgs.html",
-    "title": "4  Polygenic Risk Scores",
+    "title": "5  Polygenic Risk Scores",
     "section": "",
-    "text": "4.1 Setup\nPolygenic risk scores (PRS) are widely used in genetics to estimate an individual’s genetic predisposition to a trait or disease.\nIn this tutorial, we will:\nWe will explore four phenotypes:\n# Load necessary libraries\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(readr)\n\n# Set a clean theme for all plots\ntheme_set(theme_minimal(base_size = 14))",
+    "text": "5.1 Setup\nPolygenic risk scores (PRS) are widely used in genetics to estimate an individual’s genetic predisposition to a trait or disease.\nIn this tutorial, we will:\nWe will explore four phenotypes:\n# Load necessary libraries\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(readr)\n\n# Set a clean theme for all plots\ntheme_set(theme_minimal(base_size = 14))",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
     ]
   },
   {
     "objectID": "pgs.html#load-data",
     "href": "pgs.html#load-data",
-    "title": "4  Polygenic Risk Scores",
-    "section": "4.2 Load Data",
-    "text": "4.2 Load Data\n\n# Read PRS scores and phenotypes\nscores &lt;- read_csv(\"data/scores.txt\")\n\nRows: 2504 Columns: 5\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): sample\ndbl (4): score_1, score_2, score_3, score_4\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nphenos &lt;- read_table(\"data/phenotypes.txt\")\n\n\n── Column specification ────────────────────────────────────────────────────────\ncols(\n  IID = col_character(),\n  pheno_1 = col_double(),\n  pheno_2 = col_double(),\n  pheno_3 = col_double(),\n  pheno_4 = col_double()\n)\n\n# Check data structure\nhead(scores)\n\n# A tibble: 6 × 5\n  sample  score_1 score_2 score_3 score_4\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 HG00096   -42.0    27.1  -0.973 -10.6  \n2 HG00097   -36.3    26.0   3.54   -4.87 \n3 HG00099   -29.5    23.9   5.01   -4.56 \n4 HG00100   -43.1    27.8   5.20   -0.776\n5 HG00101   -42.4    20.5   1.24   -9.14 \n6 HG00102   -42.5    21.7   8.50   -8.40 \n\nhead(phenos)\n\n# A tibble: 6 × 5\n  IID     pheno_1 pheno_2 pheno_3 pheno_4\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 HG00096       1    533.       2    309.\n2 HG00097       1    521.       2    382.\n3 HG00099       1    369.       2    185.\n4 HG00100       1    538.       2    281.\n5 HG00101       1    292.       2    269.\n6 HG00102       1    356.       1    333.\n\n# Merge datasets by sample ID\nmerged &lt;- inner_join(scores, phenos, by = c(\"sample\" = \"IID\"))\n\n# Check merged dataset\nglimpse(merged)\n\nRows: 2,504\nColumns: 9\n$ sample  &lt;chr&gt; \"HG00096\", \"HG00097\", \"HG00099\", \"HG00100\", \"HG00101\", \"HG0010…\n$ score_1 &lt;dbl&gt; -42.00747, -36.34855, -29.53522, -43.11401, -42.42646, -42.495…\n$ score_2 &lt;dbl&gt; 27.131945, 26.031875, 23.908487, 27.786288, 20.450421, 21.6656…\n$ score_3 &lt;dbl&gt; -0.9730913, 3.5408355, 5.0054126, 5.2013110, 1.2357492, 8.4950…\n$ score_4 &lt;dbl&gt; -10.60301794, -4.87496966, -4.55507143, -0.77593228, -9.140756…\n$ pheno_1 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1,…\n$ pheno_2 &lt;dbl&gt; 533.0040, 521.3298, 368.9778, 538.3945, 291.9918, 356.4928, 32…\n$ pheno_3 &lt;dbl&gt; 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 1, 2,…\n$ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448, 29…",
+    "title": "5  Polygenic Risk Scores",
+    "section": "5.2 Load Data",
+    "text": "5.2 Load Data\n\n# Read PRS scores and phenotypes\nscores &lt;- read_csv(\"data/scores.txt\")\n\nRows: 2504 Columns: 5\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): sample\ndbl (4): score_1, score_2, score_3, score_4\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nphenos &lt;- read_table(\"data/phenotypes.txt\")\n\n\n── Column specification ────────────────────────────────────────────────────────\ncols(\n  IID = col_character(),\n  pheno_1 = col_double(),\n  pheno_2 = col_double(),\n  pheno_3 = col_double(),\n  pheno_4 = col_double()\n)\n\n# Check data structure\nhead(scores)\n\n# A tibble: 6 × 5\n  sample  score_1 score_2 score_3 score_4\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 HG00096   -42.0    27.1  -0.973 -10.6  \n2 HG00097   -36.3    26.0   3.54   -4.87 \n3 HG00099   -29.5    23.9   5.01   -4.56 \n4 HG00100   -43.1    27.8   5.20   -0.776\n5 HG00101   -42.4    20.5   1.24   -9.14 \n6 HG00102   -42.5    21.7   8.50   -8.40 \n\nhead(phenos)\n\n# A tibble: 6 × 5\n  IID     pheno_1 pheno_2 pheno_3 pheno_4\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 HG00096       1    533.       2    309.\n2 HG00097       1    521.       2    382.\n3 HG00099       1    369.       2    185.\n4 HG00100       1    538.       2    281.\n5 HG00101       1    292.       2    269.\n6 HG00102       1    356.       1    333.\n\n# Merge datasets by sample ID\nmerged &lt;- inner_join(scores, phenos, by = c(\"sample\" = \"IID\"))\n\n# Check merged dataset\nglimpse(merged)\n\nRows: 2,504\nColumns: 9\n$ sample  &lt;chr&gt; \"HG00096\", \"HG00097\", \"HG00099\", \"HG00100\", \"HG00101\", \"HG0010…\n$ score_1 &lt;dbl&gt; -42.00747, -36.34855, -29.53522, -43.11401, -42.42646, -42.495…\n$ score_2 &lt;dbl&gt; 27.131945, 26.031875, 23.908487, 27.786288, 20.450421, 21.6656…\n$ score_3 &lt;dbl&gt; -0.9730913, 3.5408355, 5.0054126, 5.2013110, 1.2357492, 8.4950…\n$ score_4 &lt;dbl&gt; -10.60301794, -4.87496966, -4.55507143, -0.77593228, -9.140756…\n$ pheno_1 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1,…\n$ pheno_2 &lt;dbl&gt; 533.0040, 521.3298, 368.9778, 538.3945, 291.9918, 356.4928, 32…\n$ pheno_3 &lt;dbl&gt; 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 1, 2,…\n$ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448, 29…",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
     ]
   },
   {
     "objectID": "pgs.html#exploring-the-distribution-of-prs-scores",
     "href": "pgs.html#exploring-the-distribution-of-prs-scores",
-    "title": "4  Polygenic Risk Scores",
-    "section": "4.3 Exploring the Distribution of PRS Scores",
-    "text": "4.3 Exploring the Distribution of PRS Scores\nIt’s good practice to inspect the distribution of scores before comparing them with phenotypes.\n\nggplot(merged, aes(x = score_1)) +\n  geom_density(alpha = 0.5, fill = \"steelblue\") +\n  labs(\n    title = \"Distribution of PRS (score_1)\",\n    x = \"score_1\",\n    y = \"Density\"\n  )",
+    "title": "5  Polygenic Risk Scores",
+    "section": "5.3 Exploring the Distribution of PRS Scores",
+    "text": "5.3 Exploring the Distribution of PRS Scores\nIt’s good practice to inspect the distribution of scores before comparing them with phenotypes.\n\nggplot(merged, aes(x = score_1)) +\n  geom_density(alpha = 0.5, fill = \"steelblue\") +\n  labs(\n    title = \"Distribution of PRS (score_1)\",\n    x = \"score_1\",\n    y = \"Density\"\n  )",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
     ]
   },
   {
     "objectID": "pgs.html#prs-performance-for-a-binary-trait-pheno_1",
     "href": "pgs.html#prs-performance-for-a-binary-trait-pheno_1",
-    "title": "4  Polygenic Risk Scores",
-    "section": "4.4 PRS Performance for a Binary Trait (pheno_1)",
-    "text": "4.4 PRS Performance for a Binary Trait (pheno_1)\npheno_1 is a binary phenotype — for example, disease status (case vs. control). We can check whether score_1 separates the two groups.\n\nggplot(merged, aes(x = score_1, fill = as.factor(pheno_1))) +\n  geom_density(alpha = 0.5) +\n  labs(\n    title = \"Distribution of PRS (score_1) by Binary Phenotype (pheno_1)\",\n    x = \"score_1\",\n    fill = \"pheno_1\"\n  )\n\n\n\n\n\n\n\n\n\nggplot(merged, aes(y = score_1, x = as.factor(pheno_1), fill = as.factor(pheno_1))) +\n  geom_boxplot(alpha = 0.7) +\n  labs(\n    title = \"PRS (score_1) by pheno_1 Status\",\n    x = \"pheno_1\",\n    y = \"score_1\",\n    fill = \"pheno_1\"\n  )\n\n\n\n\n\n\n\n\n💡 Interpretation: If the distributions are well separated, score_1 effectively distinguishes between cases and controls — meaning the PRS captures meaningful genetic signal for pheno_1.",
+    "title": "5  Polygenic Risk Scores",
+    "section": "5.4 PRS Performance for a Binary Trait (pheno_1)",
+    "text": "5.4 PRS Performance for a Binary Trait (pheno_1)\npheno_1 is a binary phenotype — for example, disease status (case vs. control). We can check whether score_1 separates the two groups.\n\nggplot(merged, aes(x = score_1, fill = as.factor(pheno_1))) +\n  geom_density(alpha = 0.5) +\n  labs(\n    title = \"Distribution of PRS (score_1) by Binary Phenotype (pheno_1)\",\n    x = \"score_1\",\n    fill = \"pheno_1\"\n  )\n\n\n\n\n\n\n\n\n\nggplot(merged, aes(y = score_1, x = as.factor(pheno_1), fill = as.factor(pheno_1))) +\n  geom_boxplot(alpha = 0.7) +\n  labs(\n    title = \"PRS (score_1) by pheno_1 Status\",\n    x = \"pheno_1\",\n    y = \"score_1\",\n    fill = \"pheno_1\"\n  )\n\n\n\n\n\n\n\n\n💡 Interpretation: If the distributions are well separated, score_1 effectively distinguishes between cases and controls — meaning the PRS captures meaningful genetic signal for pheno_1.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
     ]
   },
   {
     "objectID": "pgs.html#prs-and-continuous-trait-pheno_2",
     "href": "pgs.html#prs-and-continuous-trait-pheno_2",
-    "title": "4  Polygenic Risk Scores",
-    "section": "4.5 PRS and Continuous Trait (pheno_2)",
-    "text": "4.5 PRS and Continuous Trait (pheno_2)\npheno_2 is continuous (e.g., height, BMI). We expect a strong linear relationship between score_2 and pheno_2.\n\nggplot(merged, aes(x = pheno_2, y = score_2)) +\n  geom_point(alpha = 0.6) +\n  geom_smooth(method = \"lm\", se = TRUE, color = \"blue\") +\n  labs(\n    title = \"PRS (score_2) vs Continuous Phenotype (pheno_2)\",\n    x = \"pheno_2\",\n    y = \"score_2\"\n  )\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n💡 Interpretation: A clear upward trend and strong correlation (tight linear fit) indicate that the PRS predicts the quantitative trait effectively.",
+    "title": "5  Polygenic Risk Scores",
+    "section": "5.5 PRS and Continuous Trait (pheno_2)",
+    "text": "5.5 PRS and Continuous Trait (pheno_2)\npheno_2 is continuous (e.g., height, BMI). We expect a strong linear relationship between score_2 and pheno_2.\n\nggplot(merged, aes(x = pheno_2, y = score_2)) +\n  geom_point(alpha = 0.6) +\n  geom_smooth(method = \"lm\", se = TRUE, color = \"blue\") +\n  labs(\n    title = \"PRS (score_2) vs Continuous Phenotype (pheno_2)\",\n    x = \"pheno_2\",\n    y = \"score_2\"\n  )\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n💡 Interpretation: A clear upward trend and strong correlation (tight linear fit) indicate that the PRS predicts the quantitative trait effectively.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
     ]
   },
   {
     "objectID": "pgs.html#prs-with-weak-or-no-association-pheno_3-and-pheno_4",
     "href": "pgs.html#prs-with-weak-or-no-association-pheno_3-and-pheno_4",
-    "title": "4  Polygenic Risk Scores",
-    "section": "4.6 PRS with Weak or No Association (pheno_3 and pheno_4)",
-    "text": "4.6 PRS with Weak or No Association (pheno_3 and pheno_4)\npheno_3 and pheno_4 do not show strong relationships with their PRS. We’ll confirm this visually.\n\n4.6.1 pheno_3 (Categorical)\n\nggplot(merged, aes(x = score_3, fill = as.factor(pheno_3))) +\n  geom_density(alpha = 0.5) +\n  labs(\n    title = \"Distribution of PRS (score_3) by pheno_3\",\n    x = \"score_3\",\n    fill = \"pheno_3\"\n  )\n\n\n\n\n\n\n\n\n\nggplot(merged, aes(y = score_3, x = as.factor(pheno_3), fill = as.factor(pheno_3))) +\n  geom_boxplot(alpha = 0.7) +\n  labs(\n    title = \"PRS (score_3) by pheno_3\",\n    x = \"pheno_3\",\n    y = \"score_3\",\n    fill = \"pheno_3\"\n  )\n\n\n\n\n\n\n\n\n💡 Interpretation: If the boxplots overlap heavily, score_3 provides little discrimination for pheno_3.\n\n\n4.6.2 pheno_4 (Continuous)\n\nggplot(merged, aes(x = pheno_4, y = score_4)) +\n  geom_point(alpha = 0.6) +\n  geom_smooth(method = \"lm\", se = TRUE, color = \"blue\") +\n  labs(\n    title = \"PRS (score_4) vs pheno_4\",\n    x = \"pheno_4\",\n    y = \"score_4\"\n  )\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n💡 Interpretation: If the regression line is flat and the scatter is random, there’s no clear correlation — suggesting the PRS does not capture the underlying genetic variance for this trait.",
+    "title": "5  Polygenic Risk Scores",
+    "section": "5.6 PRS with Weak or No Association (pheno_3 and pheno_4)",
+    "text": "5.6 PRS with Weak or No Association (pheno_3 and pheno_4)\npheno_3 and pheno_4 do not show strong relationships with their PRS. We’ll confirm this visually.\n\n5.6.1 pheno_3 (Categorical)\n\nggplot(merged, aes(x = score_3, fill = as.factor(pheno_3))) +\n  geom_density(alpha = 0.5) +\n  labs(\n    title = \"Distribution of PRS (score_3) by pheno_3\",\n    x = \"score_3\",\n    fill = \"pheno_3\"\n  )\n\n\n\n\n\n\n\n\n\nggplot(merged, aes(y = score_3, x = as.factor(pheno_3), fill = as.factor(pheno_3))) +\n  geom_boxplot(alpha = 0.7) +\n  labs(\n    title = \"PRS (score_3) by pheno_3\",\n    x = \"pheno_3\",\n    y = \"score_3\",\n    fill = \"pheno_3\"\n  )\n\n\n\n\n\n\n\n\n💡 Interpretation: If the boxplots overlap heavily, score_3 provides little discrimination for pheno_3.\n\n\n5.6.2 pheno_4 (Continuous)\n\nggplot(merged, aes(x = pheno_4, y = score_4)) +\n  geom_point(alpha = 0.6) +\n  geom_smooth(method = \"lm\", se = TRUE, color = \"blue\") +\n  labs(\n    title = \"PRS (score_4) vs pheno_4\",\n    x = \"pheno_4\",\n    y = \"score_4\"\n  )\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n💡 Interpretation: If the regression line is flat and the scatter is random, there’s no clear correlation — suggesting the PRS does not capture the underlying genetic variance for this trait.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
     ]
   },
   {
     "objectID": "pgs.html#summary",
     "href": "pgs.html#summary",
-    "title": "4  Polygenic Risk Scores",
-    "section": "4.7 Summary",
-    "text": "4.7 Summary\n\n\n\n\n\n\n\n\n\nPhenotype\nType\nExpected Pattern\nPRS Performance\n\n\n\n\npheno_1\nBinary\nDistinguishable groups\n✅ Strong separation\n\n\npheno_2\nContinuous\nStrong positive linear correlation\n✅ Strong correlation\n\n\npheno_3\nBinary/Categorical\nOverlapping distributions\n❌ Weak\n\n\npheno_4\nContinuous\nFlat relationship\n❌ Weak",
+    "title": "5  Polygenic Risk Scores",
+    "section": "5.7 Summary",
+    "text": "5.7 Summary\n\n\n\n\n\n\n\n\n\nPhenotype\nType\nExpected Pattern\nPRS Performance\n\n\n\n\npheno_1\nBinary\nDistinguishable groups\n✅ Strong separation\n\n\npheno_2\nContinuous\nStrong positive linear correlation\n✅ Strong correlation\n\n\npheno_3\nBinary/Categorical\nOverlapping distributions\n❌ Weak\n\n\npheno_4\nContinuous\nFlat relationship\n❌ Weak",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
     ]
   },
   {
     "objectID": "pgs.html#conclusion",
     "href": "pgs.html#conclusion",
-    "title": "4  Polygenic Risk Scores",
-    "section": "4.8 Conclusion",
-    "text": "4.8 Conclusion\nThis tutorial demonstrates how to:\n\nLoad and merge PRS and phenotype data\nVisualize relationships between PRS and traits\nInterpret how well PRS predicts different phenotype types\n\nSuch visual checks are an essential first step before applying formal statistical tests (e.g., logistic or linear regression) to quantify the predictive power of PRS.\nNext Steps:\n\nPerform logistic regression for binary traits (pheno_1, pheno_3)\nPerform linear regression for continuous traits (pheno_2, pheno_4)\nCompute metrics such as AUC or ( R^2 ) to assess predictive strength",
+    "title": "5  Polygenic Risk Scores",
+    "section": "5.8 Conclusion",
+    "text": "5.8 Conclusion\nThis tutorial demonstrates how to:\n\nLoad and merge PRS and phenotype data\nVisualize relationships between PRS and traits\nInterpret how well PRS predicts different phenotype types\n\nSuch visual checks are an essential first step before applying formal statistical tests (e.g., logistic or linear regression) to quantify the predictive power of PRS.\nNext Steps:\n\nPerform logistic regression for binary traits (pheno_1, pheno_3)\nPerform linear regression for continuous traits (pheno_2, pheno_4)\nCompute metrics such as AUC or ( R^2 ) to assess predictive strength",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Polygenic Risk Scores</span>"
     ]
   },
   {

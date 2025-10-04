@@ -31,14 +31,7 @@ jobs:
           cache-downloads: true
           cache-environment: true
 
-      # Step 3: Check that Quarto is available and functional
-      - name: Check Quarto installation
-        run: |
-          quarto check install
-          which quarto
-          micromamba info
-
-      # Step 4: Build the Quarto book
+      # Step 3: Build the Quarto book
       - name: Build Quarto book
         shell: bash -l {0}
         run: |

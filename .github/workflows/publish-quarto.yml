@@ -38,7 +38,10 @@ jobs:
           micromamba activate imputation-and-pgs-tutorial
           quarto render
 
-      - name: Render and Publish
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2          
+
+      - name: Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           render: false

@@ -37,4 +37,11 @@ jobs:
         run: |
           micromamba activate imputation-and-pgs-tutorial
           quarto render
-          quarto publish gh-pages --no-browser --no-prompt --no-render
+
+      - name: Render and Publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          render: false
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,7 +4,7 @@ project:
 website:
   title: "Imputation and PGS Tutorial"
   page-navigation: true
-  bread-crumbs: true  
+  bread-crumbs: true
   navbar:
     background: light
     search: true  
@@ -20,6 +20,7 @@ website:
 
 format:
   html:
+    theme: [cosmo, theme.scss]
     toc: true
 
 bibliography: references.bib

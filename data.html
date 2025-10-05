@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>references – Imputation and PGS Tutorial</title>
+<title>data – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -112,7 +93,7 @@ div.csl-indent {
 <span class="menu-text">Getting Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data.html"> 
+    <a class="nav-link active" href="./data.html" aria-current="page"> 
 <span class="menu-text">Data</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -154,7 +135,14 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#file-descriptions" id="toc-file-descriptions" class="nav-link" data-scroll-target="#file-descriptions">File Descriptions</a></li>
+  </ul></li>
+  <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">Note</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -164,13 +152,130 @@ div.csl-indent {
 
 
 
-<section id="references" class="level1 unnumbered">
-<h1 class="unnumbered">References</h1>
-<div id="refs" role="list">
+<section id="data" class="level1">
+<h1>Data</h1>
+<p>This tutorial uses <strong>simulated genotype and phenotype data</strong> based on the <strong>1000 Genomes Project Human Omni 2.5 array</strong>.<br>
+The dataset represents a subset of <strong>~2,500 samples</strong> and approximately <strong>2 million SNPs</strong>, focusing on <strong>chromosome 20</strong>.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures.</p>
+<section id="file-descriptions" class="level3">
+<h3 class="anchored" data-anchor-id="file-descriptions">File Descriptions</h3>
+<section id="gwas.array.hapmap.chr20.vcf.gz" class="level4">
+<h4 class="anchored" data-anchor-id="gwas.array.hapmap.chr20.vcf.gz"><code>gwas.array.hapmap.chr20.vcf.gz</code></h4>
+<ul>
+<li><strong>Description:</strong> Simulated genotype array data for chromosome 20.<br>
+</li>
+<li><strong>Format:</strong> VCF (Variant Call Format), compressed with gzip.<br>
+</li>
+<li><strong>Content:</strong>
+<ul>
+<li>Biallelic SNPs representative of common variants from the HapMap panel.<br>
+</li>
+<li>Genotypes coded in standard VCF format (0/0, 0/1, 1/1).<br>
+</li>
+</ul></li>
+<li><strong>Use:</strong> Serves as the <em>input array dataset</em> for GWAS analysis prior to imputation.</li>
+</ul>
+<p><a href="https://todo">Download</a></p>
+<hr>
+</section>
+<section id="gwas.imputed.chr20.dose.vcf.gz" class="level4">
+<h4 class="anchored" data-anchor-id="gwas.imputed.chr20.dose.vcf.gz"><code>gwas.imputed.chr20.dose.vcf.gz</code></h4>
+<ul>
+<li><strong>Description:</strong> Imputed genotype data for chromosome 20.<br>
+</li>
+<li><strong>Format:</strong> VCF with dosage values (0–2) for each SNP, compressed with gzip.<br>
+</li>
+<li><strong>Content:</strong>
+<ul>
+<li>Dense SNP coverage after imputation from the array data.<br>
+</li>
+<li>Dosage fields represent expected allele counts derived from imputation probabilities.<br>
+</li>
+</ul></li>
+<li><strong>Use:</strong> Used for downstream association tests and polygenic score calculations.</li>
+</ul>
+<p><a href="https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz">Download</a></p>
+<hr>
+</section>
+<section id="phenotypes.txt" class="level4">
+<h4 class="anchored" data-anchor-id="phenotypes.txt"><code>phenotypes.txt</code></h4>
+<ul>
+<li><strong>Description:</strong> Simulated phenotype file containing four traits.<br>
+</li>
+<li><strong>Format:</strong> Plain text (tab-delimited).<br>
+</li>
+<li><strong>Columns:</strong>
+<ul>
+<li><code>sample_id</code> — individual sample identifiers<br>
+</li>
+<li><code>pheno_1</code>, <code>pheno_2</code>, <code>pheno_3</code>, <code>pheno_4</code> — four simulated phenotypes<br>
+</li>
+</ul></li>
+<li><strong>Use:</strong> Provides phenotype data for GWAS and PGS evaluation.</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Phenotype</th>
+<th>Type</th>
+<th>Highly Genetic?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>pheno_1</strong></td>
+<td>Binary (e.g., case/control)</td>
+<td>✅ Yes</td>
+</tr>
+<tr class="even">
+<td><strong>pheno_2</strong></td>
+<td>Continuous (e.g., height)</td>
+<td>✅ Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>pheno_3</strong></td>
+<td>Binary or categorical</td>
+<td>❌ No</td>
+</tr>
+<tr class="even">
+<td><strong>pheno_4</strong></td>
+<td>Continuous</td>
+<td>❌ No</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://todo">Download</a></p>
+<hr>
+</section>
+<section id="scores.txt.gz" class="level4">
+<h4 class="anchored" data-anchor-id="scores.txt.gz"><code>scores.txt.gz</code></h4>
+<ul>
+<li><strong>Description:</strong> Simulated polygenic scores (PGS) corresponding to the four phenotypes.<br>
+</li>
+<li><strong>Format:</strong> Tab-delimited, compressed with gzip.<br>
+</li>
+<li><strong>Columns:</strong>
+<ul>
+<li><code>sample_id</code> — individual identifiers matching the genotype data<br>
+</li>
+<li><code>PGS_pheno_1</code>, <code>PGS_pheno_2</code>, <code>PGS_pheno_3</code>, <code>PGS_pheno_4</code> — simulated PGS values<br>
+</li>
+</ul></li>
+<li><strong>Use:</strong> Demonstrates PGS evaluation and performance comparison across phenotypes.</li>
+</ul>
+<p><a href="https://todo">Download</a></p>
+<hr>
+</section>
+</section>
+</section>
+<section id="note" class="level2">
+<h2 class="anchored" data-anchor-id="note">Note</h2>
+<p>All data are <strong>simulated</strong> for educational purposes. They do <strong>not</strong> contain any identifiable or real genetic or phenotype information from human participants.</p>
 
-</div>
 
-
+</section>
 </section>
 
 </main> <!-- /main -->

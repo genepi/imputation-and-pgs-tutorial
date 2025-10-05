@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; GWAS – Imputation and PGS Tutorial</title>
+<title>gwas-with-plink2 – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./pgs.html" rel="next">
-<link href="./imputation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -76,13 +74,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68bce6427a1f9e509f91b210186b22a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-212957413f4b4e52204b6e4310820480.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -108,121 +106,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gwas.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Imputation and PGS Tutorial</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./getting-started.html"> 
+<span class="menu-text">Getting Started</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data.html"> 
+<span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./imputation.html">
+ <span class="dropdown-text">Imputation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./gwas-with-nf-gwas.html">
+ <span class="dropdown-text">GWAS with nf-gwas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./gwas-with-plink2.html">
+ <span class="dropdown-text">GWAS with PLINK2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pgs.html">
+ <span class="dropdown-text">Polygenic Risk Scores</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Imputation and PGS Tutorial</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./imputation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Imputation</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gwas.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./pgs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">4.1</span> Setup</a></li>
-  <li><a href="#nf-gwas" id="toc-nf-gwas" class="nav-link" data-scroll-target="#nf-gwas"><span class="header-section-number">4.2</span> nf-gwas</a></li>
-  <li><a href="#plink2" id="toc-plink2" class="nav-link" data-scroll-target="#plink2"><span class="header-section-number">4.3</span> PLINK2</a>
+  <li><a href="#gwas-with-plink2" id="toc-gwas-with-plink2" class="nav-link active" data-scroll-target="#gwas-with-plink2">GWAS with PLINK2</a>
   <ul class="collapse">
-  <li><a href="#without-pca" id="toc-without-pca" class="nav-link" data-scroll-target="#without-pca"><span class="header-section-number">4.3.1</span> Without PCA</a></li>
-  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">4.3.2</span> PCA</a></li>
-  <li><a href="#with-pca" id="toc-with-pca" class="nav-link" data-scroll-target="#with-pca"><span class="header-section-number">4.3.3</span> With PCA</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#gwas-without-pca" id="toc-gwas-without-pca" class="nav-link" data-scroll-target="#gwas-without-pca">GWAS Without PCA</a></li>
+  <li><a href="#pca-assessing-population-structure" id="toc-pca-assessing-population-structure" class="nav-link" data-scroll-target="#pca-assessing-population-structure">PCA: Assessing Population Structure</a></li>
+  <li><a href="#gwas-with-pca-adjustment" id="toc-gwas-with-pca-adjustment" class="nav-link" data-scroll-target="#gwas-with-pca-adjustment">GWAS With PCA Adjustment</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="setup" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">4.1</span> Setup</h2>
+<section id="gwas-with-plink2" class="level1">
+<h1>GWAS with PLINK2</h1>
+<p>This tutorial demonstrates how to perform a <strong>genome-wide association study (GWAS)</strong> using <strong>PLINK2</strong>, with and without <strong>principal component analysis (PCA)</strong> adjustment.<br>
+It also shows how to visualize results using the <strong><code>qqman</code></strong> and <strong><code>ggplot2</code></strong> R packages.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="bu">]</span> <span class="kw">||</span> <span class="fu">wget</span> <span class="at">-q</span> <span class="at">-P</span> data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -231,115 +201,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Install PLINK2</li>
 </ul>
 </section>
-<section id="nf-gwas" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="nf-gwas"><span class="header-section-number">4.2</span> nf-gwas</h2>
-</section>
-<section id="plink2" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="plink2"><span class="header-section-number">4.3</span> PLINK2</h2>
-<section id="without-pca" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="without-pca"><span class="header-section-number">4.3.1</span> Without PCA</h3>
+<section id="gwas-without-pca" class="level2">
+<h2 class="anchored" data-anchor-id="gwas-without-pca">GWAS Without PCA</h2>
+<p>First, we run a logistic regression GWAS on a simulated phenotype without adjusting for population structure.</p>
+<section id="run-gwas" class="level4">
+<h4 class="anchored" data-anchor-id="run-gwas">Run GWAS</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> allow-no-covars <span class="dt">\</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>PLINK v2.0.0-a.6.9LM 64-bit Intel (29 Jan 2025)    cog-genomics.org/plink/2.0/
-(C) 2005-2025 Shaun Purcell, Christopher Chang   GNU General Public License v3
-Logging to output/gwas.log.
-Options in effect:
-  --glm allow-no-covars
-  --out output/gwas
-  --pheno data/phenotypes.txt
-  --pheno-name pheno_1
-  --vcf data/gwas.imputed.chr20.dose.vcf.gz
-
-Start time: Sat Oct  4 11:11:19 2025
-15995 MiB RAM detected, ~14911 available; reserving 7997 MiB for main
-workspace.
-Using up to 4 compute threads.
-
---vcf: 1k variants scanned.
---vcf: 2k variants scanned.
---vcf: 3k variants scanned.
---vcf: 4k variants scanned.
---vcf: 5k variants scanned.
---vcf: 6k variants scanned.
---vcf: 7k variants scanned.
---vcf: 8k variants scanned.
---vcf: 9k variants scanned.
---vcf: 10k variants scanned.
---vcf: 11k variants scanned.
---vcf: 12k variants scanned.
---vcf: 13k variants scanned.
---vcf: 14k variants scanned.
---vcf: 15k variants scanned.
---vcf: 16k variants scanned.
---vcf: 17k variants scanned.
---vcf: 18k variants scanned.
---vcf: 19k variants scanned.
---vcf: 20k variants scanned.
---vcf: 21k variants scanned.
---vcf: 22k variants scanned.
---vcf: 23k variants scanned.
---vcf: 24k variants scanned.
---vcf: 25k variants scanned.
---vcf: 26k variants scanned.
---vcf: 27k variants scanned.
---vcf: 28k variants scanned.
---vcf: 29k variants scanned.
---vcf: 30k variants scanned.
---vcf: 31k variants scanned.
---vcf: 32k variants scanned.
---vcf: 33k variants scanned.
---vcf: 34k variants scanned.
---vcf: 35k variants scanned.
---vcf: 36k variants scanned.
---vcf: 37k variants scanned.
---vcf: 38k variants scanned.
---vcf: 39k variants scanned.
---vcf: 40k variants scanned.
---vcf: 41k variants scanned.
---vcf: 42k variants scanned.
---vcf: 43k variants scanned.
---vcf: 44k variants scanned.
---vcf: 45k variants scanned.
---vcf: 46k variants scanned.
---vcf: 47k variants scanned.
---vcf: 48k variants scanned.
---vcf: 49k variants scanned.
---vcf: 50k variants scanned.
---vcf: 51k variants scanned.
---vcf: 52k variants scanned.
---vcf: 53k variants scanned.
---vcf: 54k variants scanned.
---vcf: 55k variants scanned.
---vcf: 56k variants scanned.
---vcf: 57k variants scanned.
---vcf: 58k variants scanned.
---vcf: 59k variants scanned.
---vcf: 60k variants scanned.
---vcf: 61k variants scanned.
---vcf: 62k variants scanned.
---vcf: 63k variants scanned.
---vcf: 63402 variants scanned.
-
---vcf: 31k variants converted.    
---vcf: output/gwas-temporary.pgen + output/gwas-temporary.pvar.zst +
-output/gwas-temporary.psam written.
-2504 samples (0 females, 0 males, 2504 ambiguous; 2504 founders) loaded from
-output/gwas-temporary.psam.
-63402 variants loaded from output/gwas-temporary.pvar.zst.
-1 binary phenotype loaded (126 cases, 2378 controls).
-Calculating allele frequencies... 0%done.
---glm logistic-Firth hybrid regression on phenotype 'pheno_1': 0%done.
-Results written to output/gwas.pheno_1.glm.logistic.hybrid .
-End time: Sat Oct  4 11:11:30 2025</code></pre>
 </div>
-</div>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li><code>--vcf</code>: Input imputed genotype file in VCF format</li>
+<li><code>--pheno</code>: Phenotype file (tab-delimited)</li>
+<li><code>--pheno-name</code>: Selects the phenotype column to test (here <code>pheno_1</code>)</li>
+<li><code>--logistic allow-no-covars</code>: Runs logistic regression without covariates</li>
+<li><code>--out</code>: Prefix for output files</li>
+</ul>
+</section>
+<section id="visualize-gwas-results" class="level4">
+<h4 class="anchored" data-anchor-id="visualize-gwas-results">Visualize GWAS Results</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qqman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qqman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
@@ -358,174 +244,116 @@ End time: Sat Oct  4 11:11:30 2025</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">comment.char=</span><span class="st">""</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp=</span><span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="gwas_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="gwas-with-plink2_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="gwas_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="gwas-with-plink2_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>The <code>qqman</code> package provides quick visualizations of GWAS results.</li>
+<li>The Manhattan plot highlights SNPs across chromosome 20, while the QQ plot checks for p-value inflation.</li>
+</ul>
 </section>
-<section id="pca" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="pca"><span class="header-section-number">4.3.2</span> PCA</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/covariates.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">comment.char=</span><span class="st">""</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#phenotypes &lt;- read.table("data/phenotypes.txt", header=TRUE, comment.char="")</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># merge pca data with phenotypes by column IID</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#phenotypes &lt;- merge(pca_data, phenotypes, by = "IID")</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(phenotypes, aes(x = PC1, y = PC2, color = super_pop)) + geom_point()</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pca_data, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="gwas_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
-<section id="with-pca" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="with-pca"><span class="header-section-number">4.3.3</span> With PCA</h3>
+<section id="pca-assessing-population-structure" class="level2">
+<h2 class="anchored" data-anchor-id="pca-assessing-population-structure">PCA: Assessing Population Structure</h2>
+<p>Before including principal components (PCs) as covariates, let’s visualize the PCA data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--covar</span> data/covariates.txt <span class="dt">\</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> hide-covar <span class="dt">\</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas.covar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>PLINK v2.0.0-a.6.9LM 64-bit Intel (29 Jan 2025)    cog-genomics.org/plink/2.0/
-(C) 2005-2025 Shaun Purcell, Christopher Chang   GNU General Public License v3
-Logging to output/gwas.covar.log.
-Options in effect:
-  --covar data/covariates.txt
-  --glm hide-covar
-  --out output/gwas.covar
-  --pheno data/phenotypes.txt
-  --pheno-name pheno_1
-  --vcf data/gwas.imputed.chr20.dose.vcf.gz
-
-Start time: Sat Oct  4 11:11:37 2025
-15995 MiB RAM detected, ~14797 available; reserving 7997 MiB for main
-workspace.
-Using up to 4 compute threads.
-
---vcf: 1k variants scanned.
---vcf: 2k variants scanned.
---vcf: 3k variants scanned.
---vcf: 4k variants scanned.
---vcf: 5k variants scanned.
---vcf: 6k variants scanned.
---vcf: 7k variants scanned.
---vcf: 8k variants scanned.
---vcf: 9k variants scanned.
---vcf: 10k variants scanned.
---vcf: 11k variants scanned.
---vcf: 12k variants scanned.
---vcf: 13k variants scanned.
---vcf: 14k variants scanned.
---vcf: 15k variants scanned.
---vcf: 16k variants scanned.
---vcf: 17k variants scanned.
---vcf: 18k variants scanned.
---vcf: 19k variants scanned.
---vcf: 20k variants scanned.
---vcf: 21k variants scanned.
---vcf: 22k variants scanned.
---vcf: 23k variants scanned.
---vcf: 24k variants scanned.
---vcf: 25k variants scanned.
---vcf: 26k variants scanned.
---vcf: 27k variants scanned.
---vcf: 28k variants scanned.
---vcf: 29k variants scanned.
---vcf: 30k variants scanned.
---vcf: 31k variants scanned.
---vcf: 32k variants scanned.
---vcf: 33k variants scanned.
---vcf: 34k variants scanned.
---vcf: 35k variants scanned.
---vcf: 36k variants scanned.
---vcf: 37k variants scanned.
---vcf: 38k variants scanned.
---vcf: 39k variants scanned.
---vcf: 40k variants scanned.
---vcf: 41k variants scanned.
---vcf: 42k variants scanned.
---vcf: 43k variants scanned.
---vcf: 44k variants scanned.
---vcf: 45k variants scanned.
---vcf: 46k variants scanned.
---vcf: 47k variants scanned.
---vcf: 48k variants scanned.
---vcf: 49k variants scanned.
---vcf: 50k variants scanned.
---vcf: 51k variants scanned.
---vcf: 52k variants scanned.
---vcf: 53k variants scanned.
---vcf: 54k variants scanned.
---vcf: 55k variants scanned.
---vcf: 56k variants scanned.
---vcf: 57k variants scanned.
---vcf: 58k variants scanned.
---vcf: 59k variants scanned.
---vcf: 60k variants scanned.
---vcf: 61k variants scanned.
---vcf: 62k variants scanned.
---vcf: 63k variants scanned.
---vcf: 63402 variants scanned.
-
---vcf: 31k variants converted.    
---vcf: output/gwas.covar-temporary.pgen + output/gwas.covar-temporary.pvar.zst
-+ output/gwas.covar-temporary.psam written.
-2504 samples (0 females, 0 males, 2504 ambiguous; 2504 founders) loaded from
-output/gwas.covar-temporary.psam.
-63402 variants loaded from output/gwas.covar-temporary.pvar.zst.
-1 binary phenotype loaded (126 cases, 2378 controls).
-10 covariates loaded from data/covariates.txt.
-Calculating allele frequencies... 0%done.
---glm logistic-Firth hybrid regression on phenotype 'pheno_1': 0%done.
-Results written to output/gwas.covar.pheno_1.glm.logistic.hybrid .
-End time: Sat Oct  4 11:11:57 2025</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.covar.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">comment.char=</span><span class="st">""</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp=</span><span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/covariates.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pca_data, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PCA of Genotype Data"</span>, <span class="at">x =</span> <span class="st">"PC1"</span>, <span class="at">y =</span> <span class="st">"PC2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="gwas_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="gwas_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="gwas-with-plink2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li><code>covariates.txt</code> contains individual-level covariates including PCs (e.g., <code>IID</code>, <code>PC1</code>, <code>PC2</code>, …).</li>
+<li>The PCA plot can reveal population substructure or outliers.</li>
+</ul>
+</section>
+<section id="gwas-with-pca-adjustment" class="level2">
+<h2 class="anchored" data-anchor-id="gwas-with-pca-adjustment">GWAS With PCA Adjustment</h2>
+<p>Next, include the PCA covariates in the GWAS to account for population stratification.</p>
+<section id="run-gwas-with-covariates" class="level4">
+<h4 class="anchored" data-anchor-id="run-gwas-with-covariates">Run GWAS with Covariates</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--covar</span> data/covariates.txt <span class="dt">\</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> hide-covar <span class="dt">\</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas.covar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li><code>--covar</code>: Provides a file containing covariates (e.g., PCs).</li>
+<li><code>--logistic hide-covar</code>: Runs logistic regression while hiding covariate results in the output.</li>
+</ul>
+</section>
+<section id="visualize-adjusted-gwas-results" class="level4">
+<h4 class="anchored" data-anchor-id="visualize-adjusted-gwas-results">Visualize Adjusted GWAS Results</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.covar.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gwas-with-plink2_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gwas-with-plink2_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Comparison Tip:</strong> Compare the QQ plots <em>before</em> and <em>after</em> including PCs to see how population structure adjustment affects the inflation of p-values.</p>
+<hr>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><a href="https://www.cog-genomics.org/plink/2.0/">PLINK2 Documentation</a></li>
+<li><a href="https://cran.r-project.org/package=qqman">qqman R Package</a></li>
+<li><a href="https://ggplot2.tidyverse.org/">ggplot2 R Package</a></li>
+</ul>
 
 
 </section>
@@ -931,18 +759,6 @@ End time: Sat Oct  4 11:11:57 2025</code></pre>
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./imputation.html" class="pagination-link" aria-label="Imputation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Imputation</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./pgs.html" class="pagination-link" aria-label="Polygenic Risk Scores">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

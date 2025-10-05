@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Polygenic Risk Scores – Imputation and PGS Tutorial</title>
+<title>pgs – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
-<link href="./gwas.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -76,13 +74,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68bce6427a1f9e509f91b210186b22a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-212957413f4b4e52204b6e4310820480.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -108,123 +106,96 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pgs.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Imputation and PGS Tutorial</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./getting-started.html"> 
+<span class="menu-text">Getting Started</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data.html"> 
+<span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./imputation.html">
+ <span class="dropdown-text">Imputation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./gwas-with-nf-gwas.html">
+ <span class="dropdown-text">GWAS with nf-gwas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./gwas-with-plink2.html">
+ <span class="dropdown-text">GWAS with PLINK2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pgs.html">
+ <span class="dropdown-text">Polygenic Risk Scores</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Imputation and PGS Tutorial</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./imputation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Imputation</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gwas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./pgs.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">5.1</span> Setup</a></li>
-  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">5.2</span> Load Data</a></li>
-  <li><a href="#exploring-the-distribution-of-prs-scores" id="toc-exploring-the-distribution-of-prs-scores" class="nav-link" data-scroll-target="#exploring-the-distribution-of-prs-scores"><span class="header-section-number">5.3</span> Exploring the Distribution of PRS Scores</a></li>
-  <li><a href="#prs-performance-for-a-binary-trait-pheno_1" id="toc-prs-performance-for-a-binary-trait-pheno_1" class="nav-link" data-scroll-target="#prs-performance-for-a-binary-trait-pheno_1"><span class="header-section-number">5.4</span> PRS Performance for a Binary Trait (pheno_1)</a></li>
-  <li><a href="#prs-and-continuous-trait-pheno_2" id="toc-prs-and-continuous-trait-pheno_2" class="nav-link" data-scroll-target="#prs-and-continuous-trait-pheno_2"><span class="header-section-number">5.5</span> PRS and Continuous Trait (pheno_2)</a></li>
-  <li><a href="#prs-with-weak-or-no-association-pheno_3-and-pheno_4" id="toc-prs-with-weak-or-no-association-pheno_3-and-pheno_4" class="nav-link" data-scroll-target="#prs-with-weak-or-no-association-pheno_3-and-pheno_4"><span class="header-section-number">5.6</span> PRS with Weak or No Association (pheno_3 and pheno_4)</a>
+  <li><a href="#polygenic-risk-scores" id="toc-polygenic-risk-scores" class="nav-link active" data-scroll-target="#polygenic-risk-scores">Polygenic Risk Scores</a>
   <ul class="collapse">
-  <li><a href="#pheno_3-categorical" id="toc-pheno_3-categorical" class="nav-link" data-scroll-target="#pheno_3-categorical"><span class="header-section-number">5.6.1</span> pheno_3 (Categorical)</a></li>
-  <li><a href="#pheno_4-continuous" id="toc-pheno_4-continuous" class="nav-link" data-scroll-target="#pheno_4-continuous"><span class="header-section-number">5.6.2</span> pheno_4 (Continuous)</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load Data</a></li>
+  <li><a href="#exploring-the-distribution-of-prs-scores" id="toc-exploring-the-distribution-of-prs-scores" class="nav-link" data-scroll-target="#exploring-the-distribution-of-prs-scores">Exploring the Distribution of PRS Scores</a></li>
+  <li><a href="#prs-performance-for-a-binary-trait-pheno_1" id="toc-prs-performance-for-a-binary-trait-pheno_1" class="nav-link" data-scroll-target="#prs-performance-for-a-binary-trait-pheno_1">PRS Performance for a Binary Trait (pheno_1)</a></li>
+  <li><a href="#prs-and-continuous-trait-pheno_2" id="toc-prs-and-continuous-trait-pheno_2" class="nav-link" data-scroll-target="#prs-and-continuous-trait-pheno_2">PRS and Continuous Trait (pheno_2)</a></li>
+  <li><a href="#prs-with-weak-or-no-association-pheno_3-and-pheno_4" id="toc-prs-with-weak-or-no-association-pheno_3-and-pheno_4" class="nav-link" data-scroll-target="#prs-with-weak-or-no-association-pheno_3-and-pheno_4">PRS with Weak or No Association (pheno_3 and pheno_4)</a>
+  <ul class="collapse">
+  <li><a href="#pheno_3-categorical" id="toc-pheno_3-categorical" class="nav-link" data-scroll-target="#pheno_3-categorical">pheno_3 (Categorical)</a></li>
+  <li><a href="#pheno_4-continuous" id="toc-pheno_4-continuous" class="nav-link" data-scroll-target="#pheno_4-continuous">pheno_4 (Continuous)</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.7</span> Summary</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5.8</span> Conclusion</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Polygenic Risk Scores</span></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="polygenic-risk-scores" class="level1">
+<h1>Polygenic Risk Scores</h1>
 <p>Polygenic risk scores (PRS) are widely used in genetics to estimate an individual’s genetic predisposition to a trait or disease.<br>
 In this tutorial, we will:</p>
 <ul>
@@ -233,35 +204,8 @@ In this tutorial, we will:</p>
 <li>Visualize the relationship between scores and phenotypes</li>
 <li>Interpret how well different scores distinguish or predict traits</li>
 </ul>
-<p>We will explore four phenotypes:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Phenotype</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>pheno_1</strong></td>
-<td>Binary (e.g., case/control)</td>
-</tr>
-<tr class="even">
-<td><strong>pheno_2</strong></td>
-<td>Continuous (e.g., height)</td>
-</tr>
-<tr class="odd">
-<td><strong>pheno_3</strong></td>
-<td>Binary or categorical</td>
-</tr>
-<tr class="even">
-<td><strong>pheno_4</strong></td>
-<td>Continuous</td>
-</tr>
-</tbody>
-</table>
-<section id="setup" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">5.1</span> Setup</h2>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -272,89 +216,28 @@ In this tutorial, we will:</p>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="load-data" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="load-data"><span class="header-section-number">5.2</span> Load Data</h2>
+<section id="load-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-data">Load Data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read PRS scores and phenotypes</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/scores.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 2504 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): sample
-dbl (4): score_1, score_2, score_3, score_4
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phenos <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"data/phenotypes.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-── Column specification ────────────────────────────────────────────────────────
-cols(
-  IID = col_character(),
-  pheno_1 = col_double(),
-  pheno_2 = col_double(),
-  pheno_3 = col_double(),
-  pheno_4 = col_double()
-)</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check data structure</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  sample  score_1 score_2 score_3 score_4
-  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 HG00096   -42.0    27.1  -0.973 -10.6  
-2 HG00097   -36.3    26.0   3.54   -4.87 
-3 HG00099   -29.5    23.9   5.01   -4.56 
-4 HG00100   -43.1    27.8   5.20   -0.776
-5 HG00101   -42.4    20.5   1.24   -9.14 
-6 HG00102   -42.5    21.7   8.50   -8.40 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(phenos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  IID     pheno_1 pheno_2 pheno_3 pheno_4
-  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 HG00096       1    533.       2    309.
-2 HG00097       1    521.       2    382.
-3 HG00099       1    369.       2    185.
-4 HG00100       1    538.       2    281.
-5 HG00101       1    292.       2    269.
-6 HG00102       1    356.       1    333.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge datasets by sample ID</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(scores, phenos, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"sample"</span> <span class="ot">=</span> <span class="st">"IID"</span>))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check merged dataset</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(merged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 2,504
-Columns: 9
-$ sample  &lt;chr&gt; "HG00096", "HG00097", "HG00099", "HG00100", "HG00101", "HG0010…
-$ score_1 &lt;dbl&gt; -42.00747, -36.34855, -29.53522, -43.11401, -42.42646, -42.495…
-$ score_2 &lt;dbl&gt; 27.131945, 26.031875, 23.908487, 27.786288, 20.450421, 21.6656…
-$ score_3 &lt;dbl&gt; -0.9730913, 3.5408355, 5.0054126, 5.2013110, 1.2357492, 8.4950…
-$ score_4 &lt;dbl&gt; -10.60301794, -4.87496966, -4.55507143, -0.77593228, -9.140756…
-$ pheno_1 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1,…
-$ pheno_2 &lt;dbl&gt; 533.0040, 521.3298, 368.9778, 538.3945, 291.9918, 356.4928, 32…
-$ pheno_3 &lt;dbl&gt; 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 1, 2,…
-$ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448, 29…</code></pre>
-</div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/scores.txt"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>phenos <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"data/phenotypes.txt"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge datasets by sample ID</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(scores, phenos, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"sample"</span> <span class="ot">=</span> <span class="st">"IID"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exploring-the-distribution-of-prs-scores" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="exploring-the-distribution-of-prs-scores"><span class="header-section-number">5.3</span> Exploring the Distribution of PRS Scores</h2>
+<section id="exploring-the-distribution-of-prs-scores" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-distribution-of-prs-scores">Exploring the Distribution of PRS Scores</h2>
 <p>It’s good practice to inspect the distribution of scores before comparing them with phenotypes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_1)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of PRS (score_1)"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"score_1"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_1)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of PRS (score_1)"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"score_1"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -364,17 +247,17 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 </div>
 </section>
-<section id="prs-performance-for-a-binary-trait-pheno_1" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="prs-performance-for-a-binary-trait-pheno_1"><span class="header-section-number">5.4</span> PRS Performance for a Binary Trait (pheno_1)</h2>
+<section id="prs-performance-for-a-binary-trait-pheno_1" class="level2">
+<h2 class="anchored" data-anchor-id="prs-performance-for-a-binary-trait-pheno_1">PRS Performance for a Binary Trait (pheno_1)</h2>
 <p><strong>pheno_1</strong> is a binary phenotype — for example, disease status (case vs.&nbsp;control). We can check whether <code>score_1</code> separates the two groups.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_1, <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_1))) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of PRS (score_1) by Binary Phenotype (pheno_1)"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"score_1"</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pheno_1"</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_1, <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_1))) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of PRS (score_1) by Binary Phenotype (pheno_1)"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"score_1"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pheno_1"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -384,14 +267,14 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">y =</span> score_1, <span class="at">x =</span> <span class="fu">as.factor</span>(pheno_1), <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_1))) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PRS (score_1) by pheno_1 Status"</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"pheno_1"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"score_1"</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pheno_1"</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">y =</span> score_1, <span class="at">x =</span> <span class="fu">as.factor</span>(pheno_1), <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_1))) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PRS (score_1) by pheno_1 Status"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"pheno_1"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"score_1"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pheno_1"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -402,18 +285,18 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 <p>💡 <strong>Interpretation:</strong> If the distributions are well separated, <code>score_1</code> effectively distinguishes between cases and controls — meaning the PRS captures meaningful genetic signal for <code>pheno_1</code>.</p>
 </section>
-<section id="prs-and-continuous-trait-pheno_2" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="prs-and-continuous-trait-pheno_2"><span class="header-section-number">5.5</span> PRS and Continuous Trait (pheno_2)</h2>
+<section id="prs-and-continuous-trait-pheno_2" class="level2">
+<h2 class="anchored" data-anchor-id="prs-and-continuous-trait-pheno_2">PRS and Continuous Trait (pheno_2)</h2>
 <p><strong>pheno_2</strong> is continuous (e.g., height, BMI). We expect a <em>strong linear relationship</em> between <code>score_2</code> and <code>pheno_2</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> pheno_2, <span class="at">y =</span> score_2)) <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PRS (score_2) vs Continuous Phenotype (pheno_2)"</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"pheno_2"</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"score_2"</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> pheno_2, <span class="at">y =</span> score_2)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PRS (score_2) vs Continuous Phenotype (pheno_2)"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"pheno_2"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"score_2"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -427,19 +310,19 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 <p>💡 <strong>Interpretation:</strong> A clear upward trend and strong correlation (tight linear fit) indicate that the PRS predicts the quantitative trait effectively.</p>
 </section>
-<section id="prs-with-weak-or-no-association-pheno_3-and-pheno_4" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="prs-with-weak-or-no-association-pheno_3-and-pheno_4"><span class="header-section-number">5.6</span> PRS with Weak or No Association (pheno_3 and pheno_4)</h2>
+<section id="prs-with-weak-or-no-association-pheno_3-and-pheno_4" class="level2">
+<h2 class="anchored" data-anchor-id="prs-with-weak-or-no-association-pheno_3-and-pheno_4">PRS with Weak or No Association (pheno_3 and pheno_4)</h2>
 <p><strong>pheno_3</strong> and <strong>pheno_4</strong> do <em>not</em> show strong relationships with their PRS. We’ll confirm this visually.</p>
-<section id="pheno_3-categorical" class="level3" data-number="5.6.1">
-<h3 data-number="5.6.1" class="anchored" data-anchor-id="pheno_3-categorical"><span class="header-section-number">5.6.1</span> pheno_3 (Categorical)</h3>
+<section id="pheno_3-categorical" class="level3">
+<h3 class="anchored" data-anchor-id="pheno_3-categorical">pheno_3 (Categorical)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_3, <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_3))) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of PRS (score_3) by pheno_3"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"score_3"</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pheno_3"</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> score_3, <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_3))) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of PRS (score_3) by pheno_3"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"score_3"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pheno_3"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -449,14 +332,14 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">y =</span> score_3, <span class="at">x =</span> <span class="fu">as.factor</span>(pheno_3), <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_3))) <span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PRS (score_3) by pheno_3"</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"pheno_3"</span>,</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"score_3"</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pheno_3"</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">y =</span> score_3, <span class="at">x =</span> <span class="fu">as.factor</span>(pheno_3), <span class="at">fill =</span> <span class="fu">as.factor</span>(pheno_3))) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PRS (score_3) by pheno_3"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"pheno_3"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"score_3"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"pheno_3"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -467,17 +350,17 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </div>
 <p>💡 <strong>Interpretation:</strong> If the boxplots overlap heavily, <code>score_3</code> provides little discrimination for <code>pheno_3</code>.</p>
 </section>
-<section id="pheno_4-continuous" class="level3" data-number="5.6.2">
-<h3 data-number="5.6.2" class="anchored" data-anchor-id="pheno_4-continuous"><span class="header-section-number">5.6.2</span> pheno_4 (Continuous)</h3>
+<section id="pheno_4-continuous" class="level3">
+<h3 class="anchored" data-anchor-id="pheno_4-continuous">pheno_4 (Continuous)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> pheno_4, <span class="at">y =</span> score_4)) <span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PRS (score_4) vs pheno_4"</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"pheno_4"</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"score_4"</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged, <span class="fu">aes</span>(<span class="at">x =</span> pheno_4, <span class="at">y =</span> score_4)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PRS (score_4) vs pheno_4"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"pheno_4"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"score_4"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -492,8 +375,8 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 <p>💡 <strong>Interpretation:</strong> If the regression line is flat and the scatter is random, there’s no clear correlation — suggesting the PRS does not capture the underlying genetic variance for this trait.</p>
 </section>
 </section>
-<section id="summary" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.7</span> Summary</h2>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 11%">
@@ -537,8 +420,8 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </tbody>
 </table>
 </section>
-<section id="conclusion" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">5.8</span> Conclusion</h2>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>This tutorial demonstrates how to:</p>
 <ul>
 <li>Load and merge PRS and phenotype data</li>
@@ -554,6 +437,7 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -956,18 +840,6 @@ $ pheno_4 &lt;dbl&gt; 308.7816, 381.9142, 185.1205, 280.5754, 268.8627, 332.5448
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./gwas.html" class="pagination-link" aria-label="GWAS">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GWAS</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

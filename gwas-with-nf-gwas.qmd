@@ -1,0 +1,17 @@
+---
+engine: knitr
+---
+
+# GWAS with nf-gwas
+
+## Setup
+
+
+## GWAS Without PCA
+
+First, we run a logistic regression GWAS on a simulated phenotype without adjusting for population structure.
+
+#### Run GWAS
+
+....
+

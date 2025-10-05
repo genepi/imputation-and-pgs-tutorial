@@ -32,7 +32,7 @@ jobs:
           cache-environment: true
 
       # Step 3: Build the Quarto book
-      - name: Build Quarto book
+      - name: Build Quarto Website
         shell: bash -l {0}
         run: |
           micromamba activate imputation-and-pgs-tutorial

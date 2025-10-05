@@ -12,16 +12,6 @@ In this tutorial, we will:
 - Visualize the relationship between scores and phenotypes
 - Interpret how well different scores distinguish or predict traits
 
-We will explore four phenotypes:
-
-| Phenotype | Type |
-|------------|------|
-| **pheno_1** | Binary (e.g., case/control) |
-| **pheno_2** | Continuous (e.g., height) |
-| **pheno_3** | Binary or categorical |
-| **pheno_4** | Continuous |
-
-
 ## Setup
 
 ```{r setup, message=FALSE, warning=FALSE}
@@ -36,20 +26,13 @@ theme_set(theme_minimal(base_size = 14))
 
 ## Load Data
 
-```{r load-data}
+```{r load-data, message=FALSE, warning=FALSE}
 # Read PRS scores and phenotypes
 scores <- read_csv("data/scores.txt")
 phenos <- read_table("data/phenotypes.txt")
 
-# Check data structure
-head(scores)
-head(phenos)
-
 # Merge datasets by sample ID
 merged <- inner_join(scores, phenos, by = c("sample" = "IID"))
-
-# Check merged dataset
-glimpse(merged)
 ```
 
 ## Exploring the Distribution of PRS Scores

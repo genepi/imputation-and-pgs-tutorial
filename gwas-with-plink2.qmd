@@ -1,0 +1,124 @@
+---
+engine: knitr
+---
+
+# GWAS with PLINK2
+
+This tutorial demonstrates how to perform a **genome-wide association study (GWAS)** using **PLINK2**, with and without **principal component analysis (PCA)** adjustment.  
+It also shows how to visualize results using the **`qqman`** and **`ggplot2`** R packages.
+
+## Setup
+
+```{bash}
+[ -f data/gwas.imputed.chr20.dose.vcf.gz ] || wget -q -P data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz
+mkdir -p output
+```
+
+- Install PLINK2
+
+## GWAS Without PCA
+
+First, we run a logistic regression GWAS on a simulated phenotype without adjusting for population structure.
+
+#### Run GWAS
+
+```{bash, results='hide'}
+plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz \
+  --pheno data/phenotypes.txt \
+  --pheno-name pheno_1 \
+  --logistic allow-no-covars \
+  --out output/gwas
+```
+
+**Explanation:**
+
+* `--vcf`: Input imputed genotype file in VCF format
+* `--pheno`: Phenotype file (tab-delimited)
+* `--pheno-name`: Selects the phenotype column to test (here `pheno_1`)
+* `--logistic allow-no-covars`: Runs logistic regression without covariates
+* `--out`: Prefix for output files
+
+
+#### Visualize GWAS Results
+
+```{r}
+library(qqman)
+
+pheno_1 <- read.table("output/gwas.pheno_1.glm.logistic.hybrid", header = TRUE, comment.char = "")
+pheno_1 <- pheno_1[!is.na(pheno_1$P), ]
+
+# Manhattan plot
+manhattan(x = pheno_1, chr = "X.CHROM", bp = "POS", p = "P", snp = "ID")
+
+# QQ plot
+qq(pheno_1$P)
+```
+
+**Notes:**
+
+* The `qqman` package provides quick visualizations of GWAS results.
+* The Manhattan plot highlights SNPs across chromosome 20, while the QQ plot checks for p-value inflation.
+
+## PCA: Assessing Population Structure
+
+Before including principal components (PCs) as covariates, let's visualize the PCA data.
+
+```{r}
+library(ggplot2)
+
+pca_data <- read.table("data/covariates.txt", header = TRUE, comment.char = "")
+
+ggplot(pca_data, aes(x = PC1, y = PC2)) +
+  geom_point(alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "PCA of Genotype Data", x = "PC1", y = "PC2")
+```
+
+**Explanation:**
+
+* `covariates.txt` contains individual-level covariates including PCs (e.g., `IID`, `PC1`, `PC2`, …).
+* The PCA plot can reveal population substructure or outliers.
+
+## GWAS With PCA Adjustment
+
+Next, include the PCA covariates in the GWAS to account for population stratification.
+
+#### Run GWAS with Covariates
+
+```{bash, results='hide'}
+plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz \
+  --pheno data/phenotypes.txt \
+  --pheno-name pheno_1 \
+  --covar data/covariates.txt \
+  --logistic hide-covar \
+  --out output/gwas.covar
+```
+
+**Explanation:**
+
+* `--covar`: Provides a file containing covariates (e.g., PCs).
+* `--logistic hide-covar`: Runs logistic regression while hiding covariate results in the output.
+
+#### Visualize Adjusted GWAS Results
+
+```{r}
+pheno_1 <- read.table("output/gwas.covar.pheno_1.glm.logistic.hybrid", header = TRUE, comment.char = "")
+pheno_1 <- pheno_1[!is.na(pheno_1$P), ]
+
+# Manhattan plot
+manhattan(x = pheno_1, chr = "X.CHROM", bp = "POS", p = "P", snp = "ID")
+
+# QQ plot
+qq(pheno_1$P)
+```
+
+**Comparison Tip:**
+Compare the QQ plots *before* and *after* including PCs to see how population structure adjustment affects the inflation of p-values.
+
+---
+
+## References
+
+* [PLINK2 Documentation](https://www.cog-genomics.org/plink/2.0/)
+* [qqman R Package](https://cran.r-project.org/package=qqman)
+* [ggplot2 R Package](https://ggplot2.tidyverse.org/)

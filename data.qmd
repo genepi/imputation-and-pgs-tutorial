@@ -1,0 +1,70 @@
+# Data
+
+This tutorial uses **simulated genotype and phenotype data** based on the **1000 Genomes Project Human Omni 2.5 array**.  
+The dataset represents a subset of **~2,500 samples** and approximately **2 million SNPs**, focusing on **chromosome 20**.
+
+## Overview
+
+The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures.
+
+### File Descriptions
+
+#### `gwas.array.hapmap.chr20.vcf.gz`
+- **Description:** Simulated genotype array data for chromosome 20.  
+- **Format:** VCF (Variant Call Format), compressed with gzip.  
+- **Content:**  
+  - Biallelic SNPs representative of common variants from the HapMap panel.  
+  - Genotypes coded in standard VCF format (0/0, 0/1, 1/1).  
+- **Use:** Serves as the *input array dataset* for GWAS analysis prior to imputation.
+
+[Download](https://todo)
+
+---
+
+#### `gwas.imputed.chr20.dose.vcf.gz`
+- **Description:** Imputed genotype data for chromosome 20.  
+- **Format:** VCF with dosage values (0–2) for each SNP, compressed with gzip.  
+- **Content:**  
+  - Dense SNP coverage after imputation from the array data.  
+  - Dosage fields represent expected allele counts derived from imputation probabilities.  
+- **Use:** Used for downstream association tests and polygenic score calculations.
+
+[Download](https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz)
+
+---
+
+#### `phenotypes.txt`
+- **Description:** Simulated phenotype file containing four traits.  
+- **Format:** Plain text (tab-delimited).  
+- **Columns:**  
+  - `sample_id` — individual sample identifiers  
+  - `pheno_1`, `pheno_2`, `pheno_3`, `pheno_4` — four simulated phenotypes  
+- **Use:** Provides phenotype data for GWAS and PGS evaluation.
+
+| Phenotype   | Type                        | Highly Genetic? |
+| ----------- | --------------------------- | --------------- |
+| **pheno_1** | Binary (e.g., case/control) | ✅ Yes           |
+| **pheno_2** | Continuous (e.g., height)   | ✅ Yes           |
+| **pheno_3** | Binary or categorical       | ❌ No            |
+| **pheno_4** | Continuous                  | ❌ No            |
+
+
+[Download](https://todo)
+
+---
+
+#### `scores.txt.gz`
+- **Description:** Simulated polygenic scores (PGS) corresponding to the four phenotypes.  
+- **Format:** Tab-delimited, compressed with gzip.  
+- **Columns:**  
+  - `sample_id` — individual identifiers matching the genotype data  
+  - `PGS_pheno_1`, `PGS_pheno_2`, `PGS_pheno_3`, `PGS_pheno_4` — simulated PGS values  
+- **Use:** Demonstrates PGS evaluation and performance comparison across phenotypes.
+
+[Download](https://todo)
+
+---
+
+## Note
+
+All data are **simulated** for educational purposes. They do **not** contain any identifiable or real genetic or phenotype information from human participants.

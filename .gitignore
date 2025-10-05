@@ -4,3 +4,4 @@ output
 .quarto
 /.quarto/
 data/*.vcf.gz
+_site

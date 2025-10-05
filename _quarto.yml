@@ -1,25 +1,28 @@
 project:
-  type: book
+  type: website
 
-book:
+website:
   title: "Imputation and PGS Tutorial"
-  author:
-    - "Lukas Forer"
-    - "Sebastian Schönherr"
-  date: "10/4/2025"
-  chapters:
-    - index.qmd
-    - getting-started.qmd
-    - imputation.qmd
-    - gwas.qmd
-    - pgs.qmd
-    - references.qmd
-
-bibliography: references.bib
+  page-navigation: true
+  bread-crumbs: true  
+  navbar:
+    background: light
+    search: true  
+    left:
+      - getting-started.qmd
+      - data.qmd
+      - text: "Tutorials"
+        menu:
+          - imputation.qmd
+          - gwas-with-nf-gwas.qmd
+          - gwas-with-plink2.qmd
+          - pgs.qmd
 
 format:
   html:
-    theme: cosmo
+    toc: true
+
+bibliography: references.bib
 
 
 

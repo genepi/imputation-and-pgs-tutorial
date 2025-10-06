@@ -9,32 +9,25 @@ The dataset represents a subset of **~2,500 samples** and approximately **2 mill
 
 ### Chip Array Data
 
-* **Filename:** `gwas.array.hapmap.chr20.vcf.gz` 
-[Download](https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz)
-* **Description:** Simulated genotype array data for chromosome 20.
+* **Filename:** [gwas.array.hapmap.chr20.vcf.gz](https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz) (20.4 MB) 
+* **Description:** Simulated genotype array data for chromosome 20 (23,907 variants).
 * **Format:** VCF (Variant Call Format), compressed with gzip.
-* **Content:**
-  * Biallelic SNPs representative of common variants from the HapMap panel.
-  * Genotypes coded in standard VCF format (0/0, 0/1, 1/1).
-* **Use:** Serves as the *input array dataset* for GWAS analysis prior to imputation.
+* **Use:** Serves as the *input array dataset* for genotype imputation on the Michigan Imputation Server
 
 ---
 
 ### Imputed Data
 
-* **Filename:** `gwas.imputed.chr20.dose.vcf.gz` [Download](https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz)
-* **Description:** Imputed genotype data for chromosome 20.
+* **Filename:** [gwas.imputed.chr20.dose.vcf.gz](https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz) (774.5 MB)
+* **Description:** Imputed genotype data for chromosome 20 using the HapMap reference panel on the Michigan Imputation Server. A total of 63,402 variants were obtained after imputation..
 * **Format:** VCF with dosage values (0–2) for each SNP, compressed with gzip.
-* **Content:**
-  * Dense SNP coverage after imputation from the array data.
-  * Dosage fields represent expected allele counts derived from imputation probabilities.
 * **Use:** Used for downstream association tests and polygenic score calculations.
 
 ---
 
 ### Phenotype Data
 
-* **Filename:** `phenotypes.txt` [Download](https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt)
+* **Filename:** [phenotypes.txt](https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt) (131.6 KB)
 * **Description:** Simulated phenotype file containing four traits.
 * **Format:** Plain text (tab-delimited).
 * **Columns:**
@@ -51,29 +44,27 @@ The dataset represents a subset of **~2,500 samples** and approximately **2 mill
 
 ---
 
-### Polygenic Scores
-
-* **Filename:** `scores.txt` 
-[Download](https://genepi.i-med.ac.at/downloads/imputation/scores.txt)
-* **Description:** Simulated polygenic scores (PGS) corresponding to the four phenotypes.
-* **Format:** Comma-delimited.
-* **Columns:**
-  * `sample` — individual identifiers matching the genotype data
-  * `score_1`, `score_2`, `score_3`, `score_4` — simulated PGS values
-* **Use:** Demonstrates PGS evaluation and performance comparison across phenotypes.
-
----
-
 ### Covariates (Principal Components)
 
-* **Filename:** `covariates.txt` 
-[Download](https://genepi.i-med.ac.at/downloads/imputation/covariates.txt)
+* **Filename:** [covariates.txt](https://genepi.i-med.ac.at/downloads/imputation/covariates.txt) (292.3 KB)
 * **Description:** Covariate file containing the first 10 genetic principal components (PCs) for each individual.
 * **Format:** Tab-delimited, compressed with gzip.
 * **Columns:**
   * `sample` — individual identifiers matching the genotype data
   * `PC1`–`PC10` — first ten principal components representing population structure
 * **Use:** Used as covariates in association analyses to correct for population stratification.
+
+---
+
+### Polygenic Scores
+
+* **Filename:** [scores.txt](https://genepi.i-med.ac.at/downloads/imputation/scores.txt) (234.4 KB)
+* **Description:** Simulated polygenic scores (PGS) corresponding to the four phenotypes.
+* **Format:** Comma-delimited.
+* **Columns:**
+  * `sample` — individual identifiers matching the genotype data
+  * `score_1`, `score_2`, `score_3`, `score_4` — simulated PGS values
+* **Use:** Demonstrates PGS evaluation and performance comparison across phenotypes.
 
 ---
 

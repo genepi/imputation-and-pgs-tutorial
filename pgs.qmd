@@ -4,15 +4,32 @@ engine: knitr
 
 # Polygenic Risk Scores
 
-Polygenic risk scores (PRS) are widely used in genetics to estimate an individual's genetic predisposition to a trait or disease.  
-In this tutorial, we will:
+The **[Michigan Imputation Server](https://imputationserver.sph.umich.edu/)** not only performs genotype imputation but also provides **pre-calculated polygenic risk scores (PRS)** for a wide range of traits and diseases.
+After imputation, users can download an additional output file — **`scores.txt`** — which includes PRS computed using models from the **[PGS Catalog](https://www.pgscatalog.org/)**.
 
-- Load PRS and phenotype data
-- Merge and explore them
-- Visualize the relationship between scores and phenotypes
-- Interpret how well different scores distinguish or predict traits
+**Key details:**
+
+* The `scores.txt` file contains **over 3,000 PRS** derived from published and validated models in the PGS Catalog.
+* Each score represents a weighted sum of alleles associated with a particular phenotype or disease.
+* These precomputed scores allow researchers to quickly explore genetic risk profiles across multiple traits without performing their own PRS calculations.
+* The file can be easily merged with phenotype and covariate data for downstream statistical and visualization analyses.
+
+Using these precomputed PRS values simplifies the workflow, enabling efficient evaluation and comparison of genetic risk predictions across numerous traits.
+
+**In this tutorial, we will**:
+
+* Load PRS and phenotype data
+* Merge and explore them
+* Visualize the relationship between scores and phenotypes
+* Interpret how well different scores distinguish or predict traits
+
+
 
 ## Setup
+
+In this step, we prepare the R environment for data analysis and visualization.
+We load the required R libraries — **ggplot2** for plotting, **dplyr** for data manipulation, and **readr** for fast data import.
+We also define a consistent, clean plotting style using the `theme_minimal()` theme, which will be applied to all figures throughout the tutorial.
 
 ```{r setup, message=FALSE, warning=FALSE}
 # Load necessary libraries
@@ -24,7 +41,15 @@ library(readr)
 theme_set(theme_minimal(base_size = 14))
 ```
 
+Here’s a matching, concise description for your **Load Data** section:
+
+---
+
 ## Load Data
+
+In this step, we import the polygenic risk score (**PRS**) and phenotype datasets into R and prepare them for analysis.
+The PRS data (`scores.txt`) and phenotype data (`phenotypes.txt`) are read from the `data/` directory, and then merged by the shared sample identifier (`sample` / `IID`).
+This creates a single combined dataset containing both genetic scores and corresponding phenotypic information for each individual.
 
 ```{r load-data, message=FALSE, warning=FALSE}
 # Read PRS scores and phenotypes

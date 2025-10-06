@@ -2,6 +2,30 @@
 
 
 ## Requirements
-- What you need..
-- account on MIS, 
-- R and packages...
+
+Before starting, install the following tools and packages:
+
+1. Account on MIS
+
+2. **PLINK2** – for genetic data processing
+   [Download here](https://www.cog-genomics.org/plink/2.0/)
+   Test installation:
+
+   ```bash
+   plink2 --version
+   ```
+
+3. **R** – statistical computing environment
+   [Install R](https://cran.r-project.org/)
+
+4. **RStudio** – IDE for R
+   [Install RStudio](https://posit.co/download/rstudio/)
+
+5. **R Packages** – for data visualization
+   In R or RStudio, run:
+
+   ```R
+   install.packages(c("ggplot2", "qqman"))
+   ```
+5. **Data** - download from [here](/data.html).
+

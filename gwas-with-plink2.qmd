@@ -7,14 +7,10 @@ engine: knitr
 This tutorial demonstrates how to perform a **genome-wide association study (GWAS)** using **PLINK2**, with and without **principal component analysis (PCA)** adjustment.  
 It also shows how to visualize results using the **`qqman`** and **`ggplot2`** R packages.
 
-## Setup
-
-```{bash}
+```{bash, echo=FALSE}
 [ -f data/gwas.imputed.chr20.dose.vcf.gz ] || wget -q -P data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz
 mkdir -p output
 ```
-
-- Install PLINK2
 
 ## GWAS Without PCA
 

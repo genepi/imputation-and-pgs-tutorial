@@ -2,6 +2,8 @@
 engine: knitr
 ---
 
+# Genotype Imputation and PGS Tutorial
+ 
 This tutorial provides a practical introduction to key steps in modern genetic data analysis, including **genotype imputation**, **genome-wide association studies (GWAS)**, and **polygenic risk score (PGS)** calculation.
 
 Using the **Michigan Imputation Server (MIS)** as the imputation platform, the chapter demonstrates how to process and analyze genetic data in a reproducible workflow — from imputed genotypes to interpretable genetic associations.

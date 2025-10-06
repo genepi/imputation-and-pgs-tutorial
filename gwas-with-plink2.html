@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-212957413f4b4e52204b6e4310820480.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5fdc29966bebcfd9beab4dc11e87fe37.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -172,7 +172,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#gwas-with-plink2" id="toc-gwas-with-plink2" class="nav-link active" data-scroll-target="#gwas-with-plink2">GWAS with PLINK2</a>
   <ul class="collapse">
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#gwas-without-pca" id="toc-gwas-without-pca" class="nav-link" data-scroll-target="#gwas-without-pca">GWAS Without PCA</a></li>
   <li><a href="#pca-assessing-population-structure" id="toc-pca-assessing-population-structure" class="nav-link" data-scroll-target="#pca-assessing-population-structure">PCA: Assessing Population Structure</a></li>
   <li><a href="#gwas-with-pca-adjustment" id="toc-gwas-with-pca-adjustment" class="nav-link" data-scroll-target="#gwas-with-pca-adjustment">GWAS With PCA Adjustment</a></li>
@@ -191,27 +190,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>GWAS with PLINK2</h1>
 <p>This tutorial demonstrates how to perform a <strong>genome-wide association study (GWAS)</strong> using <strong>PLINK2</strong>, with and without <strong>principal component analysis (PCA)</strong> adjustment.<br>
 It also shows how to visualize results using the <strong><code>qqman</code></strong> and <strong><code>ggplot2</code></strong> R packages.</p>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="bu">]</span> <span class="kw">||</span> <span class="fu">wget</span> <span class="at">-q</span> <span class="at">-P</span> data https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>Install PLINK2</li>
-</ul>
-</section>
 <section id="gwas-without-pca" class="level2">
 <h2 class="anchored" data-anchor-id="gwas-without-pca">GWAS Without PCA</h2>
 <p>First, we run a logistic regression GWAS on a simulated phenotype without adjusting for population structure.</p>
 <section id="run-gwas" class="level4">
 <h4 class="anchored" data-anchor-id="run-gwas">Run GWAS</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> allow-no-covars <span class="dt">\</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> allow-no-covars <span class="dt">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Explanation:</strong></p>
 <ul>
@@ -225,7 +214,7 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 <section id="visualize-gwas-results" class="level4">
 <h4 class="anchored" data-anchor-id="visualize-gwas-results">Visualize GWAS Results</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qqman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qqman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
@@ -244,11 +233,11 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -256,8 +245,8 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -277,14 +266,14 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 <h2 class="anchored" data-anchor-id="pca-assessing-population-structure">PCA: Assessing Population Structure</h2>
 <p>Before including principal components (PCs) as covariates, let’s visualize the PCA data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/covariates.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pca_data, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PCA of Genotype Data"</span>, <span class="at">x =</span> <span class="st">"PC1"</span>, <span class="at">y =</span> <span class="st">"PC2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/covariates.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pca_data, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PCA of Genotype Data"</span>, <span class="at">x =</span> <span class="st">"PC1"</span>, <span class="at">y =</span> <span class="st">"PC2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -305,12 +294,12 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 <section id="run-gwas-with-covariates" class="level4">
 <h4 class="anchored" data-anchor-id="run-gwas-with-covariates">Run GWAS with Covariates</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--covar</span> data/covariates.txt <span class="dt">\</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> hide-covar <span class="dt">\</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas.covar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="dt">\</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--covar</span> data/covariates.txt <span class="dt">\</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> hide-covar <span class="dt">\</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas.covar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Explanation:</strong></p>
 <ul>
@@ -321,11 +310,11 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 <section id="visualize-adjusted-gwas-results" class="level4">
 <h4 class="anchored" data-anchor-id="visualize-adjusted-gwas-results">Visualize Adjusted GWAS Results</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.covar.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.covar.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -333,8 +322,8 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

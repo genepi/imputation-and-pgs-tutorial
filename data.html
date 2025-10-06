@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>data – Imputation and PGS Tutorial</title>
+<title>Data – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-212957413f4b4e52204b6e4310820480.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5fdc29966bebcfd9beab4dc11e87fe37.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -135,83 +135,80 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a>
-  <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
-  <ul class="collapse">
-  <li><a href="#file-descriptions" id="toc-file-descriptions" class="nav-link" data-scroll-target="#file-descriptions">File Descriptions</a></li>
-  </ul></li>
+  <li><a href="#chip-array-data" id="toc-chip-array-data" class="nav-link active" data-scroll-target="#chip-array-data">Chip Array Data</a></li>
+  <li><a href="#imputed-data" id="toc-imputed-data" class="nav-link" data-scroll-target="#imputed-data">Imputed Data</a></li>
+  <li><a href="#phenotype-data" id="toc-phenotype-data" class="nav-link" data-scroll-target="#phenotype-data">Phenotype Data</a></li>
+  <li><a href="#polygenic-scores" id="toc-polygenic-scores" class="nav-link" data-scroll-target="#polygenic-scores">Polygenic Scores</a></li>
+  <li><a href="#covariates-principal-components" id="toc-covariates-principal-components" class="nav-link" data-scroll-target="#covariates-principal-components">Covariates (Principal Components)</a></li>
   <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">Note</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="data" class="level1">
-<h1>Data</h1>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <p>This tutorial uses <strong>simulated genotype and phenotype data</strong> based on the <strong>1000 Genomes Project Human Omni 2.5 array</strong>.<br>
-The dataset represents a subset of <strong>~2,500 samples</strong> and approximately <strong>2 million SNPs</strong>, focusing on <strong>chromosome 20</strong>.</p>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures.</p>
-<section id="file-descriptions" class="level3">
-<h3 class="anchored" data-anchor-id="file-descriptions">File Descriptions</h3>
-<section id="gwas.array.hapmap.chr20.vcf.gz" class="level4">
-<h4 class="anchored" data-anchor-id="gwas.array.hapmap.chr20.vcf.gz"><code>gwas.array.hapmap.chr20.vcf.gz</code></h4>
+The dataset represents a subset of <strong>~2,500 samples</strong> and approximately <strong>2 million SNPs</strong>, focusing on <strong>chromosome 20</strong>. The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures.</p>
+<hr>
+<section id="chip-array-data" class="level3">
+<h3 class="anchored" data-anchor-id="chip-array-data">Chip Array Data</h3>
 <ul>
-<li><strong>Description:</strong> Simulated genotype array data for chromosome 20.<br>
-</li>
-<li><strong>Format:</strong> VCF (Variant Call Format), compressed with gzip.<br>
-</li>
+<li><strong>Filename:</strong> <code>gwas.array.hapmap.chr20.vcf.gz</code> <a href="https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz">Download</a></li>
+<li><strong>Description:</strong> Simulated genotype array data for chromosome 20.</li>
+<li><strong>Format:</strong> VCF (Variant Call Format), compressed with gzip.</li>
 <li><strong>Content:</strong>
 <ul>
-<li>Biallelic SNPs representative of common variants from the HapMap panel.<br>
-</li>
-<li>Genotypes coded in standard VCF format (0/0, 0/1, 1/1).<br>
-</li>
+<li>Biallelic SNPs representative of common variants from the HapMap panel.</li>
+<li>Genotypes coded in standard VCF format (0/0, 0/1, 1/1).</li>
 </ul></li>
 <li><strong>Use:</strong> Serves as the <em>input array dataset</em> for GWAS analysis prior to imputation.</li>
 </ul>
-<p><a href="https://todo">Download</a></p>
 <hr>
 </section>
-<section id="gwas.imputed.chr20.dose.vcf.gz" class="level4">
-<h4 class="anchored" data-anchor-id="gwas.imputed.chr20.dose.vcf.gz"><code>gwas.imputed.chr20.dose.vcf.gz</code></h4>
+<section id="imputed-data" class="level3">
+<h3 class="anchored" data-anchor-id="imputed-data">Imputed Data</h3>
 <ul>
-<li><strong>Description:</strong> Imputed genotype data for chromosome 20.<br>
-</li>
-<li><strong>Format:</strong> VCF with dosage values (0–2) for each SNP, compressed with gzip.<br>
-</li>
+<li><strong>Filename:</strong> <code>gwas.imputed.chr20.dose.vcf.gz</code> <a href="https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz">Download</a></li>
+<li><strong>Description:</strong> Imputed genotype data for chromosome 20.</li>
+<li><strong>Format:</strong> VCF with dosage values (0–2) for each SNP, compressed with gzip.</li>
 <li><strong>Content:</strong>
 <ul>
-<li>Dense SNP coverage after imputation from the array data.<br>
-</li>
-<li>Dosage fields represent expected allele counts derived from imputation probabilities.<br>
-</li>
+<li>Dense SNP coverage after imputation from the array data.</li>
+<li>Dosage fields represent expected allele counts derived from imputation probabilities.</li>
 </ul></li>
 <li><strong>Use:</strong> Used for downstream association tests and polygenic score calculations.</li>
 </ul>
-<p><a href="https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz">Download</a></p>
 <hr>
 </section>
-<section id="phenotypes.txt" class="level4">
-<h4 class="anchored" data-anchor-id="phenotypes.txt"><code>phenotypes.txt</code></h4>
+<section id="phenotype-data" class="level3">
+<h3 class="anchored" data-anchor-id="phenotype-data">Phenotype Data</h3>
 <ul>
-<li><strong>Description:</strong> Simulated phenotype file containing four traits.<br>
-</li>
-<li><strong>Format:</strong> Plain text (tab-delimited).<br>
-</li>
+<li><strong>Filename:</strong> <code>phenotypes.txt</code> <a href="https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt">Download</a></li>
+<li><strong>Description:</strong> Simulated phenotype file containing four traits.</li>
+<li><strong>Format:</strong> Plain text (tab-delimited).</li>
 <li><strong>Columns:</strong>
 <ul>
-<li><code>sample_id</code> — individual sample identifiers<br>
-</li>
-<li><code>pheno_1</code>, <code>pheno_2</code>, <code>pheno_3</code>, <code>pheno_4</code> — four simulated phenotypes<br>
-</li>
+<li><code>sample_id</code> — individual sample identifiers</li>
+<li><code>pheno_1</code>, <code>pheno_2</code>, <code>pheno_3</code>, <code>pheno_4</code> — four simulated phenotypes</li>
 </ul></li>
 <li><strong>Use:</strong> Provides phenotype data for GWAS and PGS evaluation.</li>
 </ul>
@@ -246,36 +243,43 @@ The dataset represents a subset of <strong>~2,500 samples</strong> and approxima
 </tr>
 </tbody>
 </table>
-<p><a href="https://todo">Download</a></p>
 <hr>
 </section>
-<section id="scores.txt.gz" class="level4">
-<h4 class="anchored" data-anchor-id="scores.txt.gz"><code>scores.txt.gz</code></h4>
+<section id="polygenic-scores" class="level3">
+<h3 class="anchored" data-anchor-id="polygenic-scores">Polygenic Scores</h3>
 <ul>
-<li><strong>Description:</strong> Simulated polygenic scores (PGS) corresponding to the four phenotypes.<br>
-</li>
-<li><strong>Format:</strong> Tab-delimited, compressed with gzip.<br>
-</li>
+<li><strong>Filename:</strong> <code>scores.txt</code> <a href="https://genepi.i-med.ac.at/downloads/imputation/scores.txt">Download</a></li>
+<li><strong>Description:</strong> Simulated polygenic scores (PGS) corresponding to the four phenotypes.</li>
+<li><strong>Format:</strong> Comma-delimited.</li>
 <li><strong>Columns:</strong>
 <ul>
-<li><code>sample_id</code> — individual identifiers matching the genotype data<br>
-</li>
-<li><code>PGS_pheno_1</code>, <code>PGS_pheno_2</code>, <code>PGS_pheno_3</code>, <code>PGS_pheno_4</code> — simulated PGS values<br>
-</li>
+<li><code>sample</code> — individual identifiers matching the genotype data</li>
+<li><code>score_1</code>, <code>score_2</code>, <code>score_3</code>, <code>score_4</code> — simulated PGS values</li>
 </ul></li>
 <li><strong>Use:</strong> Demonstrates PGS evaluation and performance comparison across phenotypes.</li>
 </ul>
-<p><a href="https://todo">Download</a></p>
 <hr>
 </section>
-</section>
+<section id="covariates-principal-components" class="level3">
+<h3 class="anchored" data-anchor-id="covariates-principal-components">Covariates (Principal Components)</h3>
+<ul>
+<li><strong>Filename:</strong> <code>covariates.txt</code> <a href="https://genepi.i-med.ac.at/downloads/imputation/covariates.txt">Download</a></li>
+<li><strong>Description:</strong> Covariate file containing the first 10 genetic principal components (PCs) for each individual.</li>
+<li><strong>Format:</strong> Tab-delimited, compressed with gzip.</li>
+<li><strong>Columns:</strong>
+<ul>
+<li><code>sample</code> — individual identifiers matching the genotype data</li>
+<li><code>PC1</code>–<code>PC10</code> — first ten principal components representing population structure</li>
+</ul></li>
+<li><strong>Use:</strong> Used as covariates in association analyses to correct for population stratification.</li>
+</ul>
+<hr>
 </section>
 <section id="note" class="level2">
 <h2 class="anchored" data-anchor-id="note">Note</h2>
 <p>All data are <strong>simulated</strong> for educational purposes. They do <strong>not</strong> contain any identifiable or real genetic or phenotype information from human participants.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

@@ -6,7 +6,7 @@ engine: knitr
 
 This tutorial demonstrates how to perform a **genome-wide association study (GWAS)** using **PLINK2**, with and without **principal component analysis (PCA)** adjustment.
 We will use **imputed genotype data** obtained directly from the **[Michigan Imputation Server](https://imputationserver.sph.umich.edu/)**, which provides high-quality imputed datasets ready for association testing.
-
+ 
 **In this tutorial, we will:**
 
 * Load imputed genotype, phenotype, and covariate data
@@ -30,7 +30,7 @@ This initial analysis provides a baseline to observe how population stratificati
 #### Run GWAS
 
 ```{bash, results='hide'}
-plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz \
+plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
   --pheno data/phenotypes.txt \
   --pheno-name pheno_1 \
   --logistic allow-no-covars \
@@ -96,7 +96,7 @@ Next, include the PCA covariates in the GWAS to account for population stratific
 #### Run GWAS with Covariates
 
 ```{bash, results='hide'}
-plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz \
+plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
   --pheno data/phenotypes.txt \
   --pheno-name pheno_1 \
   --covar data/covariates.txt \

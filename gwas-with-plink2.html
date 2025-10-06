@@ -188,11 +188,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="gwas-with-plink2" class="level1">
 <h1>GWAS with PLINK2</h1>
-<p>This tutorial demonstrates how to perform a <strong>genome-wide association study (GWAS)</strong> using <strong>PLINK2</strong>, with and without <strong>principal component analysis (PCA)</strong> adjustment.<br>
-It also shows how to visualize results using the <strong><code>qqman</code></strong> and <strong><code>ggplot2</code></strong> R packages.</p>
+<p>This tutorial demonstrates how to perform a <strong>genome-wide association study (GWAS)</strong> using <strong>PLINK2</strong>, with and without <strong>principal component analysis (PCA)</strong> adjustment. We will use <strong>imputed genotype data</strong> obtained directly from the <strong><a href="https://imputationserver.sph.umich.edu/">Michigan Imputation Server</a></strong>, which provides high-quality imputed datasets ready for association testing.</p>
+<p><strong>In this tutorial, we will:</strong></p>
+<ul>
+<li>Load imputed genotype, phenotype, and covariate data</li>
+<li>Perform GWAS using PLINK2</li>
+<li>Compare association results with and without PCA adjustment</li>
+<li>Visualize findings using Manhattan and QQ plots</li>
+</ul>
+<p>This workflow provides a complete introduction to conducting GWAS with imputed data, enabling accurate and efficient detection of genotype–phenotype associations.</p>
 <section id="gwas-without-pca" class="level2">
 <h2 class="anchored" data-anchor-id="gwas-without-pca">GWAS Without PCA</h2>
-<p>First, we run a logistic regression GWAS on a simulated phenotype without adjusting for population structure.</p>
+<p>First, we run a <strong>logistic regression GWAS</strong> on the simulated phenotype <strong><code>pheno_1</code></strong> from the file <strong><code>phenotypes.txt</code></strong>, <strong>without adjusting for population structure</strong>. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.</p>
 <section id="run-gwas" class="level4">
 <h4 class="anchored" data-anchor-id="run-gwas">Run GWAS</h4>
 <div class="cell">
@@ -213,6 +220,7 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 </section>
 <section id="visualize-gwas-results" class="level4">
 <h4 class="anchored" data-anchor-id="visualize-gwas-results">Visualize GWAS Results</h4>
+<p>After running the GWAS, we can visualize the results using <strong>Manhattan</strong> and <strong>QQ plots</strong> to better understand the distribution and significance of associations across the genome.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qqman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -257,8 +265,10 @@ It also shows how to visualize results using the <strong><code>qqman</code></str
 </div>
 <p><strong>Notes:</strong></p>
 <ul>
-<li>The <code>qqman</code> package provides quick visualizations of GWAS results.</li>
-<li>The Manhattan plot highlights SNPs across chromosome 20, while the QQ plot checks for p-value inflation.</li>
+<li>The <strong><code>qqman</code></strong> package provides convenient functions to visualize GWAS results.</li>
+<li>The <strong>Manhattan plot</strong> displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.</li>
+<li>The <strong>QQ plot</strong> compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.</li>
+<li>In this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.</li>
 </ul>
 </section>
 </section>

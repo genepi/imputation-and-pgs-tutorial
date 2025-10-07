@@ -1,5 +1,94 @@
-# Imputation
+---
+title: "Imputation & PGS Tutorial"
+format: html
+---
 
-This is a book created from markdown and executable code.
+## Setup
 
-See @knuth84 for additional discussion of literate programming.
+Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the **Michigan Imputation Server**. Before starting, make sure you complete the following prerequisites:
+
+1. Create an account.  
+2. Download the required [array data](https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz) for imputation and PGS calculation.  
+
+## Prepare Your Data
+
+The dataset used in this tutorial has already been prepared for the Michigan Imputation Server. For your own data, please follow our [Data Preparation Guide](http://genepi.github.io/michigan-imputationserver/prepare-your-data/).  
+
+In general, the following requirements must be met:  
+
+- Create a separate `.vcf.gz` file for each chromosome.  
+- Ensure that variants are sorted by genomic position.  
+- Use either **GRCh37** or **GRCh38** coordinates.  
+
+## Login
+
+After a successful login, you can start a new job using the **Run** tab or check previously submitted jobs under the **Jobs** tab.  
+
+![](images/imputation/start.png)  
+
+## Run Imputation or Polygenic Score Calculation
+
+The Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on **Genotype Imputation**, which performs both imputation and PGS calculation.  
+
+![](images/imputation/select-app.png)  
+
+::: {.callout-note}
+For Polygenic Score (PGS) calculation, use the **Polygenic Score Calculation** app. This also imputes your data but only provides scores as the final output. 
+:::
+
+## Start Calculation
+
+After selecting the app, fill in the following fields and click **Start Calculation**:  
+
+- **Name:** Any name of your choice  
+- **Reference Panel:** HapMap 2  
+- **Input Files:** `gwas.array.hapmap.chr20.vcf.gz`  
+- **Allele Frequency Check:** EUR  
+
+::: {.callout-note}
+For Polygenic Score Calculation, two additional options must be selected:  
+
+- **Scores:** Tutorial (Simulated Scores)  
+- **Ancestry Estimation:** Worldwide
+:::
+
+![](images/imputation/select-app-with-data.png)  
+
+## Job Queue
+
+Once submitted, your job will go through **Input Validation**, **Quality Control (QC)**, **Phasing/Imputation**, and optionally Polygenic Risk Calculation. Jobs are queued, and you will receive a notification when your imputation/PGS calculation is complete.  
+
+## Input Validation and QC
+
+The screenshots below illustrate statistics from input validation and quality control:  
+
+![](images/imputation/input-validation.png)  
+![](images/imputation/qc.png)  
+
+## Running Jobs
+
+The job is now queued and typically runs for around 30 minutes, depending on queue availability.  
+
+![](images/imputation/running-job.png)  
+
+## Download Results
+
+Once your job is complete, you will receive a notification. You can then download your results in one of the following ways:
+
+1. Click on **`results.zip`** to download the file directly.  
+2. Or use the `wget` command in your terminal.
+
+To decrypt your data, use the password that was sent to you via email.
+
+![](images/imputation/results.png)
+
+---
+
+## Next Steps
+
+The downloaded zip file contains the following files:
+
+- `chr20.dose.vcf.gz` – dosage file, can be used for GWAS analysis
+- `chr20.info.gz` – variant information file
+
+The **dosage file** (`chr20.dose.vcf.gz`) can be used to run a GWAS using [PLINK2](gwas-with-plink2.html) or [nf-gwas](gwas-with-nf-gwas.html).

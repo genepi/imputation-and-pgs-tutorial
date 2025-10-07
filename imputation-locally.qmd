@@ -1,0 +1,50 @@
+---
+title: "Running Imputation Locally"
+format: html
+---
+
+With the new **Imputation Server 2** pipeline, you can conveniently run your imputation workflow locally using **Nextflow**. This can be done either by setting up a [local imputation server](https://genepi.github.io/michigan-imputationserver/tutorials/local-server/) or, as in this example, by running it directly from the command line.
+
+## Prerequisites
+The following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:
+
+* **Java 17** or higher  
+* **Nextflow**  
+* **Docker** or **Singularity**
+
+## Setup
+First, download all required data:
+
+```bash
+mkdir imputation-locally
+cd imputation-locally
+git clone https://github.com/genepi/imputationserver2/
+wget https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz
+wget https://imputationserver.sph.umich.edu/resources/ref-panels/imputationserver2-hapmap2.zip
+unzip imputationserver2-hapmap2.zip -d hapmap2
+```
+
+Next, create a configuration file named `imputation.config` with the following content:
+
+```groovy
+params {
+    project                     = "my-test-project"
+    build                       = "hg19"
+    files                       = "gwas.array.hapmap.chr20.vcf.gz"
+    allele_frequency_population = "eur"
+    mode                        = "imputation"
+    refpanel_yaml                = "hapmap2/imputation-hapmap2.yaml"
+    output                      = "results"
+}
+```
+
+## Run Imputation
+Execute the pipeline with Nextflow:
+
+```bash
+nextflow run imputationserver2/main.nf -c imputation.config -profile docker
+```
+
+::: {.callout-note}
+If you are running this on a server with Singularity, change the profile to `"singularity"` instead of `"docker"`.
+:::

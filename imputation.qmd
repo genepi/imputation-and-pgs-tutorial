@@ -1,5 +1,5 @@
 ---
-title: "Imputation & PGS Tutorial"
+title: "Running Imputation on MIS"
 format: html
 ---
 
@@ -91,4 +91,4 @@ The downloaded zip file contains the following files:
 - `chr20.dose.vcf.gz` – dosage file, can be used for GWAS analysis
 - `chr20.info.gz` – variant information file
 
-The **dosage file** (`chr20.dose.vcf.gz`) can be used to run a GWAS using [PLINK2](gwas-with-plink2.html) or [nf-gwas](gwas-with-nf-gwas.html).
+The **dosage file** (`chr20.dose.vcf.gz`) can be used to run a GWAS using [PLINK2](/gwas-with-plink2.html) or [nf-gwas](/gwas-with-nf-gwas.html).

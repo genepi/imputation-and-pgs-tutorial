@@ -1,17 +1,92 @@
 ---
-engine: knitr
+title: "GWAS with nf-gwas"
+format: html
 ---
 
-# GWAS with nf-gwas
+[nf-gwas](https://github.com/genepi/nf-gwas) is a Nextflow pipeline designed for biobank-scale genome-wide association studies (GWAS). The pipeline automatically performs multiple pre- and post-processing steps, integrates regression modeling from the REGENIE package, and currently supports single-variant, gene-based, and interaction testing. All modules are structured as sub-workflows, allowing future extensions to other methods and tools. nf-gwas includes extensive reporting functionality, enabling users to inspect thousands of phenotypes and navigate interactive Manhattan plots directly in a web browser.
 
 ## Setup
 
+First, we need to prepare the input files for nf-gwas. The files are also available [here](/data.html).
+
+```bash
+mkdir nf-gwas-test
+cd nf-gwas-test
+# Download pipeline
+git clone https://github.com/genepi/nf-gwas
+# Download phenotype and covariates
+wget https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt
+wget https://genepi.i-med.ac.at/downloads/imputation/covariates.txt
+# Download imputed data
+wget https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz
+```
 
 ## GWAS Without PCA
 
-First, we run a logistic regression GWAS on a simulated phenotype without adjusting for population structure.
+We first run a logistic regression GWAS on a simulated phenotype without adjusting for population structure. Please create a `gwas.config` file with this content:
 
-#### Run GWAS
+```groovy
+params {
+  project                        = 'test-gwas'
+  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'
+  regenie_skip_predictions       = true
+  association_build              = 'hg19'
+  genotypes_association_format   = 'vcf'
+  phenotypes_filename            = 'phenotypes.txt'
+  phenotypes_columns             = 'pheno_2,pheno_4'
+  phenotypes_binary_trait        = false
+  regenie_test                   = 'additive'
+  regenie_min_imputation_score   = 0.3
+  phenotypes_apply_rint          = true
+  manhattan_annotation_enabled   = false
+  rsids_filename                 = "nf-gwas/tests/input/pipeline/rsids.tsv.gz"
+}
+```
 
-....
+### Run GWAS
 
+Execute the pipeline:
+
+```bash
+nextflow run nf-gwas/main.nf -profile docker -c gwas.config
+```
+
+### Results
+
+All results (REGENIE outputs, top hits, graphical reports) are available within the `results` folder.
+
+## GWAS With PCA
+
+Next, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a `gwas2.config` file with this content:
+
+```groovy
+params {
+  project                        = 'test-gwas-with-pcs'
+  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'
+  regenie_skip_predictions       = true
+  association_build              = 'hg19'
+  genotypes_association_format   = 'vcf'
+  phenotypes_filename            = 'phenotypes.txt'
+  phenotypes_columns             = 'pheno_2,pheno_4'
+  phenotypes_binary_trait        = false
+  regenie_test                   = 'additive'
+  regenie_min_imputation_score   = 0.3
+  phenotypes_apply_rint          = true
+  manhattan_annotation_enabled   = false
+  covariates_filename            = 'covariates.txt'
+  covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'
+  rsids_filename                 = "nf-gwas/tests/input/pipeline/rsids.tsv.gz"
+}
+```
+
+### Run GWAS
+
+Execute the pipeline:
+
+```bash
+nextflow run nf-gwas/main.nf -profile docker -c gwas2.config
+```
+
+### Results
+
+All results (REGENIE outputs, top hits, graphical reports) are available within the `results` folder.

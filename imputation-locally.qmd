@@ -16,10 +16,14 @@ The following software is required to set up your local imputation workflow. Thi
 First, download all required data:
 
 ```bash
+# Create temp directory
 mkdir imputation-locally
 cd imputation-locally
+# Download Repository
 git clone https://github.com/genepi/imputationserver2/
+# Download Input Data
 wget https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz
+# Download and unzip Reference Panel
 wget https://imputationserver.sph.umich.edu/resources/ref-panels/imputationserver2-hapmap2.zip
 unzip imputationserver2-hapmap2.zip -d hapmap2
 ```

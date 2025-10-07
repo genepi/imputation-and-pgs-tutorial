@@ -19,13 +19,14 @@ First, we need to prepare the input files for nf-gwas. The files are also availa
 ```bash
 mkdir nf-gwas-test
 cd nf-gwas-test
-# Download pipeline
-git clone https://github.com/genepi/nf-gwas
 # Download phenotype and covariates
 wget https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt
 wget https://genepi.i-med.ac.at/downloads/imputation/covariates.txt
 # Download imputed data
 wget https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz
+# Download annotation files for chr20
+wget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz .
+wget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz.tbi .
 ```
 
 ## GWAS Without PCA
@@ -45,8 +46,10 @@ params {
   regenie_test                   = 'additive'
   regenie_min_imputation_score   = 0.3
   phenotypes_apply_rint          = true
-  manhattan_annotation_enabled   = false
-  rsids_filename                 = "nf-gwas/tests/input/pipeline/rsids.tsv.gz"
+  manhattan_annotation_enabled   = true
+  rsids_filename                 = "rsids-v154-hg19-chr20.index.gz"
+  binning_csv                    = 'NONE'
+  binning_html                   = 'NONE'  
 }
 ```
 
@@ -55,7 +58,7 @@ params {
 Execute the pipeline:
 
 ```bash
-nextflow run nf-gwas/main.nf -profile docker -c gwas.config
+nextflow run genepi/nf-gwas -r v1.0.10  -profile docker -c gwas.config
 ```
 
 ::: {.callout-note}
@@ -83,10 +86,12 @@ params {
   regenie_test                   = 'additive'
   regenie_min_imputation_score   = 0.3
   phenotypes_apply_rint          = true
-  manhattan_annotation_enabled   = false
+  manhattan_annotation_enabled   = true
   covariates_filename            = 'covariates.txt'
   covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'
-  rsids_filename                 = "nf-gwas/tests/input/pipeline/rsids.tsv.gz"
+  rsids_filename                 = "rsids-v154-hg19-chr20.index.gz"
+  binning_csv                    = 'NONE'
+  binning_html                   = 'NONE'
 }
 ```
 
@@ -95,9 +100,15 @@ params {
 Execute the pipeline:
 
 ```bash
-nextflow run nf-gwas/main.nf -profile docker -c gwas2.config
+nextflow run genepi/nf-gwas -r v1.0.10 -profile docker -c gwas2.config
 ```
 
-### Results
+## Results
 
-All results (REGENIE outputs, top hits, graphical reports) are available within the `results` folder.
+All results (REGENIE outputs, top hits, and graphical reports) are available in the `results` folder. The folder also includes an HTML file containing an interactive Manhattan plot:
+
+## Manhattan Plot without PCs
+![](images/gwas/nf-gwas-without-pcs.png)  
+
+## Manhattan Plot with PCs
+![](images/gwas/nf-gwas-with-pcs.png)  

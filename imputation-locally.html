@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data – Imputation and PGS Tutorial</title>
+<title>Running Imputation Locally – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -93,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Getting Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./data.html" aria-current="page"> <i class="bi bi-download" role="img">
+    <a class="nav-link" href="./data.html"> <i class="bi bi-download" role="img">
 </i> 
 <span class="menu-text">Data</span></a>
   </li>  
@@ -153,12 +188,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#chip-array-data" id="toc-chip-array-data" class="nav-link active" data-scroll-target="#chip-array-data">Chip Array Data</a></li>
-  <li><a href="#imputed-data" id="toc-imputed-data" class="nav-link" data-scroll-target="#imputed-data">Imputed Data</a></li>
-  <li><a href="#phenotype-data" id="toc-phenotype-data" class="nav-link" data-scroll-target="#phenotype-data">Phenotype Data</a></li>
-  <li><a href="#covariates-principal-components" id="toc-covariates-principal-components" class="nav-link" data-scroll-target="#covariates-principal-components">Covariates (Principal Components)</a></li>
-  <li><a href="#polygenic-scores" id="toc-polygenic-scores" class="nav-link" data-scroll-target="#polygenic-scores">Polygenic Scores</a></li>
-  <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">Note</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#run-imputation" id="toc-run-imputation" class="nav-link" data-scroll-target="#run-imputation">Run Imputation</a></li>
   </ul>
 </nav>
     </div>
@@ -167,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data</h1>
+<h1 class="title">Running Imputation Locally</h1>
 </div>
 
 
@@ -184,108 +216,55 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This tutorial uses <strong>simulated genotype and phenotype data</strong> based on the <strong>1000 Genomes Project Human Omni 2.5 array</strong>.<br>
-The dataset represents a subset of <strong>~2,500 samples</strong> and approximately <strong>2 million SNPs</strong>, focusing on <strong>chromosome 20</strong>. The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures.</p>
-<hr>
-<section id="chip-array-data" class="level3">
-<h3 class="anchored" data-anchor-id="chip-array-data">Chip Array Data</h3>
+<p>With the new <strong>Imputation Server 2</strong> pipeline, you can conveniently run your imputation workflow locally using <strong>Nextflow</strong>. This can be done either by setting up a <a href="https://genepi.github.io/michigan-imputationserver/tutorials/local-server/">local imputation server</a> or, as in this example, by running it directly from the command line.</p>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<p>The following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:</p>
 <ul>
-<li><strong>Filename:</strong> <a href="https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz">gwas.array.hapmap.chr20.vcf.gz</a> (20.4 MB)</li>
-<li><strong>Description:</strong> Simulated genotype array data for chromosome 20 (23,907 variants).</li>
-<li><strong>Format:</strong> VCF (Variant Call Format), compressed with gzip.</li>
-<li><strong>Use:</strong> Serves as the <em>input array dataset</em> for genotype imputation on the Michigan Imputation Server</li>
+<li><strong>Java 17</strong> or higher<br>
+</li>
+<li><strong>Nextflow</strong><br>
+</li>
+<li><strong>Docker</strong> or <strong>Singularity</strong></li>
 </ul>
-<hr>
 </section>
-<section id="imputed-data" class="level3">
-<h3 class="anchored" data-anchor-id="imputed-data">Imputed Data</h3>
-<ul>
-<li><strong>Filename:</strong> <a href="https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz">gwas.imputed.chr20.dose.vcf.gz</a> (774.5 MB)</li>
-<li><strong>Description:</strong> Imputed genotype data for chromosome 20 using the HapMap reference panel on the Michigan Imputation Server. A total of 63,402 variants were obtained after imputation..</li>
-<li><strong>Format:</strong> VCF with dosage values (0–2) for each SNP, compressed with gzip.</li>
-<li><strong>Use:</strong> Used for downstream association tests and polygenic score calculations.</li>
-</ul>
-<hr>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>First, download all required data:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> imputation-locally</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> imputation-locally</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/genepi/imputationserver2/</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://imputationserver.sph.umich.edu/resources/ref-panels/imputationserver2-hapmap2.zip</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> imputationserver2-hapmap2.zip <span class="at">-d</span> hapmap2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, create a configuration file named <code>imputation.config</code> with the following content:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    project                     <span class="op">=</span> <span class="st">"my-test-project"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    build                       <span class="op">=</span> <span class="st">"hg19"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    files                       <span class="op">=</span> <span class="st">"gwas.array.hapmap.chr20.vcf.gz"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    allele_frequency_population <span class="op">=</span> <span class="st">"eur"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    mode                        <span class="op">=</span> <span class="st">"imputation"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    refpanel_yaml                <span class="op">=</span> <span class="st">"hapmap2/imputation-hapmap2.yaml"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    output                      <span class="op">=</span> <span class="st">"results"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="phenotype-data" class="level3">
-<h3 class="anchored" data-anchor-id="phenotype-data">Phenotype Data</h3>
-<ul>
-<li><strong>Filename:</strong> <a href="https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt">phenotypes.txt</a> (131.6 KB)</li>
-<li><strong>Description:</strong> Simulated phenotype file containing four traits.</li>
-<li><strong>Format:</strong> Plain text (tab-delimited).</li>
-<li><strong>Columns:</strong>
-<ul>
-<li><code>sample_id</code> — individual sample identifiers</li>
-<li><code>pheno_1</code>, <code>pheno_2</code>, <code>pheno_3</code>, <code>pheno_4</code> — four simulated phenotypes</li>
-</ul></li>
-<li><strong>Use:</strong> Provides phenotype data for GWAS and PGS evaluation.</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Phenotype</th>
-<th>Type</th>
-<th>Highly Genetic?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>pheno_1</strong></td>
-<td>Binary (e.g., case/control)</td>
-<td>✅ Yes</td>
-</tr>
-<tr class="even">
-<td><strong>pheno_2</strong></td>
-<td>Continuous (e.g., height)</td>
-<td>✅ Yes</td>
-</tr>
-<tr class="odd">
-<td><strong>pheno_3</strong></td>
-<td>Binary or categorical</td>
-<td>❌ No</td>
-</tr>
-<tr class="even">
-<td><strong>pheno_4</strong></td>
-<td>Continuous</td>
-<td>❌ No</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-<section id="covariates-principal-components" class="level3">
-<h3 class="anchored" data-anchor-id="covariates-principal-components">Covariates (Principal Components)</h3>
-<ul>
-<li><strong>Filename:</strong> <a href="https://genepi.i-med.ac.at/downloads/imputation/covariates.txt">covariates.txt</a> (292.3 KB)</li>
-<li><strong>Description:</strong> Covariate file containing the first 10 genetic principal components (PCs) for each individual.</li>
-<li><strong>Format:</strong> Tab-delimited, compressed with gzip.</li>
-<li><strong>Columns:</strong>
-<ul>
-<li><code>sample</code> — individual identifiers matching the genotype data</li>
-<li><code>PC1</code>–<code>PC10</code> — first ten principal components representing population structure</li>
-</ul></li>
-<li><strong>Use:</strong> Used as covariates in association analyses to correct for population stratification.</li>
-</ul>
-<hr>
-</section>
-<section id="polygenic-scores" class="level3">
-<h3 class="anchored" data-anchor-id="polygenic-scores">Polygenic Scores</h3>
-<ul>
-<li><strong>Filename:</strong> <a href="https://genepi.i-med.ac.at/downloads/imputation/scores.txt">scores.txt</a> (234.4 KB)</li>
-<li><strong>Description:</strong> Simulated polygenic scores (PGS) corresponding to the four phenotypes.</li>
-<li><strong>Format:</strong> Comma-delimited.</li>
-<li><strong>Columns:</strong>
-<ul>
-<li><code>sample</code> — individual identifiers matching the genotype data</li>
-<li><code>score_1</code>, <code>score_2</code>, <code>score_3</code>, <code>score_4</code> — simulated PGS values</li>
-</ul></li>
-<li><strong>Use:</strong> Demonstrates PGS evaluation and performance comparison across phenotypes.</li>
-</ul>
-<hr>
-</section>
-<section id="note" class="level2">
-<h2 class="anchored" data-anchor-id="note">Note</h2>
-<p>All data are <strong>simulated</strong> for educational purposes. They do <strong>not</strong> contain any identifiable or real genetic or phenotype information from human participants.</p>
+<section id="run-imputation" class="level2">
+<h2 class="anchored" data-anchor-id="run-imputation">Run Imputation</h2>
+<p>Execute the pipeline with Nextflow:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run imputationserver2/main.nf <span class="at">-c</span> imputation.config <span class="at">-profile</span> docker</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are running this on a server with Singularity, change the profile to <code>"singularity"</code> instead of <code>"docker"</code>.</p>
+</div>
+</div>
 
 
 </section>

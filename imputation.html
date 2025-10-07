@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>imputation – Imputation and PGS Tutorial</title>
+<title>Imputation &amp; PGS Tutorial – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -127,7 +107,12 @@ div.csl-indent {
         <li>
     <a class="dropdown-item" href="./imputation.html"><i class="bi bi-gear" role="img">
 </i> 
- <span class="dropdown-text">Imputation</span></a>
+ <span class="dropdown-text">Imputation &amp; PGS Tutorial</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./imputation-locally.html"><i class="bi bi-gear" role="img">
+</i> 
+ <span class="dropdown-text">Running Imputation Locally</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./gwas-with-nf-gwas.html"><i class="bi bi-bar-chart" role="img">
@@ -168,30 +153,157 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#imputation" id="toc-imputation" class="nav-link active" data-scroll-target="#imputation">Imputation</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#prepare-your-data" id="toc-prepare-your-data" class="nav-link" data-scroll-target="#prepare-your-data">Prepare Your Data</a></li>
+  <li><a href="#login" id="toc-login" class="nav-link" data-scroll-target="#login">Login</a></li>
+  <li><a href="#run-imputation-or-polygenic-score-calculation" id="toc-run-imputation-or-polygenic-score-calculation" class="nav-link" data-scroll-target="#run-imputation-or-polygenic-score-calculation">Run Imputation or Polygenic Score Calculation</a></li>
+  <li><a href="#start-calculation" id="toc-start-calculation" class="nav-link" data-scroll-target="#start-calculation">Start Calculation</a></li>
+  <li><a href="#job-queue" id="toc-job-queue" class="nav-link" data-scroll-target="#job-queue">Job Queue</a></li>
+  <li><a href="#input-validation-and-qc" id="toc-input-validation-and-qc" class="nav-link" data-scroll-target="#input-validation-and-qc">Input Validation and QC</a></li>
+  <li><a href="#running-jobs" id="toc-running-jobs" class="nav-link" data-scroll-target="#running-jobs">Running Jobs</a></li>
+  <li><a href="#download-results" id="toc-download-results" class="nav-link" data-scroll-target="#download-results">Download Results</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Imputation &amp; PGS Tutorial</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="imputation" class="level1">
-<h1>Imputation</h1>
-<p>This is a book created from markdown and executable code.</p>
-<p>See <span class="citation" data-cites="knuth84">Knuth (<a href="#ref-knuth84" role="doc-biblioref">1984</a>)</span> for additional discussion of literate programming.</p>
+    
+  
+    
+  </div>
+  
 
+
+</header>
+
+
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the <strong>Michigan Imputation Server</strong>. Before starting, make sure you complete the following prerequisites:</p>
+<ol type="1">
+<li>Create an account.<br>
+</li>
+<li>Download the required <a href="https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz">array data</a> for imputation and PGS calculation.</li>
+</ol>
+</section>
+<section id="prepare-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="prepare-your-data">Prepare Your Data</h2>
+<p>The dataset used in this tutorial has already been prepared for the Michigan Imputation Server. For your own data, please follow our <a href="http://genepi.github.io/michigan-imputationserver/prepare-your-data/">Data Preparation Guide</a>.</p>
+<p>In general, the following requirements must be met:</p>
+<ul>
+<li>Create a separate <code>.vcf.gz</code> file for each chromosome.<br>
+</li>
+<li>Ensure that variants are sorted by genomic position.<br>
+</li>
+<li>Use either <strong>GRCh37</strong> or <strong>GRCh38</strong> coordinates.</li>
+</ul>
+</section>
+<section id="login" class="level2">
+<h2 class="anchored" data-anchor-id="login">Login</h2>
+<p>After a successful login, you can start a new job using the <strong>Run</strong> tab or check previously submitted jobs under the <strong>Jobs</strong> tab.</p>
+<p><img src="images/imputation/start.png" class="img-fluid"></p>
+</section>
+<section id="run-imputation-or-polygenic-score-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="run-imputation-or-polygenic-score-calculation">Run Imputation or Polygenic Score Calculation</h2>
+<p>The Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on <strong>Genotype Imputation</strong>, which performs both imputation and PGS calculation.</p>
+<p><img src="images/imputation/select-app.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For Polygenic Score (PGS) calculation, use the <strong>Polygenic Score Calculation</strong> app. This also imputes your data but only provides scores as the final output.</p>
+</div>
+</div>
+</section>
+<section id="start-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="start-calculation">Start Calculation</h2>
+<p>After selecting the app, fill in the following fields and click <strong>Start Calculation</strong>:</p>
+<ul>
+<li><strong>Name:</strong> Any name of your choice<br>
+</li>
+<li><strong>Reference Panel:</strong> HapMap 2<br>
+</li>
+<li><strong>Input Files:</strong> <code>gwas.array.hapmap.chr20.vcf.gz</code><br>
+</li>
+<li><strong>Allele Frequency Check:</strong> EUR</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For Polygenic Score Calculation, two additional options must be selected:</p>
+<ul>
+<li><strong>Scores:</strong> Tutorial (Simulated Scores)<br>
+</li>
+<li><strong>Ancestry Estimation:</strong> Worldwide</li>
+</ul>
+</div>
+</div>
+<p><img src="images/imputation/select-app-with-data.png" class="img-fluid"></p>
+</section>
+<section id="job-queue" class="level2">
+<h2 class="anchored" data-anchor-id="job-queue">Job Queue</h2>
+<p>Once submitted, your job will go through <strong>Input Validation</strong>, <strong>Quality Control (QC)</strong>, <strong>Phasing/Imputation</strong>, and optionally Polygenic Risk Calculation. Jobs are queued, and you will receive a notification when your imputation/PGS calculation is complete.</p>
+</section>
+<section id="input-validation-and-qc" class="level2">
+<h2 class="anchored" data-anchor-id="input-validation-and-qc">Input Validation and QC</h2>
+<p>The screenshots below illustrate statistics from input validation and quality control:</p>
+<p><img src="images/imputation/input-validation.png" class="img-fluid"><br>
+<img src="images/imputation/qc.png" class="img-fluid"></p>
+</section>
+<section id="running-jobs" class="level2">
+<h2 class="anchored" data-anchor-id="running-jobs">Running Jobs</h2>
+<p>The job is now queued and typically runs for around 30 minutes, depending on queue availability.</p>
+<p><img src="images/imputation/running-job.png" class="img-fluid"></p>
+</section>
+<section id="download-results" class="level2">
+<h2 class="anchored" data-anchor-id="download-results">Download Results</h2>
+<p>Once your job is complete, you will receive a notification. You can then download your results in one of the following ways:</p>
+<ol type="1">
+<li>Click on <strong><code>results.zip</code></strong> to download the file directly.<br>
+</li>
+<li>Or use the <code>wget</code> command in your terminal.</li>
+</ol>
+<p>To decrypt your data, use the password that was sent to you via email.</p>
+<p><img src="images/imputation/results.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<p>The downloaded zip file contains the following files:</p>
+<ul>
+<li><code>chr20.dose.vcf.gz</code> – dosage file, can be used for GWAS analysis</li>
+<li><code>chr20.info.gz</code> – variant information file</li>
+</ul>
+<p>The <strong>dosage file</strong> (<code>chr20.dose.vcf.gz</code>) can be used to run a GWAS using <a href="gwas-with-plink2.html">PLINK2</a> or <a href="gwas-with-nf-gwas.html">nf-gwas</a>.</p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

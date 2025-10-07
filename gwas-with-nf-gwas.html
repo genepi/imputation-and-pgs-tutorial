@@ -275,13 +275,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  phenotypes_apply_rint          <span class="op">=</span> <span class="kw">true</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  manhattan_annotation_enabled   <span class="op">=</span> <span class="kw">true</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  rsids_filename                 <span class="op">=</span> <span class="st">"rsids-v154-hg19-chr20.index.gz"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  binning_csv                    <span class="op">=</span> <span class="st">'NONE'</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  binning_html                   <span class="op">=</span> <span class="st">'NONE'</span>  </span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  binning_size                   <span class="op">=</span> <span class="dv">50000</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="run-gwas" class="level3">
 <h3 class="anchored" data-anchor-id="run-gwas">Run GWAS</h3>
 <p>Execute the pipeline:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run genepi/nf-gwas <span class="at">-r</span> v1.0.10  <span class="at">-profile</span> docker <span class="at">-c</span> gwas.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run genepi/nf-gwas <span class="at">-r</span> v1.0.11  <span class="at">-profile</span> docker <span class="at">-c</span> gwas.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -303,7 +302,7 @@ Note
 </section>
 <section id="gwas-with-pca" class="level2">
 <h2 class="anchored" data-anchor-id="gwas-with-pca">GWAS With PCA</h2>
-<p>Next, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a <code>gwas2.config</code> file with this content:</p>
+<p>Next, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a <code>gwas_with_pcs.config</code> file with this content:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  project                        <span class="op">=</span> <span class="st">'test-gwas-with-pcs'</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  genotypes_association          <span class="op">=</span> <span class="st">'gwas.imputed.chr20.dose.vcf.gz'</span></span>
@@ -320,13 +319,12 @@ Note
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  covariates_filename            <span class="op">=</span> <span class="st">'covariates.txt'</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  covariates_columns             <span class="op">=</span> <span class="st">'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  rsids_filename                 <span class="op">=</span> <span class="st">"rsids-v154-hg19-chr20.index.gz"</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  binning_csv                    <span class="op">=</span> <span class="st">'NONE'</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  binning_html                   <span class="op">=</span> <span class="st">'NONE'</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  binning_size                   <span class="op">=</span> <span class="dv">50000</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="run-gwas-1" class="level3">
 <h3 class="anchored" data-anchor-id="run-gwas-1">Run GWAS</h3>
 <p>Execute the pipeline:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run genepi/nf-gwas <span class="at">-r</span> v1.0.10 <span class="at">-profile</span> docker <span class="at">-c</span> gwas2.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run genepi/nf-gwas <span class="at">-r</span> v1.0.11 <span class="at">-profile</span> docker <span class="at">-c</span> gwas_with_pcs.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="results-1" class="level2">

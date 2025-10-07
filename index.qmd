@@ -1,5 +1,8 @@
 ---
 engine: knitr
+format:
+  html:
+    toc: false
 ---
 
 # Genotype Imputation and PGS Tutorial

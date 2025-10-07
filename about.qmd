@@ -1,0 +1,17 @@
+---
+format:
+  html:
+    toc: false
+---
+
+# About
+
+**Authors:**  
+- [Lukas Forer](mailto:lukas.forer@i-med.ac.at)  
+- [Sebastian Schönherr](mailto:sebastian.schoenherr@i-med.ac.at)  
+
+**Institution:** Institute of Genetic Epidemiology, Medical University of Innsbruck
+
+**License:** Content released under a [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/).
+
+*Thank you for using this tutorial — we hope it supports your research and learning in genomics!*

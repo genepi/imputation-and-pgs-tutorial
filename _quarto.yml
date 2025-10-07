@@ -25,7 +25,9 @@ website:
             icon: bar-chart
           - href: pgs.qmd
             icon: activity    
-
+    right:
+      - text: "About"
+        href: about.qmd
 format:
   html:
     theme: [cosmo, theme.scss]

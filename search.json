@@ -7,18 +7,39 @@
     "text": "References"
   },
   {
-    "objectID": "getting-started.html",
-    "href": "getting-started.html",
-    "title": "Getting Started",
+    "objectID": "local-imputation.html",
+    "href": "local-imputation.html",
+    "title": "Running Imputation Locally",
     "section": "",
-    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
+    "text": "With the new Imputation Server 2 pipeline, you can conveniently run your imputation workflow locally using Nextflow. This can be done either by setting up a local imputation server or, as in this example, by running it directly from the command line."
   },
   {
-    "objectID": "getting-started.html#requirements",
-    "href": "getting-started.html#requirements",
-    "title": "Getting Started",
-    "section": "",
-    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
+    "objectID": "local-imputation.html#prerequisites",
+    "href": "local-imputation.html#prerequisites",
+    "title": "Running Imputation Locally",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nThe following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:\n\nJava 17 or higher\n\nNextflow\n\nDocker or Singularity"
+  },
+  {
+    "objectID": "local-imputation.html#setup",
+    "href": "local-imputation.html#setup",
+    "title": "Running Imputation Locally",
+    "section": "Setup",
+    "text": "Setup\nFirst, download all required data:\n# Create temp directory\nmkdir imputationserver\ncd imputationserver\n# Download Input Data\nwget https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz\n# Download and unzip Reference Panel\nwget https://imputationserver.sph.umich.edu/resources/ref-panels/imputationserver2-hapmap2.zip\nunzip imputationserver2-hapmap2.zip -d hapmap2\nNext, create a configuration file named imputation.config with the following content:\nparams {\n    project                     = \"my-test-project\"\n    build                       = \"hg19\"\n    files                       = \"gwas.array.hapmap.chr20.vcf.gz\"\n    allele_frequency_population = \"eur\"\n    mode                        = \"imputation\"\n    refpanel_yaml               = \"hapmap2/imputation-hapmap2.yaml\"\n    output                      = \"results\"\n    encryption.enabled          = false\n}"
+  },
+  {
+    "objectID": "local-imputation.html#run-imputation",
+    "href": "local-imputation.html#run-imputation",
+    "title": "Running Imputation Locally",
+    "section": "Run Imputation",
+    "text": "Run Imputation\nExecute the pipeline with Nextflow:\nnextflow run genepi/imputationserver2 -r v2.0.9  -c imputation.config -profile docker\n\n\n\n\n\n\nNote\n\n\n\nIf you are running this on a server with Singularity, change the profile to \"singularity\" instead of \"docker\"."
+  },
+  {
+    "objectID": "local-imputation.html#results",
+    "href": "local-imputation.html#results",
+    "title": "Running Imputation Locally",
+    "section": "Results",
+    "text": "Results\nThe results can be accessed directly in the results folder."
   },
   {
     "objectID": "about.html",
@@ -252,38 +273,17 @@
     "text": "GWAS With PCA\nNext, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a gwas2.config file with this content:\nparams {\n  project                        = 'test-gwas-with-pcs'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = false\n  covariates_filename            = 'covariates.txt'\n  covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'\n  rsids_filename                 = \"nf-gwas/tests/input/pipeline/rsids.tsv.gz\"\n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run nf-gwas/main.nf -profile docker -c gwas2.config\n\n\nResults\nAll results (REGENIE outputs, top hits, graphical reports) are available within the results folder."
   },
   {
-    "objectID": "imputation-locally.html",
-    "href": "imputation-locally.html",
-    "title": "Running Imputation Locally",
+    "objectID": "getting-started.html",
+    "href": "getting-started.html",
+    "title": "Getting Started",
     "section": "",
-    "text": "With the new Imputation Server 2 pipeline, you can conveniently run your imputation workflow locally using Nextflow. This can be done either by setting up a local imputation server or, as in this example, by running it directly from the command line."
+    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
   },
   {
-    "objectID": "imputation-locally.html#prerequisites",
-    "href": "imputation-locally.html#prerequisites",
-    "title": "Running Imputation Locally",
-    "section": "Prerequisites",
-    "text": "Prerequisites\nThe following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:\n\nJava 17 or higher\n\nNextflow\n\nDocker or Singularity"
-  },
-  {
-    "objectID": "imputation-locally.html#setup",
-    "href": "imputation-locally.html#setup",
-    "title": "Running Imputation Locally",
-    "section": "Setup",
-    "text": "Setup\nFirst, download all required data:\n# Create temp directory\nmkdir imputation-locally\ncd imputation-locally\n# Download Repository\ngit clone https://github.com/genepi/imputationserver2/\n# Download Input Data\nwget https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz\n# Download and unzip Reference Panel\nwget https://imputationserver.sph.umich.edu/resources/ref-panels/imputationserver2-hapmap2.zip\nunzip imputationserver2-hapmap2.zip -d hapmap2\nNext, create a configuration file named imputation.config with the following content:\nparams {\n    project                     = \"my-test-project\"\n    build                       = \"hg19\"\n    files                       = \"gwas.array.hapmap.chr20.vcf.gz\"\n    allele_frequency_population = \"eur\"\n    mode                        = \"imputation\"\n    refpanel_yaml               = \"hapmap2/imputation-hapmap2.yaml\"\n    output                      = \"results\"\n    encryption.enabled          = false\n}"
-  },
-  {
-    "objectID": "imputation-locally.html#run-imputation",
-    "href": "imputation-locally.html#run-imputation",
-    "title": "Running Imputation Locally",
-    "section": "Run Imputation",
-    "text": "Run Imputation\nExecute the pipeline with Nextflow:\nnextflow run imputationserver2/main.nf -c imputation.config -profile docker\n\n\n\n\n\n\nNote\n\n\n\nIf you are running this on a server with Singularity, change the profile to \"singularity\" instead of \"docker\"."
-  },
-  {
-    "objectID": "imputation-locally.html#results",
-    "href": "imputation-locally.html#results",
-    "title": "Running Imputation Locally",
-    "section": "Results",
-    "text": "Results\nThe results can be accessed directly in the results folder."
+    "objectID": "getting-started.html#requirements",
+    "href": "getting-started.html#requirements",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
   }
 ]

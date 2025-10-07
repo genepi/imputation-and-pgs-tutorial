@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./imputation.html"><i class="bi bi-gear" role="img">
 </i> 
- <span class="dropdown-text">Imputation &amp; PGS Tutorial</span></a>
+ <span class="dropdown-text">Running Imputation on MIS</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./imputation-locally.html"><i class="bi bi-gear" role="img">
@@ -191,6 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#run-imputation" id="toc-run-imputation" class="nav-link" data-scroll-target="#run-imputation">Run Imputation</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   </ul>
 </nav>
     </div>
@@ -248,9 +249,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    files                       <span class="op">=</span> <span class="st">"gwas.array.hapmap.chr20.vcf.gz"</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    allele_frequency_population <span class="op">=</span> <span class="st">"eur"</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    mode                        <span class="op">=</span> <span class="st">"imputation"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    refpanel_yaml                <span class="op">=</span> <span class="st">"hapmap2/imputation-hapmap2.yaml"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    refpanel_yaml               <span class="op">=</span> <span class="st">"hapmap2/imputation-hapmap2.yaml"</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    output                      <span class="op">=</span> <span class="st">"results"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    encryption<span class="op">.</span>enabled          <span class="op">=</span> <span class="kw">false</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="run-imputation" class="level2">
 <h2 class="anchored" data-anchor-id="run-imputation">Run Imputation</h2>
@@ -269,6 +271,10 @@ Note
 <p>If you are running this on a server with Singularity, change the profile to <code>"singularity"</code> instead of <code>"docker"</code>.</p>
 </div>
 </div>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The results can be accessed directly in the <code>results</code> folder.</p>
 
 
 </section>

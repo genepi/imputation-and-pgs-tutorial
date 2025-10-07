@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>gwas-with-nf-gwas – Imputation and PGS Tutorial</title>
+<title>GWAS with nf-gwas – Imputation and PGS Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -107,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="./imputation.html"><i class="bi bi-gear" role="img">
 </i> 
- <span class="dropdown-text">Imputation &amp; PGS Tutorial</span></a>
+ <span class="dropdown-text">Running Imputation on MIS</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./imputation-locally.html"><i class="bi bi-gear" role="img">
@@ -153,34 +188,139 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#gwas-with-nf-gwas" id="toc-gwas-with-nf-gwas" class="nav-link active" data-scroll-target="#gwas-with-nf-gwas">GWAS with nf-gwas</a>
-  <ul class="collapse">
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#gwas-without-pca" id="toc-gwas-without-pca" class="nav-link" data-scroll-target="#gwas-without-pca">GWAS Without PCA</a></li>
+  <li><a href="#gwas-without-pca" id="toc-gwas-without-pca" class="nav-link" data-scroll-target="#gwas-without-pca">GWAS Without PCA</a>
+  <ul class="collapse">
+  <li><a href="#run-gwas" id="toc-run-gwas" class="nav-link" data-scroll-target="#run-gwas">Run GWAS</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  </ul></li>
+  <li><a href="#gwas-with-pca" id="toc-gwas-with-pca" class="nav-link" data-scroll-target="#gwas-with-pca">GWAS With PCA</a>
+  <ul class="collapse">
+  <li><a href="#run-gwas-1" id="toc-run-gwas-1" class="nav-link" data-scroll-target="#run-gwas-1">Run GWAS</a></li>
+  <li><a href="#results-1" id="toc-results-1" class="nav-link" data-scroll-target="#results-1">Results</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">GWAS with nf-gwas</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="gwas-with-nf-gwas" class="level1">
-<h1>GWAS with nf-gwas</h1>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="https://github.com/genepi/nf-gwas">nf-gwas</a> is a Nextflow pipeline designed for biobank-scale genome-wide association studies (GWAS). The pipeline automatically performs multiple pre- and post-processing steps, integrates regression modeling from the REGENIE package, and currently supports single-variant, gene-based, and interaction testing. All modules are structured as sub-workflows, allowing future extensions to other methods and tools. nf-gwas includes extensive reporting functionality, enabling users to inspect thousands of phenotypes and navigate interactive Manhattan plots directly in a web browser.</p>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<p>The following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:</p>
+<ul>
+<li><strong>Java 17</strong> or higher<br>
+</li>
+<li><strong>Nextflow</strong><br>
+</li>
+<li><strong>Docker</strong> or <strong>Singularity</strong></li>
+</ul>
+</section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>First, we need to prepare the input files for nf-gwas. The files are also available <a href="./data.html">here</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> nf-gwas-test</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> nf-gwas-test</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Download pipeline</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/genepi/nf-gwas</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Download phenotype and covariates</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://genepi.i-med.ac.at/downloads/imputation/covariates.txt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Download imputed data</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="gwas-without-pca" class="level2">
 <h2 class="anchored" data-anchor-id="gwas-without-pca">GWAS Without PCA</h2>
-<p>First, we run a logistic regression GWAS on a simulated phenotype without adjusting for population structure.</p>
-<section id="run-gwas" class="level4">
-<h4 class="anchored" data-anchor-id="run-gwas">Run GWAS</h4>
-<p>….</p>
-
-
+<p>We first run a logistic regression GWAS on a simulated phenotype without adjusting for population structure. Please create a <code>gwas.config</code> file with this content:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  project                        <span class="op">=</span> <span class="st">'test-gwas'</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  genotypes_association          <span class="op">=</span> <span class="st">'gwas.imputed.chr20.dose.vcf.gz'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  regenie_skip_predictions       <span class="op">=</span> <span class="kw">true</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  association_build              <span class="op">=</span> <span class="st">'hg19'</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  genotypes_association_format   <span class="op">=</span> <span class="st">'vcf'</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  phenotypes_filename            <span class="op">=</span> <span class="st">'phenotypes.txt'</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  phenotypes_columns             <span class="op">=</span> <span class="st">'pheno_2,pheno_4'</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  phenotypes_binary_trait        <span class="op">=</span> <span class="kw">false</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  regenie_test                   <span class="op">=</span> <span class="st">'additive'</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  regenie_min_imputation_score   <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  phenotypes_apply_rint          <span class="op">=</span> <span class="kw">true</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  manhattan_annotation_enabled   <span class="op">=</span> <span class="kw">false</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  rsids_filename                 <span class="op">=</span> <span class="st">"nf-gwas/tests/input/pipeline/rsids.tsv.gz"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="run-gwas" class="level3">
+<h3 class="anchored" data-anchor-id="run-gwas">Run GWAS</h3>
+<p>Execute the pipeline:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run nf-gwas/main.nf <span class="at">-profile</span> docker <span class="at">-c</span> gwas.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are running this on a server with Singularity, change the profile to <code>"singularity"</code> instead of <code>"docker"</code>.</p>
+</div>
+</div>
 </section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<p>All results (REGENIE outputs, top hits, graphical reports) are available within the <code>results</code> folder.</p>
+</section>
+</section>
+<section id="gwas-with-pca" class="level2">
+<h2 class="anchored" data-anchor-id="gwas-with-pca">GWAS With PCA</h2>
+<p>Next, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a <code>gwas2.config</code> file with this content:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  project                        <span class="op">=</span> <span class="st">'test-gwas-with-pcs'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  genotypes_association          <span class="op">=</span> <span class="st">'gwas.imputed.chr20.dose.vcf.gz'</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  regenie_skip_predictions       <span class="op">=</span> <span class="kw">true</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  association_build              <span class="op">=</span> <span class="st">'hg19'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  genotypes_association_format   <span class="op">=</span> <span class="st">'vcf'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  phenotypes_filename            <span class="op">=</span> <span class="st">'phenotypes.txt'</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  phenotypes_columns             <span class="op">=</span> <span class="st">'pheno_2,pheno_4'</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  phenotypes_binary_trait        <span class="op">=</span> <span class="kw">false</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  regenie_test                   <span class="op">=</span> <span class="st">'additive'</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  regenie_min_imputation_score   <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  phenotypes_apply_rint          <span class="op">=</span> <span class="kw">true</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  manhattan_annotation_enabled   <span class="op">=</span> <span class="kw">false</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  covariates_filename            <span class="op">=</span> <span class="st">'covariates.txt'</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  covariates_columns             <span class="op">=</span> <span class="st">'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  rsids_filename                 <span class="op">=</span> <span class="st">"nf-gwas/tests/input/pipeline/rsids.tsv.gz"</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="run-gwas-1" class="level3">
+<h3 class="anchored" data-anchor-id="run-gwas-1">Run GWAS</h3>
+<p>Execute the pipeline:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run nf-gwas/main.nf <span class="at">-profile</span> docker <span class="at">-c</span> gwas2.config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="results-1" class="level3">
+<h3 class="anchored" data-anchor-id="results-1">Results</h3>
+<p>All results (REGENIE outputs, top hits, graphical reports) are available within the <code>results</code> folder.</p>
+
+
 </section>
 </section>
 

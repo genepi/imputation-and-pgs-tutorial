@@ -110,6 +110,11 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Running Imputation on MIS</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./pgs-calculation.html"><i class="bi bi-gear" role="img">
+</i> 
+ <span class="dropdown-text">Running PGS on MIS</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./local-imputation.html"><i class="bi bi-gear" role="img">
 </i> 
  <span class="dropdown-text">Running Imputation Locally</span></a>
@@ -156,8 +161,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#prepare-your-data" id="toc-prepare-your-data" class="nav-link" data-scroll-target="#prepare-your-data">Prepare Your Data</a></li>
   <li><a href="#login" id="toc-login" class="nav-link" data-scroll-target="#login">Login</a></li>
-  <li><a href="#run-imputation-or-polygenic-score-calculation" id="toc-run-imputation-or-polygenic-score-calculation" class="nav-link" data-scroll-target="#run-imputation-or-polygenic-score-calculation">Run Imputation or Polygenic Score Calculation</a></li>
-  <li><a href="#start-calculation" id="toc-start-calculation" class="nav-link" data-scroll-target="#start-calculation">Start Calculation</a></li>
+  <li><a href="#run-imputation" id="toc-run-imputation" class="nav-link" data-scroll-target="#run-imputation">Run Imputation</a></li>
   <li><a href="#job-queue" id="toc-job-queue" class="nav-link" data-scroll-target="#job-queue">Job Queue</a></li>
   <li><a href="#input-validation-and-qc" id="toc-input-validation-and-qc" class="nav-link" data-scroll-target="#input-validation-and-qc">Input Validation and QC</a></li>
   <li><a href="#running-jobs" id="toc-running-jobs" class="nav-link" data-scroll-target="#running-jobs">Running Jobs</a></li>
@@ -214,27 +218,11 @@ ul.task-list li input[type="checkbox"] {
 <p>After a successful login, you can start a new job using the <strong>Run</strong> tab or check previously submitted jobs under the <strong>Jobs</strong> tab.</p>
 <p><img src="images/imputation/start.png" class="img-fluid"></p>
 </section>
-<section id="run-imputation-or-polygenic-score-calculation" class="level2">
-<h2 class="anchored" data-anchor-id="run-imputation-or-polygenic-score-calculation">Run Imputation or Polygenic Score Calculation</h2>
-<p>The Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on <strong>Genotype Imputation</strong>, which performs both imputation and PGS calculation.</p>
+<section id="run-imputation" class="level2">
+<h2 class="anchored" data-anchor-id="run-imputation">Run Imputation</h2>
+<p>The Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on the <strong>Genotype Imputation</strong> app.</p>
 <p><img src="images/imputation/select-app.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>For Polygenic Score (PGS) calculation, use the <strong>Polygenic Score Calculation</strong> app. This also imputes your data but only provides scores as the final output.</p>
-</div>
-</div>
-</section>
-<section id="start-calculation" class="level2">
-<h2 class="anchored" data-anchor-id="start-calculation">Start Calculation</h2>
-<p>After selecting the app, fill in the following fields and click <strong>Start Calculation</strong>:</p>
+<p>After selecting the app, fill in the required fields (see below), accept the terms of use, and click <strong>Start Imputation</strong>.</p>
 <ul>
 <li><strong>Name:</strong> Any name of your choice<br>
 </li>
@@ -244,29 +232,11 @@ Note
 </li>
 <li><strong>Allele Frequency Check:</strong> EUR</li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>For Polygenic Score Calculation, two additional options must be selected:</p>
-<ul>
-<li><strong>Scores:</strong> Tutorial (Simulated Scores)<br>
-</li>
-<li><strong>Ancestry Estimation:</strong> Worldwide</li>
-</ul>
-</div>
-</div>
 <p><img src="images/imputation/select-app-with-data.png" class="img-fluid"></p>
 </section>
 <section id="job-queue" class="level2">
 <h2 class="anchored" data-anchor-id="job-queue">Job Queue</h2>
-<p>Once submitted, your job will go through <strong>Input Validation</strong>, <strong>Quality Control (QC)</strong>, <strong>Phasing/Imputation</strong>, and optionally Polygenic Risk Calculation. Jobs are queued, and you will receive a notification when your imputation/PGS calculation is complete.</p>
+<p>Once submitted, your job will go through <strong>Input Validation</strong>, <strong>Quality Control (QC)</strong>, <strong>Phasing/Imputation</strong> and <strong>Compression/Encryption</strong>. Jobs are queued, and you will receive a notification when your imputation job is complete.</p>
 </section>
 <section id="input-validation-and-qc" class="level2">
 <h2 class="anchored" data-anchor-id="input-validation-and-qc">Input Validation and QC</h2>
@@ -287,7 +257,7 @@ Note
 </li>
 <li>Or use the <code>wget</code> command in your terminal.</li>
 </ol>
-<p>To decrypt your data, use the password that was sent to you via email.</p>
+<p>To decrypt your data, use the password that was sent to you via email. Furthermore, QC-Report is available in HTML format.</p>
 <p><img src="images/imputation/results.png" class="img-fluid"></p>
 <hr>
 </section>

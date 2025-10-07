@@ -1,59 +1,262 @@
 [
   {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
+    "objectID": "pgs-calculation.html",
+    "href": "pgs-calculation.html",
+    "title": "Running PGS on MIS",
     "section": "",
-    "text": "References"
+    "text": "Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the Michigan Imputation Server. Before starting, make sure you complete the following prerequisites:\n\nCreate an account.\n\nDownload the required array data for PGS calculation."
   },
   {
-    "objectID": "local-imputation.html",
-    "href": "local-imputation.html",
-    "title": "Running Imputation Locally",
+    "objectID": "pgs-calculation.html#setup",
+    "href": "pgs-calculation.html#setup",
+    "title": "Running PGS on MIS",
     "section": "",
-    "text": "With the new Imputation Server 2 pipeline, you can conveniently run your imputation workflow locally using Nextflow. This can be done either by setting up a local imputation server or, as in this example, by running it directly from the command line."
+    "text": "Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the Michigan Imputation Server. Before starting, make sure you complete the following prerequisites:\n\nCreate an account.\n\nDownload the required array data for PGS calculation."
   },
   {
-    "objectID": "local-imputation.html#prerequisites",
-    "href": "local-imputation.html#prerequisites",
-    "title": "Running Imputation Locally",
+    "objectID": "pgs-calculation.html#prepare-your-data",
+    "href": "pgs-calculation.html#prepare-your-data",
+    "title": "Running PGS on MIS",
+    "section": "Prepare Your Data",
+    "text": "Prepare Your Data\nThe dataset used in this tutorial has already been prepared for the Michigan Imputation Server. For your own data, please follow our Data Preparation Guide.\nIn general, the following requirements must be met:\n\nCreate a separate .vcf.gz file for each chromosome.\n\nEnsure that variants are sorted by genomic position.\n\nUse either GRCh37 or GRCh38 coordinates."
+  },
+  {
+    "objectID": "pgs-calculation.html#login",
+    "href": "pgs-calculation.html#login",
+    "title": "Running PGS on MIS",
+    "section": "Login",
+    "text": "Login\nAfter a successful login, you can start a new job using the Run tab or check previously submitted jobs under the Jobs tab."
+  },
+  {
+    "objectID": "pgs-calculation.html#polygenic-score-calculation",
+    "href": "pgs-calculation.html#polygenic-score-calculation",
+    "title": "Running PGS on MIS",
+    "section": "Polygenic Score Calculation",
+    "text": "Polygenic Score Calculation\nThe Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on Polygenic Score Calculation.\n\n\n\n\n\n\n\nNote\n\n\n\nPlease note that this app does not return imputed datasets to users."
+  },
+  {
+    "objectID": "pgs-calculation.html#start-calculation",
+    "href": "pgs-calculation.html#start-calculation",
+    "title": "Running PGS on MIS",
+    "section": "Start Calculation",
+    "text": "Start Calculation\nAfter selecting the app, fill in the following fields and click Start Calculation:\n\nName: Any name of your choice\n\nReference Panel: HapMap 2\n\nInput Files: gwas.array.hapmap.chr20.vcf.gz\n\nScores: Tutorial (Simulated Scores)\n\nAncestry Estimation: Worldwide"
+  },
+  {
+    "objectID": "pgs-calculation.html#job-queue",
+    "href": "pgs-calculation.html#job-queue",
+    "title": "Running PGS on MIS",
+    "section": "Job Queue",
+    "text": "Job Queue\nOnce submitted, your job will go through Input Validation, Quality Control (QC), Phasing/Imputation, and Polygenic Risk Calculation. Jobs are queued, and you will receive a notification when your PGS calculation is complete."
+  },
+  {
+    "objectID": "pgs-calculation.html#input-validation-and-qc",
+    "href": "pgs-calculation.html#input-validation-and-qc",
+    "title": "Running PGS on MIS",
+    "section": "Input Validation and QC",
+    "text": "Input Validation and QC\nThe screenshots below illustrate statistics from input validation and quality control:"
+  },
+  {
+    "objectID": "pgs-calculation.html#running-jobs",
+    "href": "pgs-calculation.html#running-jobs",
+    "title": "Running PGS on MIS",
+    "section": "Running Jobs",
+    "text": "Running Jobs\nThe job is now queued and typically runs for around 30 minutes, depending on queue availability."
+  },
+  {
+    "objectID": "pgs-calculation.html#download-results",
+    "href": "pgs-calculation.html#download-results",
+    "title": "Running PGS on MIS",
+    "section": "Download Results",
+    "text": "Download Results\nOnce your job is complete, you will receive a notification. You can then download your results in one of the following ways:\n\nClick on one of the files to download the file directly.\n\nOr use the wget command in your terminal."
+  },
+  {
+    "objectID": "pgs-calculation.html#next-steps",
+    "href": "pgs-calculation.html#next-steps",
+    "title": "Running PGS on MIS",
+    "section": "Next Steps",
+    "text": "Next Steps\nThe available scores file (scores.txt) can be used to run the PGS analysis as described here."
+  },
+  {
+    "objectID": "getting-started.html",
+    "href": "getting-started.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
+  },
+  {
+    "objectID": "getting-started.html#requirements",
+    "href": "getting-started.html#requirements",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
+  },
+  {
+    "objectID": "gwas-with-nf-gwas.html",
+    "href": "gwas-with-nf-gwas.html",
+    "title": "GWAS with nf-gwas",
+    "section": "",
+    "text": "nf-gwas is a Nextflow pipeline designed for biobank-scale genome-wide association studies (GWAS). The pipeline automatically performs multiple pre- and post-processing steps, integrates regression modeling from the REGENIE package, and currently supports single-variant, gene-based, and interaction testing. All modules are structured as sub-workflows, allowing future extensions to other methods and tools. nf-gwas includes extensive reporting functionality, enabling users to inspect thousands of phenotypes and navigate interactive Manhattan plots directly in a web browser."
+  },
+  {
+    "objectID": "gwas-with-nf-gwas.html#prerequisites",
+    "href": "gwas-with-nf-gwas.html#prerequisites",
+    "title": "GWAS with nf-gwas",
     "section": "Prerequisites",
     "text": "Prerequisites\nThe following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:\n\nJava 17 or higher\n\nNextflow\n\nDocker or Singularity"
   },
   {
-    "objectID": "local-imputation.html#setup",
-    "href": "local-imputation.html#setup",
-    "title": "Running Imputation Locally",
+    "objectID": "gwas-with-nf-gwas.html#setup",
+    "href": "gwas-with-nf-gwas.html#setup",
+    "title": "GWAS with nf-gwas",
     "section": "Setup",
-    "text": "Setup\nFirst, download all required data:\n# Create temp directory\nmkdir imputationserver\ncd imputationserver\n# Download Input Data\nwget https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz\n# Download and unzip Reference Panel\nwget https://imputationserver.sph.umich.edu/resources/ref-panels/imputationserver2-hapmap2.zip\nunzip imputationserver2-hapmap2.zip -d hapmap2\nNext, create a configuration file named imputation.config with the following content:\nparams {\n    project                     = \"my-test-project\"\n    build                       = \"hg19\"\n    files                       = \"gwas.array.hapmap.chr20.vcf.gz\"\n    allele_frequency_population = \"eur\"\n    mode                        = \"imputation\"\n    refpanel_yaml               = \"hapmap2/imputation-hapmap2.yaml\"\n    output                      = \"results\"\n    encryption.enabled          = false\n}"
+    "text": "Setup\nFirst, we need to prepare the input files for nf-gwas. The files are also available here.\nmkdir nf-gwas-test\ncd nf-gwas-test\n# Download phenotype and covariates\nwget https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt\nwget https://genepi.i-med.ac.at/downloads/imputation/covariates.txt\n# Download imputed data\nwget https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz\n# Download annotation files for chr20\nwget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz .\nwget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz.tbi ."
   },
   {
-    "objectID": "local-imputation.html#run-imputation",
-    "href": "local-imputation.html#run-imputation",
-    "title": "Running Imputation Locally",
-    "section": "Run Imputation",
-    "text": "Run Imputation\nExecute the pipeline with Nextflow:\nnextflow run genepi/imputationserver2 -r v2.0.9  -c imputation.config -profile docker\n\n\n\n\n\n\nNote\n\n\n\nIf you are running this on a server with Singularity, change the profile to \"singularity\" instead of \"docker\"."
+    "objectID": "gwas-with-nf-gwas.html#gwas-without-pca",
+    "href": "gwas-with-nf-gwas.html#gwas-without-pca",
+    "title": "GWAS with nf-gwas",
+    "section": "GWAS Without PCA",
+    "text": "GWAS Without PCA\nWe first run a logistic regression GWAS on a simulated phenotype without adjusting for population structure. Please create a gwas.config file with this content:\nparams {\n  project                        = 'test-gwas'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = true\n  rsids_filename                 = \"rsids-v154-hg19-chr20.index.gz\"\n  binning_csv                    = 'NONE'\n  binning_html                   = 'NONE'  \n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run genepi/nf-gwas -r v1.0.10  -profile docker -c gwas.config\n\n\n\n\n\n\nNote\n\n\n\nIf you are running this on a server with Singularity, change the profile to \"singularity\" instead of \"docker\".\n\n\n\n\nResults\nAll results (REGENIE outputs, top hits, graphical reports) are available within the results folder."
   },
   {
-    "objectID": "local-imputation.html#results",
-    "href": "local-imputation.html#results",
-    "title": "Running Imputation Locally",
+    "objectID": "gwas-with-nf-gwas.html#gwas-with-pca",
+    "href": "gwas-with-nf-gwas.html#gwas-with-pca",
+    "title": "GWAS with nf-gwas",
+    "section": "GWAS With PCA",
+    "text": "GWAS With PCA\nNext, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a gwas2.config file with this content:\nparams {\n  project                        = 'test-gwas-with-pcs'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = true\n  covariates_filename            = 'covariates.txt'\n  covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'\n  rsids_filename                 = \"rsids-v154-hg19-chr20.index.gz\"\n  binning_csv                    = 'NONE'\n  binning_html                   = 'NONE'\n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run genepi/nf-gwas -r v1.0.10 -profile docker -c gwas2.config"
+  },
+  {
+    "objectID": "gwas-with-nf-gwas.html#results-1",
+    "href": "gwas-with-nf-gwas.html#results-1",
+    "title": "GWAS with nf-gwas",
     "section": "Results",
-    "text": "Results\nThe results can be accessed directly in the results folder."
+    "text": "Results\nAll results (REGENIE outputs, top hits, and graphical reports) are available in the results folder. The folder also includes an HTML file containing an interactive Manhattan plot:"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About\nAuthors:\n- Lukas Forer\n- Sebastian Schönherr\nInstitution: Institute of Genetic Epidemiology, Medical University of Innsbruck\nLicense: Content released under a CC BY 4.0 License.\nThank you for using this tutorial — we hope it supports your research and learning in genomics!"
+    "objectID": "gwas-with-nf-gwas.html#manhattan-plot-without-pcs",
+    "href": "gwas-with-nf-gwas.html#manhattan-plot-without-pcs",
+    "title": "GWAS with nf-gwas",
+    "section": "Manhattan Plot without PCs",
+    "text": "Manhattan Plot without PCs"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Genotype Imputation and PGS Tutorial",
+    "objectID": "gwas-with-nf-gwas.html#manhattan-plot-with-pcs",
+    "href": "gwas-with-nf-gwas.html#manhattan-plot-with-pcs",
+    "title": "GWAS with nf-gwas",
+    "section": "Manhattan Plot with PCs",
+    "text": "Manhattan Plot with PCs"
+  },
+  {
+    "objectID": "gwas-with-plink2.html",
+    "href": "gwas-with-plink2.html",
+    "title": "GWAS with PLINK2",
     "section": "",
-    "text": "Genotype Imputation and PGS Tutorial\nThis tutorial provides a practical introduction to key steps in modern genetic data analysis, including genotype imputation, genome-wide association studies (GWAS), and polygenic risk score (PGS) calculation.\nUsing the Michigan Imputation Server (MIS) as the imputation platform, the chapter demonstrates how to process and analyze genetic data in a reproducible workflow — from imputed genotypes to interpretable genetic associations.\nYou will learn how to:\n\nPerform and evaluate genotype imputation using the Michigan Imputation Server\nConduct a GWAS to identify variants associated with phenotypes\nCalculate and visualize polygenic risk scores (PRS) for different trait types\n\nThe tutorial concludes with examples of four phenotypes, illustrating how PRS performance varies between binary and continuous traits — ranging from clear genetic signals to weak or absent associations.\nThis chapter aims to build a solid understanding of the concepts, tools, and interpretation steps that underpin large-scale human genetic studies."
+    "text": "This tutorial demonstrates how to perform a genome-wide association study (GWAS) using PLINK2, with and without principal component analysis (PCA) adjustment. We will use imputed genotype data obtained directly from the Michigan Imputation Server, which provides high-quality imputed datasets ready for association testing.\nIn this tutorial, we will:\n\nLoad imputed genotype, phenotype, and covariate data\nPerform GWAS using PLINK2\nCompare association results with and without PCA adjustment\nVisualize findings using Manhattan and QQ plots\n\nThis workflow provides a complete introduction to conducting GWAS with imputed data, enabling accurate and efficient detection of genotype–phenotype associations.\n\n\nPhenotype 2 represents a continuous trait simulated to exhibit a strong underlying genetic component. Continuous phenotypes are commonly encountered in complex trait genetics, as they capture quantitative variation among individuals rather than discrete categories. Given the simulated genetic architecture of phenotype 2, we expected that genome-wide association analysis (GWAS) would reveal multiple significant loci contributing to the observed variation.\n\n\nFirst, we run a linear regression GWAS on the simulated phenotype pheno_2 from the file phenotypes.txt, without adjusting for population structure. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_2 \\\n  --linear allow-no-covars \\\n  --out output/gwas\n\nExplanation:\n\n--vcf: Input imputed genotype file in VCF format\n--pheno: Phenotype file (tab-delimited)\n--pheno-name: Selects the phenotype column to test (here pheno_2)\n--linear allow-no-covars: Runs linearr regression without covariates\n--out: Prefix for output files\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_2 &lt;- read.table(\"output/gwas.pheno_2.glm.linear\", header = TRUE, comment.char = \"\")\npheno_2 &lt;- pheno_2[!is.na(pheno_2$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_2, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_2$P)\n\n\n\n\n\n\n\n\nNotes:\n\nThe qqman package provides convenient functions to visualize GWAS results.\nThe Manhattan plot displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.\nThe QQ plot compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.\nIn this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.\n\n\n\n\nBefore including principal components (PCs) as covariates, let’s visualize the PCA data.\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header = TRUE, comment.char = \"\")\n\nggplot(pca_data, aes(x = PC1, y = PC2)) +\n  geom_point(alpha = 0.7) +\n  theme_minimal() +\n  labs(title = \"PCA of Genotype Data\", x = \"PC1\", y = \"PC2\")\n\n\n\n\n\n\n\n\nExplanation:\n\ncovariates.txt contains individual-level covariates including PCs (e.g., IID, PC1, PC2, …).\nThe PCA plot can reveal population substructure or outliers.\n\n\n\n\nNext, include the PCA covariates in the GWAS to account for population stratification:\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_2 \\\n  --covar data/covariates.txt \\\n  --linear hide-covar \\\n  --out output/gwas.covar\n\nExplanation:\n\n--covar: Provides a file containing covariates (e.g., PCs).\n--linear hide-covar: Runs linear regression while hiding covariate results in the output.\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\npheno_2 &lt;- read.table(\"output/gwas.covar.pheno_2.glm.linear\", header = TRUE, comment.char = \"\")\npheno_2 &lt;- pheno_2[!is.na(pheno_2$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_2, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_2$P)\n\n\n\n\n\n\n\n\nComparison Tip: Compare the QQ plots before and after including PCs to see how population structure adjustment affects the inflation of p-values.\n\n\n\n\nPhenotype 4 was simulated as a continuous trait with no underlying genetic component. In this case, the variation in the phenotype arises entirely from environmental or random factors rather than genetic differences among individuals. As a result, we did not expect to detect any significant associations in the genome-wide association analysis (GWAS).\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_4 \\\n  --covar data/covariates.txt \\\n  --linear hide-covar \\\n  --out output/gwas.covar\n\n\npheno_4 &lt;- read.table(\"output/gwas.covar.pheno_4.glm.linear\", header = TRUE, comment.char = \"\")\npheno_4 &lt;- pheno_4[!is.na(pheno_4$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_4, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_4$P)\n\n\n\n\n\n\n\n\n\n\n\n\n\nPLINK2 Documentation\nqqman R Package\nggplot2 R Package"
+  },
+  {
+    "objectID": "gwas-with-plink2.html#gwas-on-phenotype-2",
+    "href": "gwas-with-plink2.html#gwas-on-phenotype-2",
+    "title": "GWAS with PLINK2",
+    "section": "",
+    "text": "Phenotype 2 represents a continuous trait simulated to exhibit a strong underlying genetic component. Continuous phenotypes are commonly encountered in complex trait genetics, as they capture quantitative variation among individuals rather than discrete categories. Given the simulated genetic architecture of phenotype 2, we expected that genome-wide association analysis (GWAS) would reveal multiple significant loci contributing to the observed variation.\n\n\nFirst, we run a linear regression GWAS on the simulated phenotype pheno_2 from the file phenotypes.txt, without adjusting for population structure. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_2 \\\n  --linear allow-no-covars \\\n  --out output/gwas\n\nExplanation:\n\n--vcf: Input imputed genotype file in VCF format\n--pheno: Phenotype file (tab-delimited)\n--pheno-name: Selects the phenotype column to test (here pheno_2)\n--linear allow-no-covars: Runs linearr regression without covariates\n--out: Prefix for output files\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_2 &lt;- read.table(\"output/gwas.pheno_2.glm.linear\", header = TRUE, comment.char = \"\")\npheno_2 &lt;- pheno_2[!is.na(pheno_2$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_2, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_2$P)\n\n\n\n\n\n\n\n\nNotes:\n\nThe qqman package provides convenient functions to visualize GWAS results.\nThe Manhattan plot displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.\nThe QQ plot compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.\nIn this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.\n\n\n\n\nBefore including principal components (PCs) as covariates, let’s visualize the PCA data.\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header = TRUE, comment.char = \"\")\n\nggplot(pca_data, aes(x = PC1, y = PC2)) +\n  geom_point(alpha = 0.7) +\n  theme_minimal() +\n  labs(title = \"PCA of Genotype Data\", x = \"PC1\", y = \"PC2\")\n\n\n\n\n\n\n\n\nExplanation:\n\ncovariates.txt contains individual-level covariates including PCs (e.g., IID, PC1, PC2, …).\nThe PCA plot can reveal population substructure or outliers.\n\n\n\n\nNext, include the PCA covariates in the GWAS to account for population stratification:\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_2 \\\n  --covar data/covariates.txt \\\n  --linear hide-covar \\\n  --out output/gwas.covar\n\nExplanation:\n\n--covar: Provides a file containing covariates (e.g., PCs).\n--linear hide-covar: Runs linear regression while hiding covariate results in the output.\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\npheno_2 &lt;- read.table(\"output/gwas.covar.pheno_2.glm.linear\", header = TRUE, comment.char = \"\")\npheno_2 &lt;- pheno_2[!is.na(pheno_2$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_2, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_2$P)\n\n\n\n\n\n\n\n\nComparison Tip: Compare the QQ plots before and after including PCs to see how population structure adjustment affects the inflation of p-values."
+  },
+  {
+    "objectID": "gwas-with-plink2.html#gwas-on-phenotype-4",
+    "href": "gwas-with-plink2.html#gwas-on-phenotype-4",
+    "title": "GWAS with PLINK2",
+    "section": "",
+    "text": "Phenotype 4 was simulated as a continuous trait with no underlying genetic component. In this case, the variation in the phenotype arises entirely from environmental or random factors rather than genetic differences among individuals. As a result, we did not expect to detect any significant associations in the genome-wide association analysis (GWAS).\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_4 \\\n  --covar data/covariates.txt \\\n  --linear hide-covar \\\n  --out output/gwas.covar\n\n\npheno_4 &lt;- read.table(\"output/gwas.covar.pheno_4.glm.linear\", header = TRUE, comment.char = \"\")\npheno_4 &lt;- pheno_4[!is.na(pheno_4$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_4, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_4$P)"
+  },
+  {
+    "objectID": "gwas-with-plink2.html#references",
+    "href": "gwas-with-plink2.html#references",
+    "title": "GWAS with PLINK2",
+    "section": "",
+    "text": "PLINK2 Documentation\nqqman R Package\nggplot2 R Package"
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "This tutorial uses simulated genotype and phenotype data based on the 1000 Genomes Project Human Omni 2.5 array.\nThe dataset represents a subset of ~2,500 samples and approximately 2 million SNPs, focusing on chromosome 20. The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures."
+  },
+  {
+    "objectID": "data.html#note",
+    "href": "data.html#note",
+    "title": "Data",
+    "section": "Note",
+    "text": "Note\nAll data are simulated for educational purposes. They do not contain any identifiable or real genetic or phenotype information from human participants."
+  },
+  {
+    "objectID": "imputation.html",
+    "href": "imputation.html",
+    "title": "Running Imputation on MIS",
+    "section": "",
+    "text": "Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the Michigan Imputation Server. Before starting, make sure you complete the following prerequisites:\n\nCreate an account.\n\nDownload the required array data for imputation and PGS calculation."
+  },
+  {
+    "objectID": "imputation.html#setup",
+    "href": "imputation.html#setup",
+    "title": "Running Imputation on MIS",
+    "section": "",
+    "text": "Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the Michigan Imputation Server. Before starting, make sure you complete the following prerequisites:\n\nCreate an account.\n\nDownload the required array data for imputation and PGS calculation."
+  },
+  {
+    "objectID": "imputation.html#prepare-your-data",
+    "href": "imputation.html#prepare-your-data",
+    "title": "Running Imputation on MIS",
+    "section": "Prepare Your Data",
+    "text": "Prepare Your Data\nThe dataset used in this tutorial has already been prepared for the Michigan Imputation Server. For your own data, please follow our Data Preparation Guide.\nIn general, the following requirements must be met:\n\nCreate a separate .vcf.gz file for each chromosome.\n\nEnsure that variants are sorted by genomic position.\n\nUse either GRCh37 or GRCh38 coordinates."
+  },
+  {
+    "objectID": "imputation.html#login",
+    "href": "imputation.html#login",
+    "title": "Running Imputation on MIS",
+    "section": "Login",
+    "text": "Login\nAfter a successful login, you can start a new job using the Run tab or check previously submitted jobs under the Jobs tab."
+  },
+  {
+    "objectID": "imputation.html#run-imputation",
+    "href": "imputation.html#run-imputation",
+    "title": "Running Imputation on MIS",
+    "section": "Run Imputation",
+    "text": "Run Imputation\nThe Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on the Genotype Imputation app.\n\nAfter selecting the app, fill in the required fields (see below), accept the terms of use, and click Start Imputation.\n\nName: Any name of your choice\n\nReference Panel: HapMap 2\n\nInput Files: gwas.array.hapmap.chr20.vcf.gz\n\nAllele Frequency Check: EUR"
+  },
+  {
+    "objectID": "imputation.html#job-queue",
+    "href": "imputation.html#job-queue",
+    "title": "Running Imputation on MIS",
+    "section": "Job Queue",
+    "text": "Job Queue\nOnce submitted, your job will go through Input Validation, Quality Control (QC), Phasing/Imputation and Compression/Encryption. Jobs are queued, and you will receive a notification when your imputation job is complete."
+  },
+  {
+    "objectID": "imputation.html#input-validation-and-qc",
+    "href": "imputation.html#input-validation-and-qc",
+    "title": "Running Imputation on MIS",
+    "section": "Input Validation and QC",
+    "text": "Input Validation and QC\nThe screenshots below illustrate statistics from input validation and quality control:"
+  },
+  {
+    "objectID": "imputation.html#running-jobs",
+    "href": "imputation.html#running-jobs",
+    "title": "Running Imputation on MIS",
+    "section": "Running Jobs",
+    "text": "Running Jobs\nThe job is now queued and typically runs for around 30 minutes, depending on queue availability."
+  },
+  {
+    "objectID": "imputation.html#download-results",
+    "href": "imputation.html#download-results",
+    "title": "Running Imputation on MIS",
+    "section": "Download Results",
+    "text": "Download Results\nOnce your job is complete, you will receive a notification. You can then download your results in one of the following ways:\n\nClick on results.zip to download the file directly.\n\nOr use the wget command in your terminal.\n\nTo decrypt your data, use the password that was sent to you via email. Furthermore, QC-Report is available in HTML format."
+  },
+  {
+    "objectID": "imputation.html#next-steps",
+    "href": "imputation.html#next-steps",
+    "title": "Running Imputation on MIS",
+    "section": "Next Steps",
+    "text": "Next Steps\nThe downloaded zip file contains the following files:\n\nchr20.dose.vcf.gz – dosage file, can be used for GWAS analysis\nchr20.info.gz – variant information file\n\nThe dosage file (chr20.dose.vcf.gz) can be used to run a GWAS using PLINK2 or nf-gwas."
   },
   {
     "objectID": "pgs.html",
@@ -119,192 +322,59 @@
     "text": "This tutorial demonstrates how to:\n\nLoad and merge PRS and phenotype data\nVisualize relationships between PRS and traits\nInterpret how well PRS predicts different phenotype types\n\nSuch visual checks are an essential first step before applying formal statistical tests (e.g., logistic or linear regression) to quantify the predictive power of PRS.\nNext Steps:\n\nPerform logistic regression for binary traits (pheno_1, pheno_3)\nPerform linear regression for continuous traits (pheno_2, pheno_4)\nCompute metrics such as AUC or ( R^2 ) to assess predictive strength"
   },
   {
-    "objectID": "imputation.html",
-    "href": "imputation.html",
-    "title": "Running Imputation on MIS",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Genotype Imputation and PGS Tutorial",
     "section": "",
-    "text": "Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the Michigan Imputation Server. Before starting, make sure you complete the following prerequisites:\n\nCreate an account.\n\nDownload the required array data for imputation and PGS calculation."
+    "text": "Genotype Imputation and PGS Tutorial\nThis tutorial provides a practical introduction to key steps in modern genetic data analysis, including genotype imputation, genome-wide association studies (GWAS), and polygenic risk score (PGS) calculation.\nUsing the Michigan Imputation Server (MIS) as the imputation platform, the chapter demonstrates how to process and analyze genetic data in a reproducible workflow — from imputed genotypes to interpretable genetic associations.\nYou will learn how to:\n\nPerform and evaluate genotype imputation using the Michigan Imputation Server\nConduct a GWAS to identify variants associated with phenotypes\nCalculate and visualize polygenic risk scores (PRS) for different trait types\n\nThe tutorial concludes with examples of four phenotypes, illustrating how PRS performance varies between binary and continuous traits — ranging from clear genetic signals to weak or absent associations.\nThis chapter aims to build a solid understanding of the concepts, tools, and interpretation steps that underpin large-scale human genetic studies."
   },
   {
-    "objectID": "imputation.html#setup",
-    "href": "imputation.html#setup",
-    "title": "Running Imputation on MIS",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the Michigan Imputation Server. Before starting, make sure you complete the following prerequisites:\n\nCreate an account.\n\nDownload the required array data for imputation and PGS calculation."
+    "text": "About\nAuthors:\n- Lukas Forer\n- Sebastian Schönherr\nInstitution: Institute of Genetic Epidemiology, Medical University of Innsbruck\nLicense: Content released under a CC BY 4.0 License.\nThank you for using this tutorial — we hope it supports your research and learning in genomics!"
   },
   {
-    "objectID": "imputation.html#prepare-your-data",
-    "href": "imputation.html#prepare-your-data",
-    "title": "Running Imputation on MIS",
-    "section": "Prepare Your Data",
-    "text": "Prepare Your Data\nThe dataset used in this tutorial has already been prepared for the Michigan Imputation Server. For your own data, please follow our Data Preparation Guide.\nIn general, the following requirements must be met:\n\nCreate a separate .vcf.gz file for each chromosome.\n\nEnsure that variants are sorted by genomic position.\n\nUse either GRCh37 or GRCh38 coordinates."
-  },
-  {
-    "objectID": "imputation.html#login",
-    "href": "imputation.html#login",
-    "title": "Running Imputation on MIS",
-    "section": "Login",
-    "text": "Login\nAfter a successful login, you can start a new job using the Run tab or check previously submitted jobs under the Jobs tab."
-  },
-  {
-    "objectID": "imputation.html#run-imputation-or-polygenic-score-calculation",
-    "href": "imputation.html#run-imputation-or-polygenic-score-calculation",
-    "title": "Running Imputation on MIS",
-    "section": "Run Imputation or Polygenic Score Calculation",
-    "text": "Run Imputation or Polygenic Score Calculation\nThe Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on Genotype Imputation, which performs both imputation and PGS calculation.\n\n\n\n\n\n\n\nNote\n\n\n\nFor Polygenic Score (PGS) calculation, use the Polygenic Score Calculation app. This also imputes your data but only provides scores as the final output."
-  },
-  {
-    "objectID": "imputation.html#start-calculation",
-    "href": "imputation.html#start-calculation",
-    "title": "Running Imputation on MIS",
-    "section": "Start Calculation",
-    "text": "Start Calculation\nAfter selecting the app, fill in the following fields and click Start Calculation:\n\nName: Any name of your choice\n\nReference Panel: HapMap 2\n\nInput Files: gwas.array.hapmap.chr20.vcf.gz\n\nAllele Frequency Check: EUR\n\n\n\n\n\n\n\nNote\n\n\n\nFor Polygenic Score Calculation, two additional options must be selected:\n\nScores: Tutorial (Simulated Scores)\n\nAncestry Estimation: Worldwide"
-  },
-  {
-    "objectID": "imputation.html#job-queue",
-    "href": "imputation.html#job-queue",
-    "title": "Running Imputation on MIS",
-    "section": "Job Queue",
-    "text": "Job Queue\nOnce submitted, your job will go through Input Validation, Quality Control (QC), Phasing/Imputation, and optionally Polygenic Risk Calculation. Jobs are queued, and you will receive a notification when your imputation/PGS calculation is complete."
-  },
-  {
-    "objectID": "imputation.html#input-validation-and-qc",
-    "href": "imputation.html#input-validation-and-qc",
-    "title": "Running Imputation on MIS",
-    "section": "Input Validation and QC",
-    "text": "Input Validation and QC\nThe screenshots below illustrate statistics from input validation and quality control:"
-  },
-  {
-    "objectID": "imputation.html#running-jobs",
-    "href": "imputation.html#running-jobs",
-    "title": "Running Imputation on MIS",
-    "section": "Running Jobs",
-    "text": "Running Jobs\nThe job is now queued and typically runs for around 30 minutes, depending on queue availability."
-  },
-  {
-    "objectID": "imputation.html#download-results",
-    "href": "imputation.html#download-results",
-    "title": "Running Imputation on MIS",
-    "section": "Download Results",
-    "text": "Download Results\nOnce your job is complete, you will receive a notification. You can then download your results in one of the following ways:\n\nClick on results.zip to download the file directly.\n\nOr use the wget command in your terminal.\n\nTo decrypt your data, use the password that was sent to you via email."
-  },
-  {
-    "objectID": "imputation.html#next-steps",
-    "href": "imputation.html#next-steps",
-    "title": "Running Imputation on MIS",
-    "section": "Next Steps",
-    "text": "Next Steps\nThe downloaded zip file contains the following files:\n\nchr20.dose.vcf.gz – dosage file, can be used for GWAS analysis\nchr20.info.gz – variant information file\n\nThe dosage file (chr20.dose.vcf.gz) can be used to run a GWAS using PLINK2 or nf-gwas."
-  },
-  {
-    "objectID": "data.html",
-    "href": "data.html",
-    "title": "Data",
+    "objectID": "local-imputation.html",
+    "href": "local-imputation.html",
+    "title": "Running Imputation Locally",
     "section": "",
-    "text": "This tutorial uses simulated genotype and phenotype data based on the 1000 Genomes Project Human Omni 2.5 array.\nThe dataset represents a subset of ~2,500 samples and approximately 2 million SNPs, focusing on chromosome 20. The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures."
+    "text": "With the new Imputation Server 2 pipeline, you can conveniently run your imputation workflow locally using Nextflow. This can be done either by setting up a local imputation server or, as in this example, by running it directly from the command line."
   },
   {
-    "objectID": "data.html#note",
-    "href": "data.html#note",
-    "title": "Data",
-    "section": "Note",
-    "text": "Note\nAll data are simulated for educational purposes. They do not contain any identifiable or real genetic or phenotype information from human participants."
-  },
-  {
-    "objectID": "gwas-with-plink2.html",
-    "href": "gwas-with-plink2.html",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "This tutorial demonstrates how to perform a genome-wide association study (GWAS) using PLINK2, with and without principal component analysis (PCA) adjustment. We will use imputed genotype data obtained directly from the Michigan Imputation Server, which provides high-quality imputed datasets ready for association testing.\nIn this tutorial, we will:\n\nLoad imputed genotype, phenotype, and covariate data\nPerform GWAS using PLINK2\nCompare association results with and without PCA adjustment\nVisualize findings using Manhattan and QQ plots\n\nThis workflow provides a complete introduction to conducting GWAS with imputed data, enabling accurate and efficient detection of genotype–phenotype associations.\n\n\nPhenotype 2 represents a continuous trait simulated to exhibit a strong underlying genetic component. Continuous phenotypes are commonly encountered in complex trait genetics, as they capture quantitative variation among individuals rather than discrete categories. Given the simulated genetic architecture of phenotype 2, we expected that genome-wide association analysis (GWAS) would reveal multiple significant loci contributing to the observed variation.\n\n\nFirst, we run a linear regression GWAS on the simulated phenotype pheno_2 from the file phenotypes.txt, without adjusting for population structure. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_2 \\\n  --linear allow-no-covars \\\n  --out output/gwas\n\nExplanation:\n\n--vcf: Input imputed genotype file in VCF format\n--pheno: Phenotype file (tab-delimited)\n--pheno-name: Selects the phenotype column to test (here pheno_2)\n--linear allow-no-covars: Runs linearr regression without covariates\n--out: Prefix for output files\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_2 &lt;- read.table(\"output/gwas.pheno_2.glm.linear\", header = TRUE, comment.char = \"\")\npheno_2 &lt;- pheno_2[!is.na(pheno_2$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_2, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_2$P)\n\n\n\n\n\n\n\n\nNotes:\n\nThe qqman package provides convenient functions to visualize GWAS results.\nThe Manhattan plot displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.\nThe QQ plot compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.\nIn this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.\n\n\n\n\nBefore including principal components (PCs) as covariates, let’s visualize the PCA data.\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header = TRUE, comment.char = \"\")\n\nggplot(pca_data, aes(x = PC1, y = PC2)) +\n  geom_point(alpha = 0.7) +\n  theme_minimal() +\n  labs(title = \"PCA of Genotype Data\", x = \"PC1\", y = \"PC2\")\n\n\n\n\n\n\n\n\nExplanation:\n\ncovariates.txt contains individual-level covariates including PCs (e.g., IID, PC1, PC2, …).\nThe PCA plot can reveal population substructure or outliers.\n\n\n\n\nNext, include the PCA covariates in the GWAS to account for population stratification:\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_2 \\\n  --covar data/covariates.txt \\\n  --linear hide-covar \\\n  --out output/gwas.covar\n\nExplanation:\n\n--covar: Provides a file containing covariates (e.g., PCs).\n--linear hide-covar: Runs linear regression while hiding covariate results in the output.\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\npheno_2 &lt;- read.table(\"output/gwas.covar.pheno_2.glm.linear\", header = TRUE, comment.char = \"\")\npheno_2 &lt;- pheno_2[!is.na(pheno_2$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_2, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_2$P)\n\n\n\n\n\n\n\n\nComparison Tip: Compare the QQ plots before and after including PCs to see how population structure adjustment affects the inflation of p-values.\n\n\n\n\nPhenotype 4 was simulated as a continuous trait with no underlying genetic component. In this case, the variation in the phenotype arises entirely from environmental or random factors rather than genetic differences among individuals. As a result, we did not expect to detect any significant associations in the genome-wide association analysis (GWAS).\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_4 \\\n  --covar data/covariates.txt \\\n  --linear hide-covar \\\n  --out output/gwas.covar\n\n\npheno_4 &lt;- read.table(\"output/gwas.covar.pheno_4.glm.linear\", header = TRUE, comment.char = \"\")\npheno_4 &lt;- pheno_4[!is.na(pheno_4$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_4, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_4$P)\n\n\n\n\n\n\n\n\n\n\n\n\n\nPLINK2 Documentation\nqqman R Package\nggplot2 R Package"
-  },
-  {
-    "objectID": "gwas-with-plink2.html#gwas-on-phenotype-2",
-    "href": "gwas-with-plink2.html#gwas-on-phenotype-2",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "Phenotype 2 represents a continuous trait simulated to exhibit a strong underlying genetic component. Continuous phenotypes are commonly encountered in complex trait genetics, as they capture quantitative variation among individuals rather than discrete categories. Given the simulated genetic architecture of phenotype 2, we expected that genome-wide association analysis (GWAS) would reveal multiple significant loci contributing to the observed variation.\n\n\nFirst, we run a linear regression GWAS on the simulated phenotype pheno_2 from the file phenotypes.txt, without adjusting for population structure. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_2 \\\n  --linear allow-no-covars \\\n  --out output/gwas\n\nExplanation:\n\n--vcf: Input imputed genotype file in VCF format\n--pheno: Phenotype file (tab-delimited)\n--pheno-name: Selects the phenotype column to test (here pheno_2)\n--linear allow-no-covars: Runs linearr regression without covariates\n--out: Prefix for output files\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_2 &lt;- read.table(\"output/gwas.pheno_2.glm.linear\", header = TRUE, comment.char = \"\")\npheno_2 &lt;- pheno_2[!is.na(pheno_2$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_2, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_2$P)\n\n\n\n\n\n\n\n\nNotes:\n\nThe qqman package provides convenient functions to visualize GWAS results.\nThe Manhattan plot displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.\nThe QQ plot compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.\nIn this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.\n\n\n\n\nBefore including principal components (PCs) as covariates, let’s visualize the PCA data.\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header = TRUE, comment.char = \"\")\n\nggplot(pca_data, aes(x = PC1, y = PC2)) +\n  geom_point(alpha = 0.7) +\n  theme_minimal() +\n  labs(title = \"PCA of Genotype Data\", x = \"PC1\", y = \"PC2\")\n\n\n\n\n\n\n\n\nExplanation:\n\ncovariates.txt contains individual-level covariates including PCs (e.g., IID, PC1, PC2, …).\nThe PCA plot can reveal population substructure or outliers.\n\n\n\n\nNext, include the PCA covariates in the GWAS to account for population stratification:\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_2 \\\n  --covar data/covariates.txt \\\n  --linear hide-covar \\\n  --out output/gwas.covar\n\nExplanation:\n\n--covar: Provides a file containing covariates (e.g., PCs).\n--linear hide-covar: Runs linear regression while hiding covariate results in the output.\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\npheno_2 &lt;- read.table(\"output/gwas.covar.pheno_2.glm.linear\", header = TRUE, comment.char = \"\")\npheno_2 &lt;- pheno_2[!is.na(pheno_2$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_2, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_2$P)\n\n\n\n\n\n\n\n\nComparison Tip: Compare the QQ plots before and after including PCs to see how population structure adjustment affects the inflation of p-values."
-  },
-  {
-    "objectID": "gwas-with-plink2.html#gwas-on-phenotype-4",
-    "href": "gwas-with-plink2.html#gwas-on-phenotype-4",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "Phenotype 4 was simulated as a continuous trait with no underlying genetic component. In this case, the variation in the phenotype arises entirely from environmental or random factors rather than genetic differences among individuals. As a result, we did not expect to detect any significant associations in the genome-wide association analysis (GWAS).\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_4 \\\n  --covar data/covariates.txt \\\n  --linear hide-covar \\\n  --out output/gwas.covar\n\n\npheno_4 &lt;- read.table(\"output/gwas.covar.pheno_4.glm.linear\", header = TRUE, comment.char = \"\")\npheno_4 &lt;- pheno_4[!is.na(pheno_4$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_4, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_4$P)"
-  },
-  {
-    "objectID": "gwas-with-plink2.html#references",
-    "href": "gwas-with-plink2.html#references",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "PLINK2 Documentation\nqqman R Package\nggplot2 R Package"
-  },
-  {
-    "objectID": "gwas-with-nf-gwas.html",
-    "href": "gwas-with-nf-gwas.html",
-    "title": "GWAS with nf-gwas",
-    "section": "",
-    "text": "nf-gwas is a Nextflow pipeline designed for biobank-scale genome-wide association studies (GWAS). The pipeline automatically performs multiple pre- and post-processing steps, integrates regression modeling from the REGENIE package, and currently supports single-variant, gene-based, and interaction testing. All modules are structured as sub-workflows, allowing future extensions to other methods and tools. nf-gwas includes extensive reporting functionality, enabling users to inspect thousands of phenotypes and navigate interactive Manhattan plots directly in a web browser."
-  },
-  {
-    "objectID": "gwas-with-nf-gwas.html#prerequisites",
-    "href": "gwas-with-nf-gwas.html#prerequisites",
-    "title": "GWAS with nf-gwas",
+    "objectID": "local-imputation.html#prerequisites",
+    "href": "local-imputation.html#prerequisites",
+    "title": "Running Imputation Locally",
     "section": "Prerequisites",
     "text": "Prerequisites\nThe following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:\n\nJava 17 or higher\n\nNextflow\n\nDocker or Singularity"
   },
   {
-    "objectID": "gwas-with-nf-gwas.html#setup",
-    "href": "gwas-with-nf-gwas.html#setup",
-    "title": "GWAS with nf-gwas",
+    "objectID": "local-imputation.html#setup",
+    "href": "local-imputation.html#setup",
+    "title": "Running Imputation Locally",
     "section": "Setup",
-    "text": "Setup\nFirst, we need to prepare the input files for nf-gwas. The files are also available here.\nmkdir nf-gwas-test\ncd nf-gwas-test\n# Download phenotype and covariates\nwget https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt\nwget https://genepi.i-med.ac.at/downloads/imputation/covariates.txt\n# Download imputed data\nwget https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz\n# Download annotation files for chr20\nwget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz .\nwget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz.tbi ."
+    "text": "Setup\nFirst, download all required data:\n# Create temp directory\nmkdir imputationserver\ncd imputationserver\n# Download Input Data\nwget https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz\n# Download and unzip Reference Panel\nwget https://imputationserver.sph.umich.edu/resources/ref-panels/imputationserver2-hapmap2.zip\nunzip imputationserver2-hapmap2.zip -d hapmap2\nNext, create a configuration file named imputation.config with the following content:\nparams {\n    project                     = \"my-test-project\"\n    build                       = \"hg19\"\n    files                       = \"gwas.array.hapmap.chr20.vcf.gz\"\n    allele_frequency_population = \"eur\"\n    mode                        = \"imputation\"\n    refpanel_yaml               = \"hapmap2/imputation-hapmap2.yaml\"\n    output                      = \"results\"\n    encryption.enabled          = false\n}"
   },
   {
-    "objectID": "gwas-with-nf-gwas.html#gwas-without-pca",
-    "href": "gwas-with-nf-gwas.html#gwas-without-pca",
-    "title": "GWAS with nf-gwas",
-    "section": "GWAS Without PCA",
-    "text": "GWAS Without PCA\nWe first run a logistic regression GWAS on a simulated phenotype without adjusting for population structure. Please create a gwas.config file with this content:\nparams {\n  project                        = 'test-gwas'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = true\n  rsids_filename                 = \"rsids-v154-hg19-chr20.index.gz\"\n  binning_csv                    = 'NONE'\n  binning_html                   = 'NONE'  \n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run genepi/nf-gwas -r v1.0.10  -profile docker -c gwas.config\n\n\n\n\n\n\nNote\n\n\n\nIf you are running this on a server with Singularity, change the profile to \"singularity\" instead of \"docker\".\n\n\n\n\nResults\nAll results (REGENIE outputs, top hits, graphical reports) are available within the results folder."
+    "objectID": "local-imputation.html#run-imputation",
+    "href": "local-imputation.html#run-imputation",
+    "title": "Running Imputation Locally",
+    "section": "Run Imputation",
+    "text": "Run Imputation\nExecute the pipeline with Nextflow:\nnextflow run genepi/imputationserver2 -r v2.0.9  -c imputation.config -profile docker\n\n\n\n\n\n\nNote\n\n\n\nIf you are running this on a server with Singularity, change the profile to \"singularity\" instead of \"docker\"."
   },
   {
-    "objectID": "gwas-with-nf-gwas.html#gwas-with-pca",
-    "href": "gwas-with-nf-gwas.html#gwas-with-pca",
-    "title": "GWAS with nf-gwas",
-    "section": "GWAS With PCA",
-    "text": "GWAS With PCA\nNext, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a gwas2.config file with this content:\nparams {\n  project                        = 'test-gwas-with-pcs'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = true\n  covariates_filename            = 'covariates.txt'\n  covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'\n  rsids_filename                 = \"rsids-v154-hg19-chr20.index.gz\"\n  binning_csv                    = 'NONE'\n  binning_html                   = 'NONE'\n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run genepi/nf-gwas -r v1.0.10 -profile docker -c gwas2.config"
-  },
-  {
-    "objectID": "gwas-with-nf-gwas.html#results-1",
-    "href": "gwas-with-nf-gwas.html#results-1",
-    "title": "GWAS with nf-gwas",
+    "objectID": "local-imputation.html#results",
+    "href": "local-imputation.html#results",
+    "title": "Running Imputation Locally",
     "section": "Results",
-    "text": "Results\nAll results (REGENIE outputs, top hits, and graphical reports) are available in the results folder. The folder also includes an HTML file containing an interactive Manhattan plot:"
+    "text": "Results\nThe results can be accessed directly in the results folder."
   },
   {
-    "objectID": "gwas-with-nf-gwas.html#manhattan-plot-without-pcs",
-    "href": "gwas-with-nf-gwas.html#manhattan-plot-without-pcs",
-    "title": "GWAS with nf-gwas",
-    "section": "Manhattan Plot without PCs",
-    "text": "Manhattan Plot without PCs"
-  },
-  {
-    "objectID": "gwas-with-nf-gwas.html#manhattan-plot-with-pcs",
-    "href": "gwas-with-nf-gwas.html#manhattan-plot-with-pcs",
-    "title": "GWAS with nf-gwas",
-    "section": "Manhattan Plot with PCs",
-    "text": "Manhattan Plot with PCs"
-  },
-  {
-    "objectID": "getting-started.html",
-    "href": "getting-started.html",
-    "title": "Getting Started",
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
     "section": "",
-    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
-  },
-  {
-    "objectID": "getting-started.html#requirements",
-    "href": "getting-started.html#requirements",
-    "title": "Getting Started",
-    "section": "",
-    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
+    "text": "References"
   }
 ]

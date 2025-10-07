@@ -31,7 +31,7 @@ wget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index
 
 ## GWAS Without PCA
 
-We first run a logistic regression GWAS on a simulated phenotype without adjusting for population structure. Please create a `gwas.config` file with this content:
+We first run a linear regression GWAS on a simulated phenotype without adjusting for population structure. Please create a `gwas.config` file with this content:
 
 ```groovy
 params {
@@ -71,7 +71,7 @@ All results (REGENIE outputs, top hits, graphical reports) are available within 
 
 ## GWAS With PCA
 
-Next, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a `gwas2.config` file with this content:
+Next, we run a linear regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a `gwas2.config` file with this content:
 
 ```groovy
 params {

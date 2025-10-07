@@ -151,13 +151,13 @@
     "href": "getting-started.html",
     "title": "Getting Started",
     "section": "",
-    "text": "Before starting, install the following tools and packages:\n\nAccount on MIS\nPLINK2 – for genetic data processing Download here Test installation:\nplink2 --version\nR – statistical computing environment Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))\nData - download from here."
+    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
   },
   {
     "objectID": "getting-started.html#requirements",
     "href": "getting-started.html#requirements",
     "title": "Getting Started",
     "section": "",
-    "text": "Before starting, install the following tools and packages:\n\nAccount on MIS\nPLINK2 – for genetic data processing Download here Test installation:\nplink2 --version\nR – statistical computing environment Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))\nData - download from here."
+    "text": "Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.\n\nAccount on Michigan Imputation Server - required for genotype imputation.\nData - Download the genotype and phenotype datasets provided here. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.\nPLINK2 – used for running a GWAS analysis. Download plink2 from here\nTest installation:\nplink2 --version\nR – statistical computing environment used for Polygenic Score (PGS) analysis Install R\nRStudio – IDE for R Install RStudio\nR Packages – for data visualization of PGS scores In R or RStudio, run:\ninstall.packages(c(\"ggplot2\", \"qqman\"))"
   }
 ]

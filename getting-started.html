@@ -187,16 +187,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Getting Started</h1>
 <section id="requirements" class="level2">
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
-<p>Before starting, install the following tools and packages:</p>
+<p>Before starting, install the following tools and packages. Keep in mind that not all of the following tools and datasets are required for every analysis. The exact setup depends on whether you’re performing imputation, GWAS, or PGS.</p>
 <ol type="1">
-<li><p>Account on MIS</p></li>
-<li><p><strong>PLINK2</strong> – for genetic data processing <a href="https://www.cog-genomics.org/plink/2.0/">Download here</a> Test installation:</p>
+<li><p><strong>Account</strong> on <a href="https://imputationserver.sph.umich.edu/">Michigan Imputation Server</a> - required for genotype imputation.</p></li>
+<li><p><strong>Data</strong> - Download the genotype and phenotype datasets provided <a href="./data.html">here</a>. These files are required for the imputation, GWAS or Polygenic Score (PGS) analyses.</p></li>
+<li><p><strong>PLINK2</strong> – used for running a GWAS analysis. Download plink2 from <a href="https://www.cog-genomics.org/plink/2.0/">here</a></p>
+<p>Test installation:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>R</strong> – statistical computing environment <a href="https://cran.r-project.org/">Install R</a></p></li>
+<li><p><strong>R</strong> – statistical computing environment used for Polygenic Score (PGS) analysis <a href="https://cran.r-project.org/">Install R</a></p></li>
 <li><p><strong>RStudio</strong> – IDE for R <a href="https://posit.co/download/rstudio/">Install RStudio</a></p></li>
-<li><p><strong>R Packages</strong> – for data visualization In R or RStudio, run:</p>
+<li><p><strong>R Packages</strong> – for data visualization of PGS scores In R or RStudio, run:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"ggplot2"</span>, <span class="st">"qqman"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Data</strong> - download from <a href="./data.html">here</a>.</p></li>
 </ol>
 
 

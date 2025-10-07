@@ -5,6 +5,13 @@ format: html
 
 [nf-gwas](https://github.com/genepi/nf-gwas) is a Nextflow pipeline designed for biobank-scale genome-wide association studies (GWAS). The pipeline automatically performs multiple pre- and post-processing steps, integrates regression modeling from the REGENIE package, and currently supports single-variant, gene-based, and interaction testing. All modules are structured as sub-workflows, allowing future extensions to other methods and tools. nf-gwas includes extensive reporting functionality, enabling users to inspect thousands of phenotypes and navigate interactive Manhattan plots directly in a web browser.
 
+## Prerequisites
+The following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:
+
+* **Java 17** or higher  
+* **Nextflow**  
+* **Docker** or **Singularity**
+
 ## Setup
 
 First, we need to prepare the input files for nf-gwas. The files are also available [here](/data.html).
@@ -50,6 +57,10 @@ Execute the pipeline:
 ```bash
 nextflow run nf-gwas/main.nf -profile docker -c gwas.config
 ```
+
+::: {.callout-note}
+If you are running this on a server with Singularity, change the profile to `"singularity"` instead of `"docker"`.
+:::
 
 ### Results
 

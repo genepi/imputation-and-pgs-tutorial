@@ -21,19 +21,20 @@ This workflow provides a complete introduction to conducting GWAS with imputed d
 mkdir -p output
 ```
 
-## GWAS Without PCA
+## GWAS on Phenotype 2
 
-First, we run a **logistic regression GWAS** on the simulated phenotype **`pheno_1`** from the file **`phenotypes.txt`**, **without adjusting for population structure**.
+Phenotype 2 represents a continuous trait simulated to exhibit a strong underlying genetic component. Continuous phenotypes are commonly encountered in complex trait genetics, as they capture quantitative variation among individuals rather than discrete categories. Given the simulated genetic architecture of phenotype 2, we expected that genome-wide association analysis (GWAS) would reveal multiple significant loci contributing to the observed variation.
+
+### GWAS Without PCA
+
+First, we run a **linear regression GWAS** on the simulated phenotype **`pheno_2`** from the file **`phenotypes.txt`**, **without adjusting for population structure**.
 This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.
-
-
-#### Run GWAS
 
 ```{bash, results='hide'}
 plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
   --pheno data/phenotypes.txt \
-  --pheno-name pheno_1 \
-  --logistic allow-no-covars \
+  --pheno-name pheno_2 \
+  --linear allow-no-covars \
   --out output/gwas
 ```
 
@@ -41,25 +42,23 @@ plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
 
 * `--vcf`: Input imputed genotype file in VCF format
 * `--pheno`: Phenotype file (tab-delimited)
-* `--pheno-name`: Selects the phenotype column to test (here `pheno_1`)
-* `--logistic allow-no-covars`: Runs logistic regression without covariates
+* `--pheno-name`: Selects the phenotype column to test (here `pheno_2`)
+* `--linear allow-no-covars`: Runs linearr regression without covariates
 * `--out`: Prefix for output files
-
-#### Visualize GWAS Results
 
 After running the GWAS, we can visualize the results using **Manhattan** and **QQ plots** to better understand the distribution and significance of associations across the genome.
 
 ```{r}
 library(qqman)
 
-pheno_1 <- read.table("output/gwas.pheno_1.glm.logistic.hybrid", header = TRUE, comment.char = "")
-pheno_1 <- pheno_1[!is.na(pheno_1$P), ]
+pheno_2 <- read.table("output/gwas.pheno_2.glm.linear", header = TRUE, comment.char = "")
+pheno_2 <- pheno_2[!is.na(pheno_2$P), ]
 
 # Manhattan plot
-manhattan(x = pheno_1, chr = "X.CHROM", bp = "POS", p = "P", snp = "ID")
+manhattan(x = pheno_2, chr = "X.CHROM", bp = "POS", p = "P", snp = "ID")
 
 # QQ plot
-qq(pheno_1$P)
+qq(pheno_2$P)
 ```
 
 **Notes:**
@@ -69,7 +68,7 @@ qq(pheno_1$P)
 * The **QQ plot** compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.
 * In this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.
 
-## PCA: Assessing Population Structure
+### PCA: Assessing Population Structure
 
 Before including principal components (PCs) as covariates, let's visualize the PCA data.
 
@@ -89,41 +88,63 @@ ggplot(pca_data, aes(x = PC1, y = PC2)) +
 * `covariates.txt` contains individual-level covariates including PCs (e.g., `IID`, `PC1`, `PC2`, …).
 * The PCA plot can reveal population substructure or outliers.
 
-## GWAS With PCA Adjustment
+### GWAS With PCA Adjustment
 
-Next, include the PCA covariates in the GWAS to account for population stratification.
-
-#### Run GWAS with Covariates
+Next, include the PCA covariates in the GWAS to account for population stratification:
 
 ```{bash, results='hide'}
 plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
   --pheno data/phenotypes.txt \
-  --pheno-name pheno_1 \
+  --pheno-name pheno_2 \
   --covar data/covariates.txt \
-  --logistic hide-covar \
+  --linear hide-covar \
   --out output/gwas.covar
 ```
 
 **Explanation:**
 
 * `--covar`: Provides a file containing covariates (e.g., PCs).
-* `--logistic hide-covar`: Runs logistic regression while hiding covariate results in the output.
+* `--linear hide-covar`: Runs linear regression while hiding covariate results in the output.
 
-#### Visualize Adjusted GWAS Results
+After running the GWAS, we can visualize the results using **Manhattan** and **QQ plots** to better understand the distribution and significance of associations across the genome.
 
 ```{r}
-pheno_1 <- read.table("output/gwas.covar.pheno_1.glm.logistic.hybrid", header = TRUE, comment.char = "")
-pheno_1 <- pheno_1[!is.na(pheno_1$P), ]
+pheno_2 <- read.table("output/gwas.covar.pheno_2.glm.linear", header = TRUE, comment.char = "")
+pheno_2 <- pheno_2[!is.na(pheno_2$P), ]
 
 # Manhattan plot
-manhattan(x = pheno_1, chr = "X.CHROM", bp = "POS", p = "P", snp = "ID")
+manhattan(x = pheno_2, chr = "X.CHROM", bp = "POS", p = "P", snp = "ID")
 
 # QQ plot
-qq(pheno_1$P)
+qq(pheno_2$P)
 ```
 
 **Comparison Tip:**
 Compare the QQ plots *before* and *after* including PCs to see how population structure adjustment affects the inflation of p-values.
+
+## GWAS on Phenotype 4
+
+Phenotype 4 was simulated as a continuous trait with no underlying genetic component. In this case, the variation in the phenotype arises entirely from environmental or random factors rather than genetic differences among individuals. As a result, we did not expect to detect any significant associations in the genome-wide association analysis (GWAS).
+
+```{bash, results='hide'}
+plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
+  --pheno data/phenotypes.txt \
+  --pheno-name pheno_4 \
+  --covar data/covariates.txt \
+  --linear hide-covar \
+  --out output/gwas.covar
+```
+
+```{r}
+pheno_4 <- read.table("output/gwas.covar.pheno_4.glm.linear", header = TRUE, comment.char = "")
+pheno_4 <- pheno_4[!is.na(pheno_4$P), ]
+
+# Manhattan plot
+manhattan(x = pheno_4, chr = "X.CHROM", bp = "POS", p = "P", snp = "ID")
+
+# QQ plot
+qq(pheno_4$P)
+```
 
 ---
 

@@ -41,9 +41,6 @@ library(readr)
 theme_set(theme_minimal(base_size = 14))
 ```
 
-Here’s a matching, concise description for your **Load Data** section:
-
----
 
 ## Load Data
 

@@ -6,25 +6,33 @@ website:
   page-navigation: true
   bread-crumbs: true
   navbar:
-    background: light
-    search: true  
+    background: primary
+    search: true
     left:
-      - getting-started.qmd
-      - data.qmd
+      - text: "Getting Started"
+        href: getting-started.qmd
+      - text: "Data"
+        href: data.qmd
+        icon: download
       - text: "Tutorials"
+        icon: book
         menu:
-          - imputation.qmd
-          - imputation-locally.qmd
-          - gwas-with-nf-gwas.qmd
-          - gwas-with-plink2.qmd
-          - pgs.qmd
-
+          - href: imputation.qmd
+            icon: gear
+          - href: imputation-locally.qmd
+            icon: gear            
+          - href: gwas-with-nf-gwas.qmd
+            icon: bar-chart
+          - href: gwas-with-plink2.qmd
+            icon: bar-chart
+          - href: pgs.qmd
+            icon: activity    
+    right:
+      - text: "About"
+        href: about.qmd
 format:
   html:
     theme: [cosmo, theme.scss]
     toc: true
 
 bibliography: references.bib
-
-
-

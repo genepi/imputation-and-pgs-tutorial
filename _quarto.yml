@@ -19,7 +19,7 @@ website:
         menu:
           - href: imputation.qmd
             icon: gear
-          - href: imputation-locally.qmd
+          - href: local-imputation.qmd
             icon: gear            
           - href: gwas-with-nf-gwas.qmd
             icon: bar-chart

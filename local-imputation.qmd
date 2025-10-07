@@ -17,10 +17,8 @@ First, download all required data:
 
 ```bash
 # Create temp directory
-mkdir imputation-locally
-cd imputation-locally
-# Download Repository
-git clone https://github.com/genepi/imputationserver2/
+mkdir imputationserver
+cd imputationserver
 # Download Input Data
 wget https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz
 # Download and unzip Reference Panel
@@ -47,7 +45,7 @@ params {
 Execute the pipeline with Nextflow:
 
 ```bash
-nextflow run imputationserver2/main.nf -c imputation.config -profile docker
+nextflow run genepi/imputationserver2 -r v2.0.9  -c imputation.config -profile docker
 ```
 
 ::: {.callout-note}

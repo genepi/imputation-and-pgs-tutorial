@@ -185,9 +185,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#gwas-with-plink2" id="toc-gwas-with-plink2" class="nav-link active" data-scroll-target="#gwas-with-plink2">GWAS with PLINK2</a>
   <ul class="collapse">
+  <li><a href="#gwas-on-phenotype-2" id="toc-gwas-on-phenotype-2" class="nav-link" data-scroll-target="#gwas-on-phenotype-2">GWAS on Phenotype 2</a>
+  <ul class="collapse">
   <li><a href="#gwas-without-pca" id="toc-gwas-without-pca" class="nav-link" data-scroll-target="#gwas-without-pca">GWAS Without PCA</a></li>
   <li><a href="#pca-assessing-population-structure" id="toc-pca-assessing-population-structure" class="nav-link" data-scroll-target="#pca-assessing-population-structure">PCA: Assessing Population Structure</a></li>
   <li><a href="#gwas-with-pca-adjustment" id="toc-gwas-with-pca-adjustment" class="nav-link" data-scroll-target="#gwas-with-pca-adjustment">GWAS With PCA Adjustment</a></li>
+  </ul></li>
+  <li><a href="#gwas-on-phenotype-4" id="toc-gwas-on-phenotype-4" class="nav-link" data-scroll-target="#gwas-on-phenotype-4">GWAS on Phenotype 4</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
@@ -210,24 +214,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Visualize findings using Manhattan and QQ plots</li>
 </ul>
 <p>This workflow provides a complete introduction to conducting GWAS with imputed data, enabling accurate and efficient detection of genotype–phenotype associations.</p>
-<section id="gwas-without-pca" class="level2">
-<h2 class="anchored" data-anchor-id="gwas-without-pca">GWAS Without PCA</h2>
-<p>First, we run a <strong>logistic regression GWAS</strong> on the simulated phenotype <strong><code>pheno_1</code></strong> from the file <strong><code>phenotypes.txt</code></strong>, <strong>without adjusting for population structure</strong>. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.</p>
+<section id="gwas-on-phenotype-2" class="level2">
+<h2 class="anchored" data-anchor-id="gwas-on-phenotype-2">GWAS on Phenotype 2</h2>
+<p>Phenotype 2 represents a continuous trait simulated to exhibit a strong underlying genetic component. Continuous phenotypes are commonly encountered in complex trait genetics, as they capture quantitative variation among individuals rather than discrete categories. Given the simulated genetic architecture of phenotype 2, we expected that genome-wide association analysis (GWAS) would reveal multiple significant loci contributing to the observed variation.</p>
+<section id="gwas-without-pca" class="level3">
+<h3 class="anchored" data-anchor-id="gwas-without-pca">GWAS Without PCA</h3>
+<p>First, we run a <strong>linear regression GWAS</strong> on the simulated phenotype <strong><code>pheno_2</code></strong> from the file <strong><code>phenotypes.txt</code></strong>, <strong>without adjusting for population structure</strong>. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.</p>
 <section id="run-gwas" class="level4">
 <h4 class="anchored" data-anchor-id="run-gwas">Run GWAS</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="at">--double-id</span> <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> allow-no-covars <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_2 <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--linear</span> allow-no-covars <span class="dt">\</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Explanation:</strong></p>
 <ul>
 <li><code>--vcf</code>: Input imputed genotype file in VCF format</li>
 <li><code>--pheno</code>: Phenotype file (tab-delimited)</li>
-<li><code>--pheno-name</code>: Selects the phenotype column to test (here <code>pheno_1</code>)</li>
-<li><code>--logistic allow-no-covars</code>: Runs logistic regression without covariates</li>
+<li><code>--pheno-name</code>: Selects the phenotype column to test (here <code>pheno_2</code>)</li>
+<li><code>--linear allow-no-covars</code>: Runs linearr regression without covariates</li>
 <li><code>--out</code>: Prefix for output files</li>
 </ul>
 </section>
@@ -254,11 +261,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pheno_2 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.pheno_2.glm.linear"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pheno_2 <span class="ot">&lt;-</span> pheno_2[<span class="sc">!</span><span class="fu">is.na</span>(pheno_2<span class="sc">$</span>P), ]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_2, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -267,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_2<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -285,8 +292,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="pca-assessing-population-structure" class="level2">
-<h2 class="anchored" data-anchor-id="pca-assessing-population-structure">PCA: Assessing Population Structure</h2>
+<section id="pca-assessing-population-structure" class="level3">
+<h3 class="anchored" data-anchor-id="pca-assessing-population-structure">PCA: Assessing Population Structure</h3>
 <p>Before including principal components (PCs) as covariates, let’s visualize the PCA data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -311,33 +318,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The PCA plot can reveal population substructure or outliers.</li>
 </ul>
 </section>
-<section id="gwas-with-pca-adjustment" class="level2">
-<h2 class="anchored" data-anchor-id="gwas-with-pca-adjustment">GWAS With PCA Adjustment</h2>
+<section id="gwas-with-pca-adjustment" class="level3">
+<h3 class="anchored" data-anchor-id="gwas-with-pca-adjustment">GWAS With PCA Adjustment</h3>
 <p>Next, include the PCA covariates in the GWAS to account for population stratification.</p>
 <section id="run-gwas-with-covariates" class="level4">
 <h4 class="anchored" data-anchor-id="run-gwas-with-covariates">Run GWAS with Covariates</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="at">--double-id</span> <span class="dt">\</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_1 <span class="dt">\</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_2 <span class="dt">\</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--covar</span> data/covariates.txt <span class="dt">\</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> hide-covar <span class="dt">\</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--linear</span> hide-covar <span class="dt">\</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas.covar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Explanation:</strong></p>
 <ul>
 <li><code>--covar</code>: Provides a file containing covariates (e.g., PCs).</li>
-<li><code>--logistic hide-covar</code>: Runs logistic regression while hiding covariate results in the output.</li>
+<li><code>--linear hide-covar</code>: Runs linear regression while hiding covariate results in the output.</li>
 </ul>
 </section>
 <section id="visualize-adjusted-gwas-results" class="level4">
 <h4 class="anchored" data-anchor-id="visualize-adjusted-gwas-results">Visualize Adjusted GWAS Results</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.covar.pheno_1.glm.logistic.hybrid"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pheno_1 <span class="ot">&lt;-</span> pheno_1[<span class="sc">!</span><span class="fu">is.na</span>(pheno_1<span class="sc">$</span>P), ]</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pheno_2 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.covar.pheno_2.glm.linear"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pheno_2 <span class="ot">&lt;-</span> pheno_2[<span class="sc">!</span><span class="fu">is.na</span>(pheno_2<span class="sc">$</span>P), ]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_1, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_2, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -346,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_1<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_2<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -356,8 +363,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>Comparison Tip:</strong> Compare the QQ plots <em>before</em> and <em>after</em> including PCs to see how population structure adjustment affects the inflation of p-values.</p>
-<hr>
 </section>
+</section>
+</section>
+<section id="gwas-on-phenotype-4" class="level2">
+<h2 class="anchored" data-anchor-id="gwas-on-phenotype-4">GWAS on Phenotype 4</h2>
+<p>Phenotype 4 was simulated as a continuous trait with no underlying genetic component. In this case, the variation in the phenotype arises entirely from environmental or random factors rather than genetic differences among individuals. As a result, we did not expect to detect any significant associations in the genome-wide association analysis (GWAS).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="at">--double-id</span> <span class="dt">\</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno-name</span> pheno_4 <span class="dt">\</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--covar</span> data/covariates.txt <span class="dt">\</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--linear</span> hide-covar <span class="dt">\</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> output/gwas.covar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pheno_4 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.covar.pheno_4.glm.linear"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pheno_4 <span class="ot">&lt;-</span> pheno_4[<span class="sc">!</span><span class="fu">is.na</span>(pheno_4<span class="sc">$</span>P), ]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(<span class="at">x =</span> pheno_4, <span class="at">chr =</span> <span class="st">"X.CHROM"</span>, <span class="at">bp =</span> <span class="st">"POS"</span>, <span class="at">p =</span> <span class="st">"P"</span>, <span class="at">snp =</span> <span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gwas-with-plink2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qq</span>(pheno_4<span class="sc">$</span>P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gwas-with-plink2_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

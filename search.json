@@ -21,11 +21,60 @@
     "text": "First, we run a logistic regression GWAS on a simulated phenotype without adjusting for population structure.\n\n\n…."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Genotype Imputation and PGS Tutorial",
+    "objectID": "gwas-with-plink2.html",
+    "href": "gwas-with-plink2.html",
+    "title": "GWAS with PLINK2",
     "section": "",
-    "text": "Genotype Imputation and PGS Tutorial\nThis tutorial provides a practical introduction to key steps in modern genetic data analysis, including genotype imputation, genome-wide association studies (GWAS), and polygenic risk score (PGS) calculation.\nUsing the Michigan Imputation Server (MIS) as the imputation platform, the chapter demonstrates how to process and analyze genetic data in a reproducible workflow — from imputed genotypes to interpretable genetic associations.\nYou will learn how to:\n\nPerform and evaluate genotype imputation using the Michigan Imputation Server\nConduct a GWAS to identify variants associated with phenotypes\nCalculate and visualize polygenic risk scores (PRS) for different trait types\n\nThe tutorial concludes with examples of four phenotypes, illustrating how PRS performance varies between binary and continuous traits — ranging from clear genetic signals to weak or absent associations.\nThis chapter aims to build a solid understanding of the concepts, tools, and interpretation steps that underpin large-scale human genetic studies."
+    "text": "This tutorial demonstrates how to perform a genome-wide association study (GWAS) using PLINK2, with and without principal component analysis (PCA) adjustment. We will use imputed genotype data obtained directly from the Michigan Imputation Server, which provides high-quality imputed datasets ready for association testing.\nIn this tutorial, we will:\n\nLoad imputed genotype, phenotype, and covariate data\nPerform GWAS using PLINK2\nCompare association results with and without PCA adjustment\nVisualize findings using Manhattan and QQ plots\n\nThis workflow provides a complete introduction to conducting GWAS with imputed data, enabling accurate and efficient detection of genotype–phenotype associations.\n\n\nFirst, we run a logistic regression GWAS on the simulated phenotype pheno_1 from the file phenotypes.txt, without adjusting for population structure. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.\n\n\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --logistic allow-no-covars \\\n  --out output/gwas\n\nExplanation:\n\n--vcf: Input imputed genotype file in VCF format\n--pheno: Phenotype file (tab-delimited)\n--pheno-name: Selects the phenotype column to test (here pheno_1)\n--logistic allow-no-covars: Runs logistic regression without covariates\n--out: Prefix for output files\n\n\n\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.pheno_1.glm.logistic.hybrid\", header = TRUE, comment.char = \"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\nNotes:\n\nThe qqman package provides convenient functions to visualize GWAS results.\nThe Manhattan plot displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.\nThe QQ plot compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.\nIn this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.\n\n\n\n\n\nBefore including principal components (PCs) as covariates, let’s visualize the PCA data.\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header = TRUE, comment.char = \"\")\n\nggplot(pca_data, aes(x = PC1, y = PC2)) +\n  geom_point(alpha = 0.7) +\n  theme_minimal() +\n  labs(title = \"PCA of Genotype Data\", x = \"PC1\", y = \"PC2\")\n\n\n\n\n\n\n\n\nExplanation:\n\ncovariates.txt contains individual-level covariates including PCs (e.g., IID, PC1, PC2, …).\nThe PCA plot can reveal population substructure or outliers.\n\n\n\n\nNext, include the PCA covariates in the GWAS to account for population stratification.\n\n\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --covar data/covariates.txt \\\n  --logistic hide-covar \\\n  --out output/gwas.covar\n\nExplanation:\n\n--covar: Provides a file containing covariates (e.g., PCs).\n--logistic hide-covar: Runs logistic regression while hiding covariate results in the output.\n\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.covar.pheno_1.glm.logistic.hybrid\", header = TRUE, comment.char = \"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\nComparison Tip: Compare the QQ plots before and after including PCs to see how population structure adjustment affects the inflation of p-values.\n\n\n\n\n\n\nPLINK2 Documentation\nqqman R Package\nggplot2 R Package"
+  },
+  {
+    "objectID": "gwas-with-plink2.html#gwas-without-pca",
+    "href": "gwas-with-plink2.html#gwas-without-pca",
+    "title": "GWAS with PLINK2",
+    "section": "",
+    "text": "First, we run a logistic regression GWAS on the simulated phenotype pheno_1 from the file phenotypes.txt, without adjusting for population structure. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.\n\n\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --logistic allow-no-covars \\\n  --out output/gwas\n\nExplanation:\n\n--vcf: Input imputed genotype file in VCF format\n--pheno: Phenotype file (tab-delimited)\n--pheno-name: Selects the phenotype column to test (here pheno_1)\n--logistic allow-no-covars: Runs logistic regression without covariates\n--out: Prefix for output files\n\n\n\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.pheno_1.glm.logistic.hybrid\", header = TRUE, comment.char = \"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\nNotes:\n\nThe qqman package provides convenient functions to visualize GWAS results.\nThe Manhattan plot displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.\nThe QQ plot compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.\nIn this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals."
+  },
+  {
+    "objectID": "gwas-with-plink2.html#pca-assessing-population-structure",
+    "href": "gwas-with-plink2.html#pca-assessing-population-structure",
+    "title": "GWAS with PLINK2",
+    "section": "",
+    "text": "Before including principal components (PCs) as covariates, let’s visualize the PCA data.\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header = TRUE, comment.char = \"\")\n\nggplot(pca_data, aes(x = PC1, y = PC2)) +\n  geom_point(alpha = 0.7) +\n  theme_minimal() +\n  labs(title = \"PCA of Genotype Data\", x = \"PC1\", y = \"PC2\")\n\n\n\n\n\n\n\n\nExplanation:\n\ncovariates.txt contains individual-level covariates including PCs (e.g., IID, PC1, PC2, …).\nThe PCA plot can reveal population substructure or outliers."
+  },
+  {
+    "objectID": "gwas-with-plink2.html#gwas-with-pca-adjustment",
+    "href": "gwas-with-plink2.html#gwas-with-pca-adjustment",
+    "title": "GWAS with PLINK2",
+    "section": "",
+    "text": "Next, include the PCA covariates in the GWAS to account for population stratification.\n\n\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --covar data/covariates.txt \\\n  --logistic hide-covar \\\n  --out output/gwas.covar\n\nExplanation:\n\n--covar: Provides a file containing covariates (e.g., PCs).\n--logistic hide-covar: Runs logistic regression while hiding covariate results in the output.\n\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.covar.pheno_1.glm.logistic.hybrid\", header = TRUE, comment.char = \"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\nComparison Tip: Compare the QQ plots before and after including PCs to see how population structure adjustment affects the inflation of p-values."
+  },
+  {
+    "objectID": "gwas-with-plink2.html#references",
+    "href": "gwas-with-plink2.html#references",
+    "title": "GWAS with PLINK2",
+    "section": "",
+    "text": "PLINK2 Documentation\nqqman R Package\nggplot2 R Package"
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "This tutorial uses simulated genotype and phenotype data based on the 1000 Genomes Project Human Omni 2.5 array.\nThe dataset represents a subset of ~2,500 samples and approximately 2 million SNPs, focusing on chromosome 20. The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures."
+  },
+  {
+    "objectID": "data.html#note",
+    "href": "data.html#note",
+    "title": "Data",
+    "section": "Note",
+    "text": "Note\nAll data are simulated for educational purposes. They do not contain any identifiable or real genetic or phenotype information from human participants."
+  },
+  {
+    "objectID": "imputation.html",
+    "href": "imputation.html",
+    "title": "Imputation",
+    "section": "",
+    "text": "Imputation\nThis is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\n\nReferences\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "pgs.html",
@@ -91,60 +140,18 @@
     "text": "This tutorial demonstrates how to:\n\nLoad and merge PRS and phenotype data\nVisualize relationships between PRS and traits\nInterpret how well PRS predicts different phenotype types\n\nSuch visual checks are an essential first step before applying formal statistical tests (e.g., logistic or linear regression) to quantify the predictive power of PRS.\nNext Steps:\n\nPerform logistic regression for binary traits (pheno_1, pheno_3)\nPerform linear regression for continuous traits (pheno_2, pheno_4)\nCompute metrics such as AUC or ( R^2 ) to assess predictive strength"
   },
   {
-    "objectID": "imputation.html",
-    "href": "imputation.html",
-    "title": "Imputation",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Genotype Imputation and PGS Tutorial",
     "section": "",
-    "text": "Imputation\nThis is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\n\nReferences\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Genotype Imputation and PGS Tutorial\nThis tutorial provides a practical introduction to key steps in modern genetic data analysis, including genotype imputation, genome-wide association studies (GWAS), and polygenic risk score (PGS) calculation.\nUsing the Michigan Imputation Server (MIS) as the imputation platform, the chapter demonstrates how to process and analyze genetic data in a reproducible workflow — from imputed genotypes to interpretable genetic associations.\nYou will learn how to:\n\nPerform and evaluate genotype imputation using the Michigan Imputation Server\nConduct a GWAS to identify variants associated with phenotypes\nCalculate and visualize polygenic risk scores (PRS) for different trait types\n\nThe tutorial concludes with examples of four phenotypes, illustrating how PRS performance varies between binary and continuous traits — ranging from clear genetic signals to weak or absent associations.\nThis chapter aims to build a solid understanding of the concepts, tools, and interpretation steps that underpin large-scale human genetic studies."
   },
   {
-    "objectID": "data.html",
-    "href": "data.html",
-    "title": "Data",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "This tutorial uses simulated genotype and phenotype data based on the 1000 Genomes Project Human Omni 2.5 array.\nThe dataset represents a subset of ~2,500 samples and approximately 2 million SNPs, focusing on chromosome 20. The data are designed to illustrate GWAS, imputation, and polygenic score (PGS) analysis workflows using realistic, but simulated, inputs derived from real genotype array structures."
-  },
-  {
-    "objectID": "data.html#note",
-    "href": "data.html#note",
-    "title": "Data",
-    "section": "Note",
-    "text": "Note\nAll data are simulated for educational purposes. They do not contain any identifiable or real genetic or phenotype information from human participants."
-  },
-  {
-    "objectID": "gwas-with-plink2.html",
-    "href": "gwas-with-plink2.html",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "This tutorial demonstrates how to perform a genome-wide association study (GWAS) using PLINK2, with and without principal component analysis (PCA) adjustment. We will use imputed genotype data obtained directly from the Michigan Imputation Server, which provides high-quality imputed datasets ready for association testing.\nIn this tutorial, we will:\n\nLoad imputed genotype, phenotype, and covariate data\nPerform GWAS using PLINK2\nCompare association results with and without PCA adjustment\nVisualize findings using Manhattan and QQ plots\n\nThis workflow provides a complete introduction to conducting GWAS with imputed data, enabling accurate and efficient detection of genotype–phenotype associations.\n\n\nFirst, we run a logistic regression GWAS on the simulated phenotype pheno_1 from the file phenotypes.txt, without adjusting for population structure. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.\n\n\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --logistic allow-no-covars \\\n  --out output/gwas\n\nExplanation:\n\n--vcf: Input imputed genotype file in VCF format\n--pheno: Phenotype file (tab-delimited)\n--pheno-name: Selects the phenotype column to test (here pheno_1)\n--logistic allow-no-covars: Runs logistic regression without covariates\n--out: Prefix for output files\n\n\n\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.pheno_1.glm.logistic.hybrid\", header = TRUE, comment.char = \"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\nNotes:\n\nThe qqman package provides convenient functions to visualize GWAS results.\nThe Manhattan plot displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.\nThe QQ plot compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.\nIn this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.\n\n\n\n\n\nBefore including principal components (PCs) as covariates, let’s visualize the PCA data.\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header = TRUE, comment.char = \"\")\n\nggplot(pca_data, aes(x = PC1, y = PC2)) +\n  geom_point(alpha = 0.7) +\n  theme_minimal() +\n  labs(title = \"PCA of Genotype Data\", x = \"PC1\", y = \"PC2\")\n\n\n\n\n\n\n\n\nExplanation:\n\ncovariates.txt contains individual-level covariates including PCs (e.g., IID, PC1, PC2, …).\nThe PCA plot can reveal population substructure or outliers.\n\n\n\n\nNext, include the PCA covariates in the GWAS to account for population stratification.\n\n\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --covar data/covariates.txt \\\n  --logistic hide-covar \\\n  --out output/gwas.covar\n\nExplanation:\n\n--covar: Provides a file containing covariates (e.g., PCs).\n--logistic hide-covar: Runs logistic regression while hiding covariate results in the output.\n\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.covar.pheno_1.glm.logistic.hybrid\", header = TRUE, comment.char = \"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\nComparison Tip: Compare the QQ plots before and after including PCs to see how population structure adjustment affects the inflation of p-values.\n\n\n\n\n\n\nPLINK2 Documentation\nqqman R Package\nggplot2 R Package"
-  },
-  {
-    "objectID": "gwas-with-plink2.html#gwas-without-pca",
-    "href": "gwas-with-plink2.html#gwas-without-pca",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "First, we run a logistic regression GWAS on the simulated phenotype pheno_1 from the file phenotypes.txt, without adjusting for population structure. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.\n\n\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --logistic allow-no-covars \\\n  --out output/gwas\n\nExplanation:\n\n--vcf: Input imputed genotype file in VCF format\n--pheno: Phenotype file (tab-delimited)\n--pheno-name: Selects the phenotype column to test (here pheno_1)\n--logistic allow-no-covars: Runs logistic regression without covariates\n--out: Prefix for output files\n\n\n\n\nAfter running the GWAS, we can visualize the results using Manhattan and QQ plots to better understand the distribution and significance of associations across the genome.\n\nlibrary(qqman)\n\n\n\n\nFor example usage please run: vignette('qqman')\n\n\n\n\n\nCitation appreciated but not required:\n\n\nTurner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.pheno_1.glm.logistic.hybrid\", header = TRUE, comment.char = \"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\nNotes:\n\nThe qqman package provides convenient functions to visualize GWAS results.\nThe Manhattan plot displays all tested SNPs along chromosome 20, with the y-axis showing the –log₁₀(p-value). Peaks in the plot represent genomic regions with stronger association signals.\nThe QQ plot compares the observed versus expected p-value distributions to assess potential inflation or systematic bias in the test statistics.\nIn this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals."
-  },
-  {
-    "objectID": "gwas-with-plink2.html#pca-assessing-population-structure",
-    "href": "gwas-with-plink2.html#pca-assessing-population-structure",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "Before including principal components (PCs) as covariates, let’s visualize the PCA data.\n\nlibrary(ggplot2)\n\npca_data &lt;- read.table(\"data/covariates.txt\", header = TRUE, comment.char = \"\")\n\nggplot(pca_data, aes(x = PC1, y = PC2)) +\n  geom_point(alpha = 0.7) +\n  theme_minimal() +\n  labs(title = \"PCA of Genotype Data\", x = \"PC1\", y = \"PC2\")\n\n\n\n\n\n\n\n\nExplanation:\n\ncovariates.txt contains individual-level covariates including PCs (e.g., IID, PC1, PC2, …).\nThe PCA plot can reveal population substructure or outliers."
-  },
-  {
-    "objectID": "gwas-with-plink2.html#gwas-with-pca-adjustment",
-    "href": "gwas-with-plink2.html#gwas-with-pca-adjustment",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "Next, include the PCA covariates in the GWAS to account for population stratification.\n\n\n\nplink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \\\n  --pheno data/phenotypes.txt \\\n  --pheno-name pheno_1 \\\n  --covar data/covariates.txt \\\n  --logistic hide-covar \\\n  --out output/gwas.covar\n\nExplanation:\n\n--covar: Provides a file containing covariates (e.g., PCs).\n--logistic hide-covar: Runs logistic regression while hiding covariate results in the output.\n\n\n\n\n\npheno_1 &lt;- read.table(\"output/gwas.covar.pheno_1.glm.logistic.hybrid\", header = TRUE, comment.char = \"\")\npheno_1 &lt;- pheno_1[!is.na(pheno_1$P), ]\n\n# Manhattan plot\nmanhattan(x = pheno_1, chr = \"X.CHROM\", bp = \"POS\", p = \"P\", snp = \"ID\")\n\n\n\n\n\n\n\n# QQ plot\nqq(pheno_1$P)\n\n\n\n\n\n\n\n\nComparison Tip: Compare the QQ plots before and after including PCs to see how population structure adjustment affects the inflation of p-values."
-  },
-  {
-    "objectID": "gwas-with-plink2.html#references",
-    "href": "gwas-with-plink2.html#references",
-    "title": "GWAS with PLINK2",
-    "section": "",
-    "text": "PLINK2 Documentation\nqqman R Package\nggplot2 R Package"
+    "text": "About\nAuthors:\n- Lukas Forer\n- Sebastian Schönherr\nInstitution: Institute of Genetic Epidemiology, Medical University of Innsbruck\nLicense: Content released under a CC BY 4.0 License.\nThank you for using this tutorial — we hope it supports your research and learning in genomics!"
   },
   {
     "objectID": "getting-started.html",

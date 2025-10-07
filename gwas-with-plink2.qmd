@@ -30,9 +30,6 @@ Phenotype 2 represents a continuous trait simulated to exhibit a strong underlyi
 First, we run a **linear regression GWAS** on the simulated phenotype **`pheno_2`** from the file **`phenotypes.txt`**, **without adjusting for population structure**.
 This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.
 
-
-#### Run GWAS
-
 ```{bash, results='hide'}
 plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
   --pheno data/phenotypes.txt \
@@ -48,8 +45,6 @@ plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
 * `--pheno-name`: Selects the phenotype column to test (here `pheno_2`)
 * `--linear allow-no-covars`: Runs linearr regression without covariates
 * `--out`: Prefix for output files
-
-#### Visualize GWAS Results
 
 After running the GWAS, we can visualize the results using **Manhattan** and **QQ plots** to better understand the distribution and significance of associations across the genome.
 
@@ -95,9 +90,7 @@ ggplot(pca_data, aes(x = PC1, y = PC2)) +
 
 ### GWAS With PCA Adjustment
 
-Next, include the PCA covariates in the GWAS to account for population stratification.
-
-#### Run GWAS with Covariates
+Next, include the PCA covariates in the GWAS to account for population stratification:
 
 ```{bash, results='hide'}
 plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
@@ -113,7 +106,7 @@ plink2 --vcf data/gwas.imputed.chr20.dose.vcf.gz --double-id \
 * `--covar`: Provides a file containing covariates (e.g., PCs).
 * `--linear hide-covar`: Runs linear regression while hiding covariate results in the output.
 
-#### Visualize Adjusted GWAS Results
+After running the GWAS, we can visualize the results using **Manhattan** and **QQ plots** to better understand the distribution and significance of associations across the genome.
 
 ```{r}
 pheno_2 <- read.table("output/gwas.covar.pheno_2.glm.linear", header = TRUE, comment.char = "")

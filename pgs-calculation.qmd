@@ -1,5 +1,5 @@
 ---
-title: "Running Imputation on MIS"
+title: "Running PGS on MIS"
 format: html
 ---
 
@@ -8,7 +8,7 @@ format: html
 Several imputation servers are available, each hosting different reference panels. In this tutorial, we will use the main instance of the **Michigan Imputation Server**. Before starting, make sure you complete the following prerequisites:
 
 1. Create an account.  
-2. Download the required [array data](https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz) for imputation and PGS calculation.  
+2. Download the required [array data](https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz) for PGS calculation.  
 
 ## Prepare Your Data
 
@@ -26,58 +26,58 @@ After a successful login, you can start a new job using the **Run** tab or check
 
 ![](images/imputation/start.png)  
 
-## Run Imputation
+## Polygenic Score Calculation
 
-The Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on the **Genotype Imputation** app.
+The Michigan Imputation Server offers several applications, including Genotype Imputation, HLA Imputation, and Polygenic Score Calculation. In this tutorial, we focus on **Polygenic Score Calculation**.
 
 ![](images/imputation/select-app.png)  
 
+::: {.callout-note}
+Please note that this app does not return imputed datasets to users. 
+:::
 
-After selecting the app, fill in the required fields (see below), accept the terms of use, and click **Start Imputation**.
+
+## Start Calculation
+
+After selecting the app, fill in the following fields and click **Start Calculation**:  
 
 - **Name:** Any name of your choice  
 - **Reference Panel:** HapMap 2  
 - **Input Files:** `gwas.array.hapmap.chr20.vcf.gz`  
-- **Allele Frequency Check:** EUR  
+- **Scores:** Tutorial (Simulated Scores)  
+- **Ancestry Estimation:** Worldwide
 
-
-![](images/imputation/select-app-with-data.png)  
+![](images/pgs/select-app-with-data.png)  
 
 ## Job Queue
 
-Once submitted, your job will go through **Input Validation**, **Quality Control (QC)**, **Phasing/Imputation** and **Compression/Encryption**. Jobs are queued, and you will receive a notification when your imputation job is complete.  
+Once submitted, your job will go through **Input Validation**, **Quality Control (QC)**, **Phasing/Imputation**, and **Polygenic Risk Calculation**. Jobs are queued, and you will receive a notification when your PGS calculation is complete.  
 
 ## Input Validation and QC
 
 The screenshots below illustrate statistics from input validation and quality control:  
 
-![](images/imputation/input-validation.png)  
-![](images/imputation/qc.png)  
+![](images/pgs/input-validation.png)  
+![](images/pgs/qc.png)  
 
 ## Running Jobs
 
 The job is now queued and typically runs for around 30 minutes, depending on queue availability.  
 
-![](images/imputation/running-job.png)  
+![](images/pgs/running-job.png)  
 
 ## Download Results
 
 Once your job is complete, you will receive a notification. You can then download your results in one of the following ways:
 
-1. Click on **`results.zip`** to download the file directly.  
+1. Click on one of the files to download the file directly.  
 2. Or use the `wget` command in your terminal.
 
-To decrypt your data, use the password that was sent to you via email. Furthermore, QC-Report is available in HTML format. 
 
-![](images/imputation/results.png)
+![](images/pgs/results.png)
 
 ---
 
 ## Next Steps
 
-The downloaded zip file contains the following files:
-
-- `chr20.dose.vcf.gz` – dosage file, can be used for GWAS analysis
-- `chr20.info.gz` – variant information file
-
-The **dosage file** (`chr20.dose.vcf.gz`) can be used to run a GWAS using [PLINK2](/gwas-with-plink2.html) or [nf-gwas](/gwas-with-nf-gwas.html).
+The available scores file (`scores.txt`) can be used to run the PGS analysis as described [here](/pgs.html).

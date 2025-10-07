@@ -19,8 +19,10 @@ website:
         menu:
           - href: imputation.qmd
             icon: gear
-          - href: local-imputation.qmd
+          - href: pgs-calculation.qmd
             icon: gear            
+          - href: local-imputation.qmd
+            icon: gear                       
           - href: gwas-with-nf-gwas.qmd
             icon: bar-chart
           - href: gwas-with-plink2.qmd

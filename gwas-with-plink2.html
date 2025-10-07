@@ -220,8 +220,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="gwas-without-pca" class="level3">
 <h3 class="anchored" data-anchor-id="gwas-without-pca">GWAS Without PCA</h3>
 <p>First, we run a <strong>linear regression GWAS</strong> on the simulated phenotype <strong><code>pheno_2</code></strong> from the file <strong><code>phenotypes.txt</code></strong>, <strong>without adjusting for population structure</strong>. This initial analysis provides a baseline to observe how population stratification may influence the association results before including principal components as covariates.</p>
-<section id="run-gwas" class="level4">
-<h4 class="anchored" data-anchor-id="run-gwas">Run GWAS</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="at">--double-id</span> <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
@@ -237,9 +235,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>--linear allow-no-covars</code>: Runs linearr regression without covariates</li>
 <li><code>--out</code>: Prefix for output files</li>
 </ul>
-</section>
-<section id="visualize-gwas-results" class="level4">
-<h4 class="anchored" data-anchor-id="visualize-gwas-results">Visualize GWAS Results</h4>
 <p>After running the GWAS, we can visualize the results using <strong>Manhattan</strong> and <strong>QQ plots</strong> to better understand the distribution and significance of associations across the genome.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qqman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -291,7 +286,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>In this unadjusted GWAS (without PCA correction), some inflation may appear, reflecting the effect of population structure or relatedness among individuals.</li>
 </ul>
 </section>
-</section>
 <section id="pca-assessing-population-structure" class="level3">
 <h3 class="anchored" data-anchor-id="pca-assessing-population-structure">PCA: Assessing Population Structure</h3>
 <p>Before including principal components (PCs) as covariates, let’s visualize the PCA data.</p>
@@ -320,9 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="gwas-with-pca-adjustment" class="level3">
 <h3 class="anchored" data-anchor-id="gwas-with-pca-adjustment">GWAS With PCA Adjustment</h3>
-<p>Next, include the PCA covariates in the GWAS to account for population stratification.</p>
-<section id="run-gwas-with-covariates" class="level4">
-<h4 class="anchored" data-anchor-id="run-gwas-with-covariates">Run GWAS with Covariates</h4>
+<p>Next, include the PCA covariates in the GWAS to account for population stratification:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--vcf</span> data/gwas.imputed.chr20.dose.vcf.gz <span class="at">--double-id</span> <span class="dt">\</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--pheno</span> data/phenotypes.txt <span class="dt">\</span></span>
@@ -336,9 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>--covar</code>: Provides a file containing covariates (e.g., PCs).</li>
 <li><code>--linear hide-covar</code>: Runs linear regression while hiding covariate results in the output.</li>
 </ul>
-</section>
-<section id="visualize-adjusted-gwas-results" class="level4">
-<h4 class="anchored" data-anchor-id="visualize-adjusted-gwas-results">Visualize Adjusted GWAS Results</h4>
+<p>After running the GWAS, we can visualize the results using <strong>Manhattan</strong> and <strong>QQ plots</strong> to better understand the distribution and significance of associations across the genome.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pheno_2 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"output/gwas.covar.pheno_2.glm.linear"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">""</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pheno_2 <span class="ot">&lt;-</span> pheno_2[<span class="sc">!</span><span class="fu">is.na</span>(pheno_2<span class="sc">$</span>P), ]</span>
@@ -363,7 +353,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>Comparison Tip:</strong> Compare the QQ plots <em>before</em> and <em>after</em> including PCs to see how population structure adjustment affects the inflation of p-values.</p>
-</section>
 </section>
 </section>
 <section id="gwas-on-phenotype-4" class="level2">

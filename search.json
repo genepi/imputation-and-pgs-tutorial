@@ -256,21 +256,42 @@
     "href": "gwas-with-nf-gwas.html#setup",
     "title": "GWAS with nf-gwas",
     "section": "Setup",
-    "text": "Setup\nFirst, we need to prepare the input files for nf-gwas. The files are also available here.\nmkdir nf-gwas-test\ncd nf-gwas-test\n# Download pipeline\ngit clone https://github.com/genepi/nf-gwas\n# Download phenotype and covariates\nwget https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt\nwget https://genepi.i-med.ac.at/downloads/imputation/covariates.txt\n# Download imputed data\nwget https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz"
+    "text": "Setup\nFirst, we need to prepare the input files for nf-gwas. The files are also available here.\nmkdir nf-gwas-test\ncd nf-gwas-test\n# Download phenotype and covariates\nwget https://genepi.i-med.ac.at/downloads/imputation/phenotypes.txt\nwget https://genepi.i-med.ac.at/downloads/imputation/covariates.txt\n# Download imputed data\nwget https://genepi.i-med.ac.at/downloads/imputation/gwas.imputed.chr20.dose.vcf.gz\n# Download annotation files for chr20\nwget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz .\nwget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz.tbi ."
   },
   {
     "objectID": "gwas-with-nf-gwas.html#gwas-without-pca",
     "href": "gwas-with-nf-gwas.html#gwas-without-pca",
     "title": "GWAS with nf-gwas",
     "section": "GWAS Without PCA",
-    "text": "GWAS Without PCA\nWe first run a logistic regression GWAS on a simulated phenotype without adjusting for population structure. Please create a gwas.config file with this content:\nparams {\n  project                        = 'test-gwas'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = false\n  rsids_filename                 = \"nf-gwas/tests/input/pipeline/rsids.tsv.gz\"\n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run nf-gwas/main.nf -profile docker -c gwas.config\n\n\n\n\n\n\nNote\n\n\n\nIf you are running this on a server with Singularity, change the profile to \"singularity\" instead of \"docker\".\n\n\n\n\nResults\nAll results (REGENIE outputs, top hits, graphical reports) are available within the results folder."
+    "text": "GWAS Without PCA\nWe first run a logistic regression GWAS on a simulated phenotype without adjusting for population structure. Please create a gwas.config file with this content:\nparams {\n  project                        = 'test-gwas'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = true\n  rsids_filename                 = \"rsids-v154-hg19-chr20.index.gz\"\n  binning_csv                    = 'NONE'\n  binning_html                   = 'NONE'  \n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run genepi/nf-gwas -r v1.0.10  -profile docker -c gwas.config\n\n\n\n\n\n\nNote\n\n\n\nIf you are running this on a server with Singularity, change the profile to \"singularity\" instead of \"docker\".\n\n\n\n\nResults\nAll results (REGENIE outputs, top hits, graphical reports) are available within the results folder."
   },
   {
     "objectID": "gwas-with-nf-gwas.html#gwas-with-pca",
     "href": "gwas-with-nf-gwas.html#gwas-with-pca",
     "title": "GWAS with nf-gwas",
     "section": "GWAS With PCA",
-    "text": "GWAS With PCA\nNext, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a gwas2.config file with this content:\nparams {\n  project                        = 'test-gwas-with-pcs'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = false\n  covariates_filename            = 'covariates.txt'\n  covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'\n  rsids_filename                 = \"nf-gwas/tests/input/pipeline/rsids.tsv.gz\"\n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run nf-gwas/main.nf -profile docker -c gwas2.config\n\n\nResults\nAll results (REGENIE outputs, top hits, graphical reports) are available within the results folder."
+    "text": "GWAS With PCA\nNext, we run a logistic regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a gwas2.config file with this content:\nparams {\n  project                        = 'test-gwas-with-pcs'\n  genotypes_association          = 'gwas.imputed.chr20.dose.vcf.gz'\n  regenie_skip_predictions       = true\n  association_build              = 'hg19'\n  genotypes_association_format   = 'vcf'\n  phenotypes_filename            = 'phenotypes.txt'\n  phenotypes_columns             = 'pheno_2,pheno_4'\n  phenotypes_binary_trait        = false\n  regenie_test                   = 'additive'\n  regenie_min_imputation_score   = 0.3\n  phenotypes_apply_rint          = true\n  manhattan_annotation_enabled   = true\n  covariates_filename            = 'covariates.txt'\n  covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'\n  rsids_filename                 = \"rsids-v154-hg19-chr20.index.gz\"\n  binning_csv                    = 'NONE'\n  binning_html                   = 'NONE'\n}\n\nRun GWAS\nExecute the pipeline:\nnextflow run genepi/nf-gwas -r v1.0.10 -profile docker -c gwas2.config"
+  },
+  {
+    "objectID": "gwas-with-nf-gwas.html#results-1",
+    "href": "gwas-with-nf-gwas.html#results-1",
+    "title": "GWAS with nf-gwas",
+    "section": "Results",
+    "text": "Results\nAll results (REGENIE outputs, top hits, and graphical reports) are available in the results folder. The folder also includes an HTML file containing an interactive Manhattan plot:"
+  },
+  {
+    "objectID": "gwas-with-nf-gwas.html#manhattan-plot-without-pcs",
+    "href": "gwas-with-nf-gwas.html#manhattan-plot-without-pcs",
+    "title": "GWAS with nf-gwas",
+    "section": "Manhattan Plot without PCs",
+    "text": "Manhattan Plot without PCs"
+  },
+  {
+    "objectID": "gwas-with-nf-gwas.html#manhattan-plot-with-pcs",
+    "href": "gwas-with-nf-gwas.html#manhattan-plot-with-pcs",
+    "title": "GWAS with nf-gwas",
+    "section": "Manhattan Plot with PCs",
+    "text": "Manhattan Plot with PCs"
   },
   {
     "objectID": "getting-started.html",

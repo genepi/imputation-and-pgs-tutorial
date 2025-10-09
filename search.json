@@ -380,7 +380,7 @@
   {
     "objectID": "bot-imputation.html",
     "href": "bot-imputation.html",
-    "title": "Running Imputation using imputationbot",
+    "title": "Running Imputation Automatically",
     "section": "",
     "text": "You can submit jobs to the Michigan Imputation Server using the API through the imputationbot. A step-by-step tutorial is available in the official documentation."
   },

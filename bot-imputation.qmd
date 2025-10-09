@@ -1,5 +1,5 @@
 ---
-title: "Running imputation using imputationbot"
+title: "Running Imputation using imputationbot"
 format: html
 ---
 

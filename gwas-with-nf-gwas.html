@@ -195,6 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#nf-gwas-parameters" id="toc-nf-gwas-parameters" class="nav-link" data-scroll-target="#nf-gwas-parameters">nf-gwas Parameters</a></li>
   <li><a href="#gwas-without-pca" id="toc-gwas-without-pca" class="nav-link" data-scroll-target="#gwas-without-pca">GWAS Without PCA</a>
   <ul class="collapse">
   <li><a href="#run-gwas" id="toc-run-gwas" class="nav-link" data-scroll-target="#run-gwas">Run GWAS</a></li>
@@ -258,6 +259,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz .</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz.tbi .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="nf-gwas-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="nf-gwas-parameters">nf-gwas Parameters</h2>
+<p>The <strong>nf-gwas</strong> pipeline supports a variety of configurable parameters.<br>
+In the examples below, we demonstrate a simplified GWAS analysis where we skip <strong>Step 1</strong> of REGENIE — the model-fitting stage.</p>
+<p><strong>Step 1</strong> of REGENIE usually fits a <strong>ridge regression model</strong> to predict the phenotype (or residuals) from genotypes, accounting for <strong>population structure</strong> and <strong>relatedness</strong>. Since <code>regenie_skip_predictions = true</code>, this step is bypassed, and we proceed directly to <strong>Step 2</strong>, which performs the <strong>association testing</strong>.</p>
+<p>Below is a breakdown of the main parameters:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>project</code></td>
+<td>A name for the analysis run. Useful for organizing output files.</td>
+</tr>
+<tr class="even">
+<td><code>genotypes_association</code></td>
+<td>The genotype file used in Step 2. Here, it’s a compressed VCF file (<code>.vcf.gz</code>) containing imputed genotypes for chromosome 20.</td>
+</tr>
+<tr class="odd">
+<td><code>genotypes_association_format</code></td>
+<td>Specifies the format of the genotype file (<code>vcf</code> here). Internally, nf-gwas converts this VCF into <strong>PLINK2</strong> format for REGENIE.</td>
+</tr>
+<tr class="even">
+<td><code>association_build</code></td>
+<td>The genome reference build used (<code>hg19</code> or <code>hg38</code>).</td>
+</tr>
+<tr class="odd">
+<td><code>phenotypes_filename</code></td>
+<td>File containing phenotype data for each individual.</td>
+</tr>
+<tr class="even">
+<td><code>phenotypes_columns</code></td>
+<td>Specific phenotype columns to include (<code>pheno_2</code> and <code>pheno_4</code>).</td>
+</tr>
+<tr class="odd">
+<td><code>phenotypes_binary_trait</code></td>
+<td>Whether phenotypes are binary (<code>true</code>) or continuous (<code>false</code>).</td>
+</tr>
+<tr class="even">
+<td><code>covariates_filename</code></td>
+<td>File listing covariates (e.g., PCs) to adjust for population stratification.</td>
+</tr>
+<tr class="odd">
+<td><code>covariates_columns</code></td>
+<td>Covariate columns to include (<code>PC1–PC10</code>).</td>
+</tr>
+<tr class="even">
+<td><code>regenie_test</code></td>
+<td>Genetic model to test; here, <strong>additive</strong>.</td>
+</tr>
+<tr class="odd">
+<td><code>regenie_min_imputation_score</code></td>
+<td>Minimum genotype imputation quality score; variants below are excluded.</td>
+</tr>
+<tr class="even">
+<td><code>rsids_filename</code></td>
+<td>Index file mapping variant positions to <strong>rsIDs</strong> for annotation.</td>
+</tr>
+<tr class="odd">
+<td><code>binning_size</code></td>
+<td>Genomic bin size (in base pairs) for plotting and indexing results.</td>
+</tr>
+</tbody>
+</table>
+<p>This configuration performs a straightforward GWAS on two continuous traits (<code>pheno_2</code> and <code>pheno_4</code>), adjusting for population structure using the top 10 principal components (PCs).</p>
+</section>
 <section id="gwas-without-pca" class="level2">
 <h2 class="anchored" data-anchor-id="gwas-without-pca">GWAS Without PCA</h2>
 <p>We first run a linear regression GWAS on a simulated phenotype without adjusting for population structure. Please create a <code>gwas.config</code> file with this content:</p>
@@ -272,11 +347,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  phenotypes_binary_trait        <span class="op">=</span> <span class="kw">false</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  regenie_test                   <span class="op">=</span> <span class="st">'additive'</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  regenie_min_imputation_score   <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  phenotypes_apply_rint          <span class="op">=</span> <span class="kw">true</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  manhattan_annotation_enabled   <span class="op">=</span> <span class="kw">true</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  rsids_filename                 <span class="op">=</span> <span class="st">"rsids-v154-hg19-chr20.index.gz"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  binning_size                   <span class="op">=</span> <span class="dv">50000</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  rsids_filename                 <span class="op">=</span> <span class="st">"rsids-v154-hg19-chr20.index.gz"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  binning_size                   <span class="op">=</span> <span class="dv">50000</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="run-gwas" class="level3">
 <h3 class="anchored" data-anchor-id="run-gwas">Run GWAS</h3>
 <p>Execute the pipeline:</p>
@@ -314,13 +387,11 @@ Note
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  phenotypes_binary_trait        <span class="op">=</span> <span class="kw">false</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  regenie_test                   <span class="op">=</span> <span class="st">'additive'</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  regenie_min_imputation_score   <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  phenotypes_apply_rint          <span class="op">=</span> <span class="kw">true</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  manhattan_annotation_enabled   <span class="op">=</span> <span class="kw">true</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  covariates_filename            <span class="op">=</span> <span class="st">'covariates.txt'</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  covariates_columns             <span class="op">=</span> <span class="st">'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  rsids_filename                 <span class="op">=</span> <span class="st">"rsids-v154-hg19-chr20.index.gz"</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  binning_size                   <span class="op">=</span> <span class="dv">50000</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  covariates_filename            <span class="op">=</span> <span class="st">'covariates.txt'</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  covariates_columns             <span class="op">=</span> <span class="st">'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  rsids_filename                 <span class="op">=</span> <span class="st">"rsids-v154-hg19-chr20.index.gz"</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  binning_size                   <span class="op">=</span> <span class="dv">50000</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="run-gwas-1" class="level3">
 <h3 class="anchored" data-anchor-id="run-gwas-1">Run GWAS</h3>
 <p>Execute the pipeline:</p>

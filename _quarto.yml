@@ -18,13 +18,13 @@ website:
         icon: book
         menu:
           - href: imputation.qmd
-            icon: gear
-          - href: pgs-calculation.qmd
-            icon: gear            
+            icon: gear         
           - href: local-imputation.qmd
             icon: gear
           - href: bot-imputation.qmd  
-            icon: gear                                            
+            icon: gear   
+          - href: pgs-calculation.qmd
+            icon: gear                                                     
           - href: gwas-with-nf-gwas.qmd
             icon: bar-chart
           - href: gwas-with-plink2.qmd

@@ -48,8 +48,7 @@ params {
   phenotypes_apply_rint          = true
   manhattan_annotation_enabled   = true
   rsids_filename                 = "rsids-v154-hg19-chr20.index.gz"
-  binning_csv                    = 'NONE'
-  binning_html                   = 'NONE'  
+  binning_size                   = 50000
 }
 ```
 
@@ -58,7 +57,7 @@ params {
 Execute the pipeline:
 
 ```bash
-nextflow run genepi/nf-gwas -r v1.0.10  -profile docker -c gwas.config
+nextflow run genepi/nf-gwas -r v1.0.11  -profile docker -c gwas.config
 ```
 
 ::: {.callout-note}
@@ -71,7 +70,8 @@ All results (REGENIE outputs, top hits, graphical reports) are available within 
 
 ## GWAS With PCA
 
-Next, we run a linear regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a `gwas2.config` file with this content:
+Next, we run a linear regression GWAS on a simulated phenotype while adjusting for population structure using principal components. Please create a `gwas_with_pcs.config` file with this content:
+
 
 ```groovy
 params {
@@ -90,8 +90,7 @@ params {
   covariates_filename            = 'covariates.txt'
   covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'
   rsids_filename                 = "rsids-v154-hg19-chr20.index.gz"
-  binning_csv                    = 'NONE'
-  binning_html                   = 'NONE'
+  binning_size                   = 50000
 }
 ```
 
@@ -100,7 +99,7 @@ params {
 Execute the pipeline:
 
 ```bash
-nextflow run genepi/nf-gwas -r v1.0.10 -profile docker -c gwas2.config
+nextflow run genepi/nf-gwas -r v1.0.11 -profile docker -c gwas_with_pcs.config
 ```
 
 ## Results

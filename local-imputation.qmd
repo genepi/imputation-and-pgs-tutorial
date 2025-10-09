@@ -3,7 +3,7 @@ title: "Running Imputation Locally"
 format: html
 ---
 
-With the new **Imputation Server 2** pipeline, you can conveniently run your imputation workflow locally using **Nextflow**. This can be done either by setting up a [local imputation server](https://genepi.github.io/michigan-imputationserver/tutorials/local-server/) or, as in this example, by running it directly from the command line.
+With the new **Imputation Server 2** pipeline, you can conveniently run your imputation workflow locally on the commandline using **Nextflow**. This can be done either by setting up a [local imputation server](https://genepi.github.io/michigan-imputationserver/tutorials/local-server/) or, as in this example, by running it directly from the command line.
 
 ## Prerequisites
 The following software is required to set up your local imputation workflow. This has been tested on various Linux distributions as well as macOS:

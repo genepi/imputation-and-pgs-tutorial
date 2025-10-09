@@ -1,0 +1,6 @@
+---
+title: "Running imputation using imputationbot"
+format: html
+---
+
+You can submit jobs to the Michigan Imputation Server using the API through the imputationbot. A step-by-step tutorial is available in the [official documentation](https://genepi.github.io/michigan-imputationserver/tutorials/imputationbot/).

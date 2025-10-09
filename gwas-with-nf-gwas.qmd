@@ -29,6 +29,35 @@ wget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index
 wget https://genepi.i-med.ac.at/downloads/imputation/rsids-v154-hg19-chr20.index.gz.tbi .
 ```
 
+
+## nf-gwas Parameters
+
+The **nf-gwas** pipeline supports a variety of configurable parameters.  
+In the examples below, we demonstrate a simplified GWAS analysis where we skip **Step 1** of REGENIE — the model-fitting stage.  
+
+**Step 1** of REGENIE usually fits a **ridge regression model** to predict the phenotype (or residuals) from genotypes, accounting for **population structure** and **relatedness**. Since `regenie_skip_predictions = true`, this step is bypassed, and we proceed directly to **Step 2**, which performs the **association testing**.
+
+Below is a breakdown of the main parameters:
+
+| Parameter | Description |
+|-----------|-------------|
+| `project` | A name for the analysis run. Useful for organizing output files. |
+| `genotypes_association` | The genotype file used in Step 2. Here, it’s a compressed VCF file (`.vcf.gz`) containing imputed genotypes for chromosome 20. |
+| `genotypes_association_format` | Specifies the format of the genotype file (`vcf` here). Internally, nf-gwas converts this VCF into **PLINK2** format for REGENIE. |
+| `association_build` | The genome reference build used (`hg19` or `hg38`). |
+| `phenotypes_filename` | File containing phenotype data for each individual. |
+| `phenotypes_columns` | Specific phenotype columns to include (`pheno_2` and `pheno_4`). |
+| `phenotypes_binary_trait` | Whether phenotypes are binary (`true`) or continuous (`false`). |
+| `covariates_filename` | File listing covariates (e.g., PCs) to adjust for population stratification. |
+| `covariates_columns` | Covariate columns to include (`PC1–PC10`). |
+| `regenie_test` | Genetic model to test; here, **additive**. |
+| `regenie_min_imputation_score` | Minimum genotype imputation quality score; variants below are excluded. |
+| `rsids_filename` | Index file mapping variant positions to **rsIDs** for annotation. |
+| `binning_size` | Genomic bin size (in base pairs) for plotting and indexing results. |
+
+This configuration performs a straightforward GWAS on two continuous traits (`pheno_2` and `pheno_4`), adjusting for population structure using the top 10 principal components (PCs).
+
+
 ## GWAS Without PCA
 
 We first run a linear regression GWAS on a simulated phenotype without adjusting for population structure. Please create a `gwas.config` file with this content:
@@ -45,8 +74,6 @@ params {
   phenotypes_binary_trait        = false
   regenie_test                   = 'additive'
   regenie_min_imputation_score   = 0.3
-  phenotypes_apply_rint          = true
-  manhattan_annotation_enabled   = true
   rsids_filename                 = "rsids-v154-hg19-chr20.index.gz"
   binning_size                   = 50000
 }
@@ -85,8 +112,6 @@ params {
   phenotypes_binary_trait        = false
   regenie_test                   = 'additive'
   regenie_min_imputation_score   = 0.3
-  phenotypes_apply_rint          = true
-  manhattan_annotation_enabled   = true
   covariates_filename            = 'covariates.txt'
   covariates_columns             = 'PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10'
   rsids_filename                 = "rsids-v154-hg19-chr20.index.gz"

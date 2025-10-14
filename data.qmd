@@ -7,6 +7,9 @@ The dataset represents a subset of **~2,500 samples** and approximately **2 mill
 
 ---
 
+### Imputation Workshop Slides (ASHG 2025) 
+* **Filename:** [Imputation Workshop ASHG 2025](https://genepi.i-med.ac.at/downloads/imputation/Imputation_Workshop_2025.pdf) (19 MB) 
+
 ### Chip Array Data
 
 * **Filename:** [gwas.array.hapmap.chr20.vcf.gz](https://genepi.i-med.ac.at/downloads/imputation/gwas.array.hapmap.chr20.vcf.gz) (20.4 MB) 
